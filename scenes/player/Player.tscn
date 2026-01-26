@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqa4utnaakybx"]
+
+[ext_resource type="Script" uid="uid://dd0ehq2l8x1r4" path="res://scripts/entities/player/Player.gd" id="1_gfjak"]
+[ext_resource type="Texture2D" uid="uid://o740h3usbc3e" path="res://resources/player/spritesheet.png" id="2_gfjak"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gfjak"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_gfjak")
+atlas = ExtResource("2_gfjak")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gfjak")
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+
+[node name="GroundRay" type="RayCast2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]

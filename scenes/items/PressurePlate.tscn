@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7drwybm3moq"]
+
+[ext_resource type="Script" uid="uid://cplkjaqaf0cv0" path="res://scripts/components/PressurePlate.gd" id="1_3gtij"]
+[ext_resource type="Texture2D" uid="uid://dlpyfq6xxhgvw" path="res://resources/tileset/Prefabs1.png" id="1_8sa03"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7afhd"]
+
+[node name="PressurePlate" type="Node2D"]
+script = ExtResource("1_3gtij")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visual"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_8sa03")
+region_enabled = true
+region_rect = Rect2(320, 0, 96, 16)
+
+[node name="Detector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
+scale = Vector2(1, 0.2)
+shape = SubResource("RectangleShape2D_7afhd")

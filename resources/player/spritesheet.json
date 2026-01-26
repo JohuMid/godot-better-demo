@@ -1,0 +1,2115 @@
+{
+	"frames": {
+		"AbilityUse.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 1280,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1280,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1280,
+				"h": 128
+			}
+		},
+		"AerialStrike.png": {
+			"frame": {
+				"x": 0,
+				"y": 128,
+				"w": 1152,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1152,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1152,
+				"h": 128
+			}
+		},
+		"Aimedshotshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 256,
+				"w": 512,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 512,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 512,
+				"h": 128
+			}
+		},
+		"Aiming.png": {
+			"frame": {
+				"x": 0,
+				"y": 384,
+				"w": 256,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 256,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 256,
+				"h": 128
+			}
+		},
+		"Aimshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 512,
+				"w": 128,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 128,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 128,
+				"h": 128
+			}
+		},
+		"Attack1shooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 640,
+				"w": 512,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 512,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 512,
+				"h": 128
+			}
+		},
+		"Attack2shooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 768,
+				"w": 512,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 512,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 512,
+				"h": 128
+			}
+		},
+		"AttackFromCover.png": {
+			"frame": {
+				"x": 0,
+				"y": 896,
+				"w": 640,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 640,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 640,
+				"h": 128
+			}
+		},
+		"BulletDodge.png": {
+			"frame": {
+				"x": 0,
+				"y": 1024,
+				"w": 640,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 640,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 640,
+				"h": 128
+			}
+		},
+		"CarryingObject.png": {
+			"frame": {
+				"x": 0,
+				"y": 1152,
+				"w": 1280,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1280,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1280,
+				"h": 128
+			}
+		},
+		"CastingSpell.png": {
+			"frame": {
+				"x": 0,
+				"y": 1280,
+				"w": 1280,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1280,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1280,
+				"h": 128
+			}
+		},
+		"ClimbingLadder.png": {
+			"frame": {
+				"x": 0,
+				"y": 1408,
+				"w": 1152,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1152,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1152,
+				"h": 128
+			}
+		},
+		"Counterattack.png": {
+			"frame": {
+				"x": 0,
+				"y": 1536,
+				"w": 512,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 512,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 512,
+				"h": 128
+			}
+		},
+		"Crawl.png": {
+			"frame": {
+				"x": 0,
+				"y": 1664,
+				"w": 1024,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1024,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1024,
+				"h": 128
+			}
+		},
+		"Crouch.png": {
+			"frame": {
+				"x": 0,
+				"y": 1792,
+				"w": 384,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 384,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 384,
+				"h": 128
+			}
+		},
+		"Deadshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 1920,
+				"w": 640,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 640,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 640,
+				"h": 128
+			}
+		},
+		"Death.png": {
+			"frame": {
+				"x": 0,
+				"y": 2048,
+				"w": 640,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 640,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 640,
+				"h": 128
+			}
+		},
+		"Defenseattack.png": {
+			"frame": {
+				"x": 0,
+				"y": 2176,
+				"w": 512,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 512,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 512,
+				"h": 128
+			}
+		},
+		"DefensiveStance.png": {
+			"frame": {
+				"x": 0,
+				"y": 2304,
+				"w": 128,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 128,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 128,
+				"h": 128
+			}
+		},
+		"DescendingLadder.png": {
+			"frame": {
+				"x": 0,
+				"y": 2432,
+				"w": 1152,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1152,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1152,
+				"h": 128
+			}
+		},
+		"Dodge.png": {
+			"frame": {
+				"x": 0,
+				"y": 2560,
+				"w": 896,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 896,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 896,
+				"h": 128
+			}
+		},
+		"DoubleJump.png": {
+			"frame": {
+				"x": 0,
+				"y": 2688,
+				"w": 1408,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1408,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1408,
+				"h": 128
+			}
+		},
+		"DoubleSrtike.png": {
+			"frame": {
+				"x": 0,
+				"y": 2816,
+				"w": 896,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 896,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 896,
+				"h": 128
+			}
+		},
+		"DrinkingPotion.png": {
+			"frame": {
+				"x": 0,
+				"y": 2944,
+				"w": 1024,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1024,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1024,
+				"h": 128
+			}
+		},
+		"EnchancedImpact1.png": {
+			"frame": {
+				"x": 0,
+				"y": 3072,
+				"w": 896,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 896,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 896,
+				"h": 128
+			}
+		},
+		"Enchancedimpact2.png": {
+			"frame": {
+				"x": 0,
+				"y": 3200,
+				"w": 1024,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1024,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1024,
+				"h": 128
+			}
+		},
+		"EnergyAbcorb.png": {
+			"frame": {
+				"x": 0,
+				"y": 3328,
+				"w": 640,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 640,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 640,
+				"h": 128
+			}
+		},
+		"EnergyWave.png": {
+			"frame": {
+				"x": 0,
+				"y": 3456,
+				"w": 896,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 896,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 896,
+				"h": 128
+			}
+		},
+		"ExplosiveStrike.png": {
+			"frame": {
+				"x": 0,
+				"y": 3584,
+				"w": 1152,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1152,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1152,
+				"h": 128
+			}
+		},
+		"Falling.png": {
+			"frame": {
+				"x": 0,
+				"y": 3712,
+				"w": 1408,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1408,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1408,
+				"h": 128
+			}
+		},
+		"FireKick.png": {
+			"frame": {
+				"x": 0,
+				"y": 3840,
+				"w": 1408,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1408,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1408,
+				"h": 128
+			}
+		},
+		"GlidingJump.png": {
+			"frame": {
+				"x": 0,
+				"y": 3968,
+				"w": 1024,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1024,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1024,
+				"h": 128
+			}
+		},
+		"GroundSlam.png": {
+			"frame": {
+				"x": 0,
+				"y": 4096,
+				"w": 1536,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1536,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1536,
+				"h": 128
+			}
+		},
+		"Hacking.png": {
+			"frame": {
+				"x": 0,
+				"y": 4224,
+				"w": 512,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 512,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 512,
+				"h": 128
+			}
+		},
+		"Healing.png": {
+			"frame": {
+				"x": 0,
+				"y": 4352,
+				"w": 1024,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1024,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1024,
+				"h": 128
+			}
+		},
+		"Hurt.png": {
+			"frame": {
+				"x": 0,
+				"y": 4480,
+				"w": 384,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 384,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 384,
+				"h": 128
+			}
+		},
+		"Hurtshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 4608,
+				"w": 512,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 512,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 512,
+				"h": 128
+			}
+		},
+		"Idle.png": {
+			"frame": {
+				"x": 0,
+				"y": 4736,
+				"w": 768,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 768,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 768,
+				"h": 128
+			}
+		},
+		"Idleshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 4864,
+				"w": 768,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 768,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 768,
+				"h": 128
+			}
+		},
+		"IseStrice.png": {
+			"frame": {
+				"x": 0,
+				"y": 4992,
+				"w": 1280,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1280,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1280,
+				"h": 128
+			}
+		},
+		"JumpKick.png": {
+			"frame": {
+				"x": 0,
+				"y": 5120,
+				"w": 1024,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1024,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1024,
+				"h": 128
+			}
+		},
+		"JumpStrike.png": {
+			"frame": {
+				"x": 0,
+				"y": 5248,
+				"w": 1152,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1152,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1152,
+				"h": 128
+			}
+		},
+		"Jumping.png": {
+			"frame": {
+				"x": 0,
+				"y": 5376,
+				"w": 1280,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1280,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1280,
+				"h": 128
+			}
+		},
+		"JumpwitnStrike.png": {
+			"frame": {
+				"x": 0,
+				"y": 5504,
+				"w": 384,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 384,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 384,
+				"h": 128
+			}
+		},
+		"Kick.png": {
+			"frame": {
+				"x": 0,
+				"y": 5632,
+				"w": 640,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 640,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 640,
+				"h": 128
+			}
+		},
+		"Knockback.png": {
+			"frame": {
+				"x": 0,
+				"y": 5760,
+				"w": 1024,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1024,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1024,
+				"h": 128
+			}
+		},
+		"Landing.png": {
+			"frame": {
+				"x": 0,
+				"y": 5888,
+				"w": 768,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 768,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 768,
+				"h": 128
+			}
+		},
+		"LandingwithImpact.png": {
+			"frame": {
+				"x": 0,
+				"y": 6016,
+				"w": 1664,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1664,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1664,
+				"h": 128
+			}
+		},
+		"Leap.png": {
+			"frame": {
+				"x": 0,
+				"y": 6144,
+				"w": 1024,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1024,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1024,
+				"h": 128
+			}
+		},
+		"LevelUp.png": {
+			"frame": {
+				"x": 0,
+				"y": 6272,
+				"w": 896,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 896,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 896,
+				"h": 128
+			}
+		},
+		"LieRechargeshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 6400,
+				"w": 1024,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1024,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1024,
+				"h": 128
+			}
+		},
+		"Lieshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 6528,
+				"w": 128,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 128,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 128,
+				"h": 128
+			}
+		},
+		"Lieshootshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 6656,
+				"w": 512,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 512,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 512,
+				"h": 128
+			}
+		},
+		"LightEmission.png": {
+			"frame": {
+				"x": 0,
+				"y": 6784,
+				"w": 640,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 640,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 640,
+				"h": 128
+			}
+		},
+		"MagicShield.png": {
+			"frame": {
+				"x": 0,
+				"y": 6912,
+				"w": 1536,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1536,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1536,
+				"h": 128
+			}
+		},
+		"ObstacleJump.png": {
+			"frame": {
+				"x": 0,
+				"y": 7040,
+				"w": 896,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 896,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 896,
+				"h": 128
+			}
+		},
+		"Peekouthiding1shooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 7168,
+				"w": 128,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 128,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 128,
+				"h": 128
+			}
+		},
+		"Peekouthiding2shooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 7296,
+				"w": 128,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 128,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 128,
+				"h": 128
+			}
+		},
+		"PlatformJump.png": {
+			"frame": {
+				"x": 0,
+				"y": 7424,
+				"w": 896,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 896,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 896,
+				"h": 128
+			}
+		},
+		"PowerBoost.png": {
+			"frame": {
+				"x": 0,
+				"y": 7552,
+				"w": 1280,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1280,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1280,
+				"h": 128
+			}
+		},
+		"PowerStrike.png": {
+			"frame": {
+				"x": 0,
+				"y": 7680,
+				"w": 1408,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1408,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1408,
+				"h": 128
+			}
+		},
+		"Protect.png": {
+			"frame": {
+				"x": 0,
+				"y": 7808,
+				"w": 256,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 256,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 256,
+				"h": 128
+			}
+		},
+		"Punch1.png": {
+			"frame": {
+				"x": 0,
+				"y": 7936,
+				"w": 640,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 640,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 640,
+				"h": 128
+			}
+		},
+		"Punch2.png": {
+			"frame": {
+				"x": 0,
+				"y": 8064,
+				"w": 384,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 384,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 384,
+				"h": 128
+			}
+		},
+		"Resurrection.png": {
+			"frame": {
+				"x": 0,
+				"y": 8192,
+				"w": 1024,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1024,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1024,
+				"h": 128
+			}
+		},
+		"Roll.png": {
+			"frame": {
+				"x": 0,
+				"y": 8320,
+				"w": 1152,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1152,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1152,
+				"h": 128
+			}
+		},
+		"Rollshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 8448,
+				"w": 1024,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1024,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1024,
+				"h": 128
+			}
+		},
+		"Running.png": {
+			"frame": {
+				"x": 0,
+				"y": 8576,
+				"w": 1536,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1536,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1536,
+				"h": 128
+			}
+		},
+		"Runshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 8704,
+				"w": 1536,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1536,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1536,
+				"h": 128
+			}
+		},
+		"ShootingCover1shooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 8832,
+				"w": 512,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 512,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 512,
+				"h": 128
+			}
+		},
+		"ShootingCover2shooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 8960,
+				"w": 512,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 512,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 512,
+				"h": 128
+			}
+		},
+		"SideJump.png": {
+			"frame": {
+				"x": 0,
+				"y": 9088,
+				"w": 1280,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1280,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1280,
+				"h": 128
+			}
+		},
+		"SideJumpDown.png": {
+			"frame": {
+				"x": 0,
+				"y": 9216,
+				"w": 512,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 512,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 512,
+				"h": 128
+			}
+		},
+		"SideJumpUp.png": {
+			"frame": {
+				"x": 0,
+				"y": 9344,
+				"w": 768,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 768,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 768,
+				"h": 128
+			}
+		},
+		"SittingShootshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 9472,
+				"w": 512,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 512,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 512,
+				"h": 128
+			}
+		},
+		"Sittingrechargeshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 9600,
+				"w": 1536,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1536,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1536,
+				"h": 128
+			}
+		},
+		"Sittingshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 9728,
+				"w": 128,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 128,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 128,
+				"h": 128
+			}
+		},
+		"SkillCharging.png": {
+			"frame": {
+				"x": 0,
+				"y": 9856,
+				"w": 768,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 768,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 768,
+				"h": 128
+			}
+		},
+		"SlideAttack.png": {
+			"frame": {
+				"x": 0,
+				"y": 9984,
+				"w": 768,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 768,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 768,
+				"h": 128
+			}
+		},
+		"SpeedBoostRunning.png": {
+			"frame": {
+				"x": 0,
+				"y": 10112,
+				"w": 1536,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1536,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1536,
+				"h": 128
+			}
+		},
+		"Standingrechargeshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 10240,
+				"w": 1536,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1536,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1536,
+				"h": 128
+			}
+		},
+		"Standingshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 10368,
+				"w": 128,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 128,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 128,
+				"h": 128
+			}
+		},
+		"Standingshootingshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 10496,
+				"w": 512,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 512,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 512,
+				"h": 128
+			}
+		},
+		"StealthMode.png": {
+			"frame": {
+				"x": 0,
+				"y": 10624,
+				"w": 128,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 128,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 128,
+				"h": 128
+			}
+		},
+		"StopRunning.png": {
+			"frame": {
+				"x": 0,
+				"y": 10752,
+				"w": 640,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 640,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 640,
+				"h": 128
+			}
+		},
+		"SummonAlly.png": {
+			"frame": {
+				"x": 0,
+				"y": 10880,
+				"w": 1024,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1024,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1024,
+				"h": 128
+			}
+		},
+		"Swimming.png": {
+			"frame": {
+				"x": 0,
+				"y": 11008,
+				"w": 1792,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1792,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1792,
+				"h": 128
+			}
+		},
+		"SwimmingDive.png": {
+			"frame": {
+				"x": 0,
+				"y": 11136,
+				"w": 1152,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1152,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1152,
+				"h": 128
+			}
+		},
+		"TakeCover1shooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 11264,
+				"w": 256,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 256,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 256,
+				"h": 128
+			}
+		},
+		"TakeCover2shooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 11392,
+				"w": 128,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 128,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 128,
+				"h": 128
+			}
+		},
+		"TakingDamage.png": {
+			"frame": {
+				"x": 0,
+				"y": 11520,
+				"w": 384,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 384,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 384,
+				"h": 128
+			}
+		},
+		"TeleportCharacter1.png": {
+			"frame": {
+				"x": 0,
+				"y": 11648,
+				"w": 768,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 768,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 768,
+				"h": 128
+			}
+		},
+		"TeleportCharacter2.png": {
+			"frame": {
+				"x": 0,
+				"y": 11776,
+				"w": 768,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 768,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 768,
+				"h": 128
+			}
+		},
+		"Throwing.png": {
+			"frame": {
+				"x": 0,
+				"y": 11904,
+				"w": 512,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 512,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 512,
+				"h": 128
+			}
+		},
+		"TimeSlow.png": {
+			"frame": {
+				"x": 0,
+				"y": 12032,
+				"w": 1280,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1280,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1280,
+				"h": 128
+			}
+		},
+		"UpwardJump.png": {
+			"frame": {
+				"x": 0,
+				"y": 12160,
+				"w": 1408,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1408,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1408,
+				"h": 128
+			}
+		},
+		"UpwardJumpDown.png": {
+			"frame": {
+				"x": 0,
+				"y": 12288,
+				"w": 384,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 384,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 384,
+				"h": 128
+			}
+		},
+		"UpwardJumpUp.png": {
+			"frame": {
+				"x": 0,
+				"y": 12416,
+				"w": 1024,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1024,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1024,
+				"h": 128
+			}
+		},
+		"UsingHealthPack.png": {
+			"frame": {
+				"x": 0,
+				"y": 12544,
+				"w": 384,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 384,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 384,
+				"h": 128
+			}
+		},
+		"Walking.png": {
+			"frame": {
+				"x": 0,
+				"y": 12672,
+				"w": 1536,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1536,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1536,
+				"h": 128
+			}
+		},
+		"Walkshooter.png": {
+			"frame": {
+				"x": 0,
+				"y": 12800,
+				"w": 1536,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1536,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1536,
+				"h": 128
+			}
+		},
+		"WallClimbing.png": {
+			"frame": {
+				"x": 0,
+				"y": 12928,
+				"w": 2176,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 2176,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 2176,
+				"h": 128
+			}
+		},
+		"WallJump.png": {
+			"frame": {
+				"x": 0,
+				"y": 13056,
+				"w": 1024,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1024,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1024,
+				"h": 128
+			}
+		},
+		"WeaponSummon.png": {
+			"frame": {
+				"x": 0,
+				"y": 13184,
+				"w": 1408,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1408,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 1408,
+				"h": 128
+			}
+		},
+		"WindPower.png": {
+			"frame": {
+				"x": 0,
+				"y": 13312,
+				"w": 768,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 768,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 768,
+				"h": 128
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 2176,
+			"h": 13440
+		},
+		"scale": "1"
+	}
+}
