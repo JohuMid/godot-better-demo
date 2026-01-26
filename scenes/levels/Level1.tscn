@@ -218,4 +218,5 @@ physics_quadrant_size = 32
 position = Vector2(48, 160)
 
 [node name="Box" parent="." instance=ExtResource("5_68ib6")]
-position = Vector2(112, 120)
+position = Vector2(-12, 62)
+mass = 10.0

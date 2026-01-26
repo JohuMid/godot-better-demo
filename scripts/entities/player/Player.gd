@@ -15,8 +15,13 @@ extends CharacterBody2D
 @export var climb_check_up: float = -8.0       # 向上偏移（负值表示向上）
 @export var climb_stand_offset: float = -2.0   # 爬上后角色底部应处的 Y 偏移（相对于边缘点）
 var climb_target_y: float = 0.0
-
 var is_climbing: bool = false
+
+# —————— 推箱子相关 ——————
+var is_pushing: bool = false
+@export var push_distance: float = 8.0  # 推箱子距离（像素）
+var target_box: RigidBody2D = null
+@export var push_force: float = 1000.0  # 推箱子力（像素）
 
 # —————— 动画帧偏移相关 ——————
 var original_offset: Vector2 = Vector2.ZERO   # 原始偏移量
@@ -87,6 +92,38 @@ func _create_collision_shape():
 	
 	add_child(collision_shape)
 
+func _input(event):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			_try_start_push()   # 按下时尝试找箱子
+		else:
+			is_pushing = false  # 松开就停止
+
+func _try_start_push():
+	# 仅在地面上时才尝试推箱子
+	if is_on_floor():
+		var from = global_position
+		var dir = 1 if not animated_sprite.flip_h else -1
+		var to = from + Vector2(push_distance * dir, 0)  # 检测推箱子距离
+
+		# 创建射线查询参数（正确方式）
+		var ray_params = PhysicsRayQueryParameters2D.new()
+		ray_params.from = from
+		ray_params.to = to
+		ray_params.exclude = [self]
+		ray_params.collision_mask = 1  # 根据你的箱子所在层调整
+
+		var space_state = get_world_2d().direct_space_state
+		var result = space_state.intersect_ray(ray_params)
+
+		print(result)
+
+		if result and result.collider is RigidBody2D:
+			target_box = result.collider
+			is_pushing = true
+		else:
+			is_pushing = false
+
 # —————— 物理处理 ——————
 func _physics_process(delta):
 
@@ -97,6 +134,9 @@ func _physics_process(delta):
 
 	# 1. 保存上一帧的地面状态（关键修复！）
 	var current_on_floor = is_on_floor()
+
+	# ===== 推箱子逻辑 =====
+
 	
 	# 2. 重力处理
 	if not current_on_floor:
@@ -116,19 +156,19 @@ func _physics_process(delta):
 	else:
 		# 空中保留水平惯性（增加减速系数以获得更好的惯性效果）
 		velocity.x = velocity.x * 0.98
-	
-	# 5. 碰撞处理
+		
+	# 6. 碰撞处理
 	move_and_slide()
 
 	# 攀爬检测
 	if not is_climbing and not current_on_floor and velocity.y > 0:  # 下落中
 		_try_climb_edge()
 
-	# 6. 动画更新（注意：如果正在攀爬，跳过常规动画）
+	# 7. 动画更新（注意：如果正在攀爬，跳过常规动画）
 	if not is_climbing:
 		_update_animation(was_on_floor, current_on_floor)
 	
-	# 7. 更新前一帧地面状态
+	# 8. 更新前一帧地面状态
 	was_on_floor = current_on_floor
 
 # —————— 动画状态机 ——————
