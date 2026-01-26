@@ -1,3 +1,44 @@
-# Godot 4+ specific ignores
+# Godot 官方推荐的 .gitignore
+# 来源：https://github.com/github/gitignore/blob/main/Godot.gitignore
 .godot/
 /android/
+# 导出文件（根据你的导出平台调整）
+*.pck
+*.apk
+*.x86
+*.x86_64
+*.zip
+*.tar.gz
+*.dmg
+*.exe
+*.msi
+
+# 编辑器生成的文件
+.import/
+export.cfg
+export_presets.cfg  # 如果你希望共享导出预设，请注释掉这一行
+icon.png            # 如果你用的是默认图标且未自定义，可忽略；否则保留
+
+# 项目缓存与临时文件
+.mono/
+.cache/
+.temp/
+
+# 用户特定配置（不要提交）
+project.godot.tmp
+*.cfg
+*.cachefile
+
+# macOS 特有
+.DS_Store
+
+# Windows 特有
+Thumbs.db
+desktop.ini
+
+# 日志和调试文件
+*.log
+
+# 可选：如果你使用 C# 脚本
+# bin/
+# obj/
