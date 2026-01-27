@@ -1,13 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://i4ishioo27ak"]
+[gd_scene load_steps=5 format=3 uid="uid://i4ishioo27ak"]
 
 [ext_resource type="Texture2D" uid="uid://dlpyfq6xxhgvw" path="res://resources/tileset/Prefabs1.png" id="1_brk01"]
 [ext_resource type="Script" uid="uid://cvfdpn6fxyxs6" path="res://scripts/components/Box.gd" id="1_f8jd8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f8jd8"]
+friction = 0.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f8jd8"]
 size = Vector2(13, 13)
 
 [node name="Box" type="RigidBody2D"]
-linear_damp = 0.5
+mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_f8jd8")
+freeze_mode = 1
 script = ExtResource("1_f8jd8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

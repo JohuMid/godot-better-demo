@@ -6,7 +6,7 @@ signal deactivated # 压力板释放（关闭通路）
 # --- 可配置的属性 ---
 @export var activation_layer: int = 1
 @export var activation_mask: int = 1
-@export var pressed_distance: float = 4.0
+@export var pressed_distance: float = 2.0
 @export var move_speed: float = 200.0
 
 # --- 内部状态变量 ---

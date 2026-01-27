@@ -11,21 +11,19 @@ extends CharacterBody2D
 @export var json_path: String = "res://resources/player/spritesheet.json"
 
 # —————— 攀爬相关 ——————
-@export var climb_check_forward: float = 8.0   # 向前检测距离（像素）
-@export var climb_check_up: float = -8.0       # 向上偏移（负值表示向上）
-@export var climb_stand_offset: float = -2.0   # 爬上后角色底部应处的 Y 偏移（相对于边缘点）
+@export var climb_check_forward: float = 8.0 # 向前检测距离（像素）
+@export var climb_check_up: float = -8.0 # 向上偏移（负值表示向上）
+@export var climb_stand_offset: float = -2.0 # 爬上后角色底部应处的 Y 偏移（相对于边缘点）
 var climb_target_y: float = 0.0
 var is_climbing: bool = false
 
 # —————— 推箱子相关 ——————
+@export var push_distance: float = 8.0 # 推箱子距离（像素）
 var is_pushing: bool = false
-@export var push_distance: float = 8.0  # 推箱子距离（像素）
-var target_box: RigidBody2D = null
-@export var push_force: float = 1000.0  # 推箱子力（像素）
 
 # —————— 动画帧偏移相关 ——————
-var original_offset: Vector2 = Vector2.ZERO   # 原始偏移量
-var platform_jump_offset: float = -280.0       # PlatformJump最后两帧的向上偏移
+var original_offset: Vector2 = Vector2.ZERO # 原始偏移量
+var platform_jump_offset: float = -280.0 # PlatformJump最后两帧的向上偏移
 
 # —— 角色原始帧尺寸 ——
 const ORIGINAL_FRAME_WIDTH: int = 128
@@ -34,15 +32,15 @@ const SPRITE_SCALE: float = 0.2
 
 # —— 动画速度配置 ——
 const ANIM_SPEED = {
-	"Idle": 1.2,         # 慢速站立
-	"Walk": 1.2,         # 步行
-	"Running": 2.5,      # 跑步
-	"SideJumpUp": 3.0,   # 跑跳上升
+	"Idle": 1.2, # 慢速站立
+	"Walk": 1.2, # 步行
+	"Running": 2.5, # 跑步
+	"SideJumpUp": 3.0, # 跑跳上升
 	"SideJumpDown": 1.0, # 跑跳下降
 	"UpwardJumpUp": 5.0, # 原地跳上升
-	"UpwardJumpDown": 1.0,# 原地跳下降
-	"Landing": 1.7,      # 落地
-	"PlatformJump": 2.0,      # 跳跃平台
+	"UpwardJumpDown": 1.0, # 原地跳下降
+	"Landing": 1.7, # 落地
+	"PlatformJump": 2.0, # 跳跃平台
 	"default": 1.0
 }
 
@@ -63,8 +61,8 @@ func _ready():
 	animated_sprite.scale = Vector2(SPRITE_SCALE, SPRITE_SCALE)
 	animated_sprite.centered = false
 	animated_sprite.offset = Vector2(
-		-float(ORIGINAL_FRAME_WIDTH) / 2.0,
-		-ORIGINAL_FRAME_HEIGHT
+		- float(ORIGINAL_FRAME_WIDTH) / 2.0,
+		- ORIGINAL_FRAME_HEIGHT
 	)
 
 	# 存储原始偏移量
@@ -82,7 +80,7 @@ func _create_collision_shape():
 	var scaled_height = ORIGINAL_FRAME_HEIGHT * SPRITE_SCALE
 
 	var capsule = CapsuleShape2D.new()
-	capsule.radius = scaled_width * 0.15  # 窄碰撞体
+	capsule.radius = scaled_width * 0.15 # 窄碰撞体
 	capsule.height = scaled_height * 0.7
 
 	var collision_shape = CollisionShape2D.new()
@@ -92,83 +90,118 @@ func _create_collision_shape():
 	
 	add_child(collision_shape)
 
-func _input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			_try_start_push()   # 按下时尝试找箱子
-		else:
-			is_pushing = false  # 松开就停止
-
-func _try_start_push():
-	# 仅在地面上时才尝试推箱子
-	if is_on_floor():
-		var from = global_position
-		var dir = 1 if not animated_sprite.flip_h else -1
-		var to = from + Vector2(push_distance * dir, 0)  # 检测推箱子距离
-
-		# 创建射线查询参数（正确方式）
-		var ray_params = PhysicsRayQueryParameters2D.new()
-		ray_params.from = from
-		ray_params.to = to
-		ray_params.exclude = [self]
-		ray_params.collision_mask = 1  # 根据你的箱子所在层调整
-
-		var space_state = get_world_2d().direct_space_state
-		var result = space_state.intersect_ray(ray_params)
-
-		print(result)
-
-		if result and result.collider is RigidBody2D:
-			target_box = result.collider
-			is_pushing = true
-		else:
-			is_pushing = false
-
 # —————— 物理处理 ——————
 func _physics_process(delta):
-
 	if is_climbing:
-		# 保持最小碰撞响应，但不更新速度或位置
 		move_and_slide()
 		return
 
-	# 1. 保存上一帧的地面状态（关键修复！）
 	var current_on_floor = is_on_floor()
 
-	# ===== 推箱子逻辑 =====
-
-	
-	# 2. 重力处理
+		# 2. 重力处理
 	if not current_on_floor:
 		velocity.y += gravity * delta
 	else:
 		velocity.y = 0
-	
+
 	# 3. 跳跃处理
 	if Input.is_action_just_pressed("jump") and current_on_floor:
 		velocity.y = jump_velocity
 		_set_animation("SideJumpUp" if abs(velocity.x) > 50 else "UpwardJumpUp")
-	
+
 	# 4. 水平移动
 	if current_on_floor:
 		var input_dir = Input.get_axis("move_left", "move_right")
 		velocity.x = input_dir * speed
 	else:
-		# 空中保留水平惯性（增加减速系数以获得更好的惯性效果）
-		velocity.x = velocity.x * 0.98
-		
-	# 6. 碰撞处理
+		velocity.x = velocity.x * 0.98 # 空中惯性
+
+	var box_to_interact: RigidBody2D = null
+	# ===== 推/拉箱子逻辑 =====
+	if current_on_floor:
+		var input_dir = Input.get_axis("move_left", "move_right")
+		var has_input = abs(input_dir) > 0.1
+		var mouse_held = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+
+		if mouse_held and has_input:
+			is_pushing = true
+			var facing_dir = 1 if not animated_sprite.flip_h else -1
+			var ray_offset_y = - ORIGINAL_FRAME_HEIGHT * SPRITE_SCALE * 0.35
+			var from = global_position + Vector2(0, ray_offset_y)
+
+			
+			var target_vel_x: float = 0.0
+
+			# --- 推：前方有箱子 ---
+			if sign(input_dir) == facing_dir:
+				var to_forward = from + Vector2(push_distance * facing_dir, 0)
+				var ray_forward = PhysicsRayQueryParameters2D.new()
+				ray_forward.from = from
+				ray_forward.to = to_forward
+				ray_forward.exclude = [self]
+				ray_forward.collision_mask = 1
+				var res = get_world_2d().direct_space_state.intersect_ray(ray_forward)
+				if res and res.collider is RigidBody2D:
+					box_to_interact = res.collider
+					target_vel_x = speed * facing_dir # 推
+
+			# --- 拉（且输入方向与面朝相反）---
+			elif sign(input_dir) == -facing_dir:
+				var pull_distance = 36.0
+				var to_backward = from + Vector2(pull_distance * facing_dir, 0)
+				var ray_backward = PhysicsRayQueryParameters2D.new()
+				ray_backward.from = from
+				ray_backward.to = to_backward
+				ray_backward.exclude = [self]
+				ray_backward.collision_mask = 1
+				var res = get_world_2d().direct_space_state.intersect_ray(ray_backward)
+				if res and res.collider is RigidBody2D:
+					box_to_interact = res.collider
+					target_vel_x = - speed * facing_dir # 拉
+
+			# --- 应用控制 ---
+			if box_to_interact:
+				box_to_interact.sleeping = false
+
+				# === 新增：背对墙时禁止拉箱子 ===
+				var is_pulling = (sign(input_dir) == -facing_dir)  # 拉：输入与面朝相反
+
+				if is_pulling:
+					# 检测玩家背后是否有墙（距离 8 像素）
+					var behind_offset = Vector2(-8 * facing_dir, 0)  # 背后方向
+					var behind_ray = PhysicsRayQueryParameters2D.new()
+					behind_ray.from = global_position
+					behind_ray.to = global_position + behind_offset
+					behind_ray.exclude = [self]
+					behind_ray.collision_mask = 1
+
+					var hit_behind = get_world_2d().direct_space_state.intersect_ray(behind_ray)
+					if hit_behind:
+						# 背后有墙 → 禁止拉箱子（设目标速度为0）
+						target_vel_x = 0.0
+
+				var current_vel_x = box_to_interact.linear_velocity.x
+				var new_vel_x = lerp(current_vel_x, target_vel_x, 0.2)
+				print(new_vel_x, box_to_interact.linear_velocity.y)
+				box_to_interact.linear_velocity = Vector2(new_vel_x, box_to_interact.linear_velocity.y)
+		else:
+			is_pushing = false
+
+	# 推/拉箱子时限制玩家速度
+	if box_to_interact and current_on_floor:
+		velocity.x = box_to_interact.linear_velocity.x * 0.9
+
+	# 5. 碰撞与移动
 	move_and_slide()
 
 	# 攀爬检测
-	if not is_climbing and not current_on_floor and velocity.y > 0:  # 下落中
+	if not is_climbing and not current_on_floor and velocity.y > 0:
 		_try_climb_edge()
 
-	# 7. 动画更新（注意：如果正在攀爬，跳过常规动画）
+	# 动画更新
 	if not is_climbing:
 		_update_animation(was_on_floor, current_on_floor)
-	
-	# 8. 更新前一帧地面状态
+
 	was_on_floor = current_on_floor
 
 # —————— 动画状态机 ——————
@@ -194,7 +227,9 @@ func _update_animation(prev_on_floor: bool, current_on_floor: bool):
 	if abs(input_dir) > 0.1:
 		# 跑步
 		_set_animation("Running")
-		animated_sprite.flip_h = input_dir < 0
+		# 推拉箱子时不翻转
+		if not is_pushing:
+			animated_sprite.flip_h = input_dir < 0
 		return
 	
 	_set_animation("Idle")
@@ -231,7 +266,7 @@ func _on_frame_changed():
 		animated_sprite.offset = original_offset
 
 func _on_animation_finished():
-	var anim_name = animated_sprite.animation  # 当前正在播放的动画（即刚完成的）
+	var anim_name = animated_sprite.animation # 当前正在播放的动画（即刚完成的）
 	if anim_name == "PlatformJump":
 		# === 先精确对齐到平台顶部（防止因动画位移不准导致悬空/陷地）===
 		var stand_y = climb_target_y
@@ -267,13 +302,13 @@ func _try_climb_edge():
 	var result = space_state.intersect_ray(ray_query)
 
 	if result:
-		var input_dir = Input.get_axis("move_left", "move_right")    # -1 ～ 1
+		var input_dir = Input.get_axis("move_left", "move_right") # -1 ～ 1
 
 		# 检查输入方向是否与平台方向一致
 		if direction > 0 and input_dir <= 0:
-			return  # 面朝右但没按右/按左 → 不爬
+			return # 面朝右但没按右/按左 → 不爬
 		if direction < 0 and input_dir >= 0:
-			return  # 面朝左但没按左/按右 → 不爬
+			return # 面朝左但没按左/按右 → 不爬
 		var ledge_pos = result.position
 		var stand_y = ledge_pos.y + climb_stand_offset
 
