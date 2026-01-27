@@ -39,13 +39,13 @@ func _physics_process(delta: float) -> void:
 		visual.position = target_position
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D:
+	if body is CharacterBody2D or body is RigidBody2D:
 		object_count += 1
 		if object_count == 1:
 			activate()
 
 func _on_body_exited(body: Node2D) -> void:
-	if body is CharacterBody2D:
+	if body is CharacterBody2D or body is RigidBody2D:
 		object_count -= 1
 		object_count = max(object_count, 0)
 		if object_count == 0:

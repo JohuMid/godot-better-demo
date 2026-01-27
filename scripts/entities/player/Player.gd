@@ -13,7 +13,7 @@ extends CharacterBody2D
 # —————— 攀爬相关 ——————
 @export var climb_check_forward: float = 8.0 # 向前检测距离（像素）
 @export var climb_check_up: float = -8.0 # 向上偏移（负值表示向上）
-@export var climb_stand_offset: float = -2.0 # 爬上后角色底部应处的 Y 偏移（相对于边缘点）
+@export var climb_stand_offset: float = -4.0 # 爬上后角色底部应处的 Y 偏移（相对于边缘点）
 var climb_target_y: float = 0.0
 var is_climbing: bool = false
 
@@ -124,7 +124,6 @@ func _physics_process(delta):
 		var mouse_held = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 
 		if mouse_held and has_input:
-			is_pushing = true
 			var facing_dir = 1 if not animated_sprite.flip_h else -1
 			var ray_offset_y = - ORIGINAL_FRAME_HEIGHT * SPRITE_SCALE * 0.35
 			var from = global_position + Vector2(0, ray_offset_y)
@@ -147,7 +146,7 @@ func _physics_process(delta):
 
 			# --- 拉（且输入方向与面朝相反）---
 			elif sign(input_dir) == -facing_dir:
-				var pull_distance = 36.0
+				var pull_distance = 8.0
 				var to_backward = from + Vector2(pull_distance * facing_dir, 0)
 				var ray_backward = PhysicsRayQueryParameters2D.new()
 				ray_backward.from = from
@@ -161,6 +160,7 @@ func _physics_process(delta):
 
 			# --- 应用控制 ---
 			if box_to_interact:
+				is_pushing = true
 				box_to_interact.sleeping = false
 
 				# === 新增：背对墙时禁止拉箱子 ===
@@ -182,8 +182,9 @@ func _physics_process(delta):
 
 				var current_vel_x = box_to_interact.linear_velocity.x
 				var new_vel_x = lerp(current_vel_x, target_vel_x, 0.2)
-				print(new_vel_x, box_to_interact.linear_velocity.y)
 				box_to_interact.linear_velocity = Vector2(new_vel_x, box_to_interact.linear_velocity.y)
+			else:
+				is_pushing = false
 		else:
 			is_pushing = false
 
@@ -300,8 +301,8 @@ func _try_climb_edge():
 	ray_query.collision_mask = collision_mask
 
 	var result = space_state.intersect_ray(ray_query)
-
-	if result:
+	# 攀爬的对象只能是TileMap
+	if result and result["collider"] is TileMapLayer:
 		var input_dir = Input.get_axis("move_left", "move_right") # -1 ～ 1
 
 		# 检查输入方向是否与平台方向一致
