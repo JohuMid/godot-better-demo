@@ -244,7 +244,7 @@ func _set_animation(anim_name: String):
 		animated_sprite.play(anim_name)
 		var speed_scale = ANIM_SPEED.get(anim_name, ANIM_SPEED.default)
 		animated_sprite.speed_scale = speed_scale
-		print("▶ 播放动画: %s (速度: %.1f)" % [anim_name, speed_scale])
+		# print("▶ 播放动画: %s (速度: %.1f)" % [anim_name, speed_scale])
 	else:
 		print("⚠️ 动画不存在: %s" % anim_name)
 

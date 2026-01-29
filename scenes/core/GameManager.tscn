@@ -1,10 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://xo1q7lqtprfl"]
 
 [ext_resource type="PackedScene" uid="uid://cqa4utnaakybx" path="res://scenes/player/Player.tscn" id="1_vqfyl"]
-[ext_resource type="PackedScene" uid="uid://bkesnncuypm6n" path="res://scenes/levels/Level1.tscn" id="2_fthb4"]
+[ext_resource type="Script" uid="uid://b18si8n3hedg5" path="res://scripts/core/level_manager.gd" id="2_vqfyl"]
 
 [node name="GameManager" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_vqfyl")]
+[node name="levels_container" type="Node2D" parent="."]
 
-[node name="Level1" parent="." instance=ExtResource("2_fthb4")]
+[node name="LevelManager" type="Node2D" parent="." node_paths=PackedStringArray("levels_container")]
+script = ExtResource("2_vqfyl")
+player_scene = ExtResource("1_vqfyl")
+levels_container = NodePath("../levels_container")

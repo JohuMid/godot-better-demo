@@ -57,6 +57,6 @@ static func create_sprite_frames(atlas_texture: Texture2D, json_path: String) ->
 		var should_loop = not (anim_name in NON_LOOPING_ANIMS)
 		sprite_frames.set_animation_loop(anim_name, should_loop)
 		
-		print("✅ 动画 '%s' 已加载 (%d 帧)" % [anim_name, frame_count])
+		# print("✅ 动画 '%s' 已加载 (%d 帧)" % [anim_name, frame_count])
 	
 	return sprite_frames
