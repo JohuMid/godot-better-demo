@@ -114,7 +114,13 @@ func _physics_process(delta):
 		var input_dir = Input.get_axis("move_left", "move_right")
 		velocity.x = input_dir * speed
 	else:
-		velocity.x = velocity.x * 0.98 # 空中惯性
+		# 空中移动处理
+		var input_dir = Input.get_axis("move_left", "move_right")
+		# 空中移动速度应小于地面，使用 air_control 系数（例如 0.5 倍）
+		var air_control = 0.5
+		var target_air_velocity = input_dir * speed * air_control
+		# 平滑过渡到目标空中速度（避免突变）
+		velocity.x = lerp(velocity.x, target_air_velocity, 0.2)
 
 	var box_to_interact: RigidBody2D = null
 	# ===== 推/拉箱子逻辑 =====
