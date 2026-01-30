@@ -25,6 +25,11 @@ var is_pushing: bool = false
 var original_offset: Vector2 = Vector2.ZERO # 原始偏移量
 var platform_jump_offset: float = -280.0 # PlatformJump最后两帧的向上偏移
 
+# —————— 受击相关 ——————
+var is_hit: bool = false
+@export var hit_duration: float = 0.3  # 受击僵直时间（秒）
+var hit_timer: float = 0.0
+
 # —— 角色原始帧尺寸 ——
 const ORIGINAL_FRAME_WIDTH: int = 128
 const ORIGINAL_FRAME_HEIGHT: int = 128
@@ -41,6 +46,8 @@ const ANIM_SPEED = {
 	"UpwardJumpDown": 1.0, # 原地跳下降
 	"Landing": 1.7, # 落地
 	"PlatformJump": 2.0, # 跳跃平台
+	"Death":2.0, # 死亡
+	"TakingDamage":2.0, # 受击
 	"default": 1.0
 }
 
@@ -92,6 +99,16 @@ func _create_collision_shape():
 
 # —————— 物理处理 ——————
 func _physics_process(delta):
+	# ===== 受击期间不处理输入 =====
+	if is_hit:
+		hit_timer -= delta
+		if hit_timer <= 0:
+			is_hit = false
+		move_and_slide()
+		# 受击动画
+		_set_animation("TakingDamage")
+		return
+
 	if is_climbing:
 		move_and_slide()
 		return
@@ -292,6 +309,14 @@ func _on_animation_finished():
 	elif anim_name in ["Landing"]:
 		_update_animation(was_on_floor, is_on_floor())
 
+func take_hit(push_velocity: Vector2) -> void:
+	if is_hit:
+		return  # 防止连击
+	is_hit = true
+	hit_timer = hit_duration
+	velocity = push_velocity  # 直接应用击退速度
+	# 可选：播放音效、屏幕震动等
+	
 func _try_climb_edge():
 	var space_state = get_world_2d().direct_space_state
 	var direction = 1 if animated_sprite.flip_h == false else -1
