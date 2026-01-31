@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://75o0w0fr0wum"]
+
+[ext_resource type="PackedScene" uid="uid://deq8fex5njp8x" path="res://scenes/emeny/Enemy.tscn" id="1_my5ud"]
+[ext_resource type="Script" uid="uid://dabcdtaraq61r" path="res://scripts/entities/enemy/lizard/Lizard.gd" id="2_5lj8j"]
+[ext_resource type="Texture2D" uid="uid://ctarccmc5rkf0" path="res://resources/enemy/lizard/spritesheet.png" id="2_ispoc"]
+
+[node name="Lizard" instance=ExtResource("1_my5ud")]
+script = ExtResource("2_5lj8j")
+atlas = ExtResource("2_ispoc")
+json_path = "res://resources/enemy/lizard/spritesheet.json"

@@ -27,7 +27,7 @@ var platform_jump_offset: float = -280.0 # PlatformJump最后两帧的向上偏�
 
 # —————— 受击相关 ——————
 var is_hit: bool = false
-@export var hit_duration: float = 0.3  # 受击僵直时间（秒）
+@export var hit_duration: float = 0.3 # 受击僵直时间（秒）
 var hit_timer: float = 0.0
 
 # —— 角色原始帧尺寸 ——
@@ -46,8 +46,8 @@ const ANIM_SPEED = {
 	"UpwardJumpDown": 1.0, # 原地跳下降
 	"Landing": 1.7, # 落地
 	"PlatformJump": 2.0, # 跳跃平台
-	"Death":2.0, # 死亡
-	"TakingDamage":2.0, # 受击
+	"Death": 2.0, # 死亡
+	"TakingDamage": 2.0, # 受击
 	"default": 1.0
 }
 
@@ -60,7 +60,7 @@ func _ready():
 		push_error("请在检查器中指定 Atlas 纹理！")
 		return
 
-	var frames = TexturePackerImporter.create_sprite_frames(atlas, json_path)
+	var frames = TexturePackerImporter.create_sprite_frames(atlas, json_path, ORIGINAL_FRAME_WIDTH, ORIGINAL_FRAME_HEIGHT)
 	animated_sprite = $AnimatedSprite2D
 	animated_sprite.sprite_frames = frames
 
@@ -187,11 +187,11 @@ func _physics_process(delta):
 				box_to_interact.sleeping = false
 
 				# === 新增：背对墙时禁止拉箱子 ===
-				var is_pulling = (sign(input_dir) == -facing_dir)  # 拉：输入与面朝相反
+				var is_pulling = (sign(input_dir) == -facing_dir) # 拉：输入与面朝相反
 
 				if is_pulling:
 					# 检测玩家背后是否有墙（距离 8 像素）
-					var behind_offset = Vector2(-8 * facing_dir, 0)  # 背后方向
+					var behind_offset = Vector2(-8 * facing_dir, 0) # 背后方向
 					var behind_ray = PhysicsRayQueryParameters2D.new()
 					behind_ray.from = global_position
 					behind_ray.to = global_position + behind_offset
@@ -311,10 +311,10 @@ func _on_animation_finished():
 
 func take_hit(push_velocity: Vector2) -> void:
 	if is_hit:
-		return  # 防止连击
+		return # 防止连击
 	is_hit = true
 	hit_timer = hit_duration
-	velocity = push_velocity  # 直接应用击退速度
+	velocity = push_velocity # 直接应用击退速度
 	# 可选：播放音效、屏幕震动等
 	
 func _try_climb_edge():
