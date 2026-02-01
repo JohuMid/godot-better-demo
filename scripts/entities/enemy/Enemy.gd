@@ -7,6 +7,8 @@ class_name Enemy
 @export var jump_velocity: float = -280.0
 @export var gravity: float = 1000.0
 const SPRITE_SCALE: float = 1.0
+# 检测范围
+const DETECTION_RANGE: float = 40.0
 
 # —————— 动画相关 ——————
 @export var atlas: Texture2D
@@ -100,9 +102,9 @@ func _handle_moving() -> void:
 		velocity.x = 0
 		return
 	elif _is_player_detected():
-		print("玩家检测到")
 		# 触发攻击状态
 		ai_state = AIState.ATTACKING
+		_enter_attack_state()
 		_set_animation("Attack")
 		velocity.x = 0
 		return
@@ -120,9 +122,16 @@ func _handle_waiting(delta: float) -> void:
 		facing *= -1
 		ai_state = AIState.MOVING
 
+func _enter_attack_state() -> void:
+	pass
+
 # —————— 攻击逻辑 ——————
 func _handle_attacking(delta: float) -> void:
 	velocity.x = 0
+	_perform_attack_check()
+
+func _perform_attack_check() -> void:
+	pass
 
 # —————— 检测逻辑 ——————
 func _is_front_blocked() -> bool:
@@ -144,7 +153,7 @@ func _is_front_cliff() -> bool:
 func _is_player_detected() -> bool:
 	# 检测玩家是否在检测范围内
 	player_ray.from = global_position
-	player_ray.to = global_position + Vector2(30 * facing, 0)
+	player_ray.to = global_position + Vector2(DETECTION_RANGE * facing, 0)
 
 	var result = get_world_2d().direct_space_state.intersect_ray(player_ray)
 	return result and result.collider is CharacterBody2D

@@ -16,14 +16,14 @@ tile_map_data = PackedByteArray("AAD9/wYAAAABAAIAAAD9/wUAAAADAAEAAAD9/wQAAAACAAE
 tile_set = ExtResource("2_68ib6")
 
 [node name="PressurePlate" parent="." instance=ExtResource("4_fh0io")]
-position = Vector2(256, 160)
+position = Vector2(224, 160)
 
 [node name="Box" parent="." instance=ExtResource("5_68ib6")]
 position = Vector2(88, 136)
 script = null
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
-position = Vector2(552, 0)
+position = Vector2(304, 112)
 
 [node name="RightEdge" parent="." instance=ExtResource("4_qcr8a")]
 position = Vector2(576, 160)
