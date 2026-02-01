@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://evr32afob2m7"]
+[gd_scene load_steps=10 format=4 uid="uid://evr32afob2m7"]
 
 [ext_resource type="TileSet" uid="uid://bmowt2na06w2i" path="res://resources/tres/new_tile_set.tres" id="2_68ib6"]
 [ext_resource type="PackedScene" uid="uid://b7drwybm3moq" path="res://scenes/items/PressurePlate.tscn" id="4_fh0io"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ct458gb6jx10i" path="res://scenes/items/Stungun.tscn" id="6_in5bs"]
 [ext_resource type="PackedScene" uid="uid://dom5oi6nv5o0i" path="res://scenes/items/Chainsaw.tscn" id="7_ax2ff"]
 [ext_resource type="PackedScene" uid="uid://75o0w0fr0wum" path="res://scenes/emeny/Lizard.tscn" id="8_bbvxl"]
+[ext_resource type="PackedScene" uid="uid://cjix2q018qnj4" path="res://scenes/items/Fragibridge.tscn" id="9_e2o36"]
 
 [node name="Level0" type="Node2D"]
 
@@ -23,7 +24,7 @@ position = Vector2(88, 136)
 script = null
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
-position = Vector2(304, 112)
+position = Vector2(216, 48)
 
 [node name="RightEdge" parent="." instance=ExtResource("4_qcr8a")]
 position = Vector2(576, 160)
@@ -39,3 +40,20 @@ position = Vector2(112, 176)
 
 [node name="Lizard" parent="." instance=ExtResource("8_bbvxl")]
 position = Vector2(480, 88)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Fragibridge" parent="Node2D" instance=ExtResource("9_e2o36")]
+position = Vector2(208, 80)
+
+[node name="Fragibridge2" parent="Node2D" instance=ExtResource("9_e2o36")]
+position = Vector2(240, 80)
+
+[node name="Fragibridge3" parent="Node2D" instance=ExtResource("9_e2o36")]
+position = Vector2(271, 80)
+
+[node name="Fragibridge4" parent="Node2D" instance=ExtResource("9_e2o36")]
+position = Vector2(303, 80)
+
+[node name="Fragibridge5" parent="Node2D" instance=ExtResource("9_e2o36")]
+position = Vector2(335, 80)
