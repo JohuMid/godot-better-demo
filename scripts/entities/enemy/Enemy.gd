@@ -17,6 +17,7 @@ const ANIM_SPEED = {
 	"Idle": 4.0,
 	"Walk": 1.2,
 	"Run": 4.0,
+	"Attack": 4.0,
 	"default": 1.0
 }
 
@@ -28,13 +29,15 @@ var facing: int = 1
 var is_grounded: bool = false
 
 # —————— 新增：AI 状态管理 ——————
-enum AIState { MOVING, WAITING }
+enum AIState {MOVING, WAITING, ATTACKING}
 var ai_state: int = AIState.WAITING
 var wait_timer: float = 0.0
 const TURN_WAIT_TIME: float = 2.0
 
-# 缓存 RayCast 引用
-var front_detector: RayCast2D
+# 缓存射线查询参数，避免每帧新建
+var front_block_ray: PhysicsRayQueryParameters2D
+var front_cliff_ray: PhysicsRayQueryParameters2D
+var player_ray: PhysicsRayQueryParameters2D
 
 func _ready() -> void:
 	print("Enemy _ready")
@@ -50,18 +53,36 @@ func _ready() -> void:
 	animated_sprite.centered = false
 	animated_sprite.offset = Vector2(-50, -36)
 
-	# 关键：初始化面向方向
+	# 初始化射线查询参数（只创建一次）
+	front_block_ray = PhysicsRayQueryParameters2D.new()
+	front_block_ray.exclude = [self]
+	
+	front_cliff_ray = PhysicsRayQueryParameters2D.new()
+	front_cliff_ray.exclude = [self]
+	front_cliff_ray.collision_mask = 1 # 仅检测地面层（假设 mask=1）
+
+	player_ray = PhysicsRayQueryParameters2D.new()
+	player_ray.exclude = [self]
+
+	# 初始化面向方向
 	_update_facing_direction()
 
-	_set_animation("Run")  # 启动即跑步
+	_set_animation("Run") # 启动即跑步
+
+	animated_sprite.animation_finished.connect(_on_animation_finished)
+
+func _on_animation_finished() -> void:
+	ai_state = AIState.MOVING
+	_set_animation("Run")
 
 func _physics_process(delta: float) -> void:
-	
 	match ai_state:
 		AIState.MOVING:
-			_handle_moving(delta)
+			_handle_moving()
 		AIState.WAITING:
 			_handle_waiting(delta)
+		AIState.ATTACKING:
+			_handle_attacking(delta)
 
 	# 添加重力
 	if not is_on_floor():
@@ -69,13 +90,20 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 # —————— AI 行为 ——————
-func _handle_moving(delta: float) -> void:
-	# 检测前方是否有障碍
-	if _is_front_blocked():
+func _handle_moving() -> void:
+	# 检测前方是否有障碍或者悬崖
+	if _is_front_blocked() or _is_front_cliff():
 		# 触发等待状态
 		ai_state = AIState.WAITING
 		wait_timer = TURN_WAIT_TIME
 		_set_animation("Idle")
+		velocity.x = 0
+		return
+	elif _is_player_detected():
+		print("玩家检测到")
+		# 触发攻击状态
+		ai_state = AIState.ATTACKING
+		_set_animation("Attack")
 		velocity.x = 0
 		return
 
@@ -86,44 +114,44 @@ func _handle_moving(delta: float) -> void:
 
 func _handle_waiting(delta: float) -> void:
 	wait_timer -= delta
-	velocity.x = 0  # 确保不动
+	velocity.x = 0 # 确保不动
 	if wait_timer <= 0.15:
 		# 等待结束，转身
 		facing *= -1
 		ai_state = AIState.MOVING
 
+# —————— 攻击逻辑 ——————
+func _handle_attacking(delta: float) -> void:
+	velocity.x = 0
+
 # —————— 检测逻辑 ——————
 func _is_front_blocked() -> bool:
-	var forward_offset = Vector2(20 * facing, 0)
-	var from = global_position
-	var to = global_position + forward_offset
+	# 动态更新射线起点和终点（根据当前位置和朝向）
+	front_block_ray.from = global_position
+	front_block_ray.to = global_position + Vector2(20 * facing, 0)
 
-	var ray = PhysicsRayQueryParameters2D.new()
-	ray.from = from
-	ray.to = to
-	ray.exclude = [self]
-
-	var result = get_world_2d().direct_space_state.intersect_ray(ray)
-	if result and result.collider is TileMapLayer:
-		return true
-	else:
-		return false
+	var result = get_world_2d().direct_space_state.intersect_ray(front_block_ray)
+	return result and result.collider is TileMapLayer
 
 func _is_front_cliff() -> bool:
-	var space_state = get_world_2d().direct_space_state
+	# 检测正下方是否有地面（用于防掉落）
+	front_cliff_ray.from = global_position
+	front_cliff_ray.to = global_position + Vector2(16 * facing, 20)
 
-	var ray_forward = PhysicsRayQueryParameters2D.new()
-	ray_forward.from = global_position
-	ray_forward.to = global_position + Vector2(0, 20)
-	ray_forward.exclude = [self]
-	ray_forward.collision_mask = 1
+	var result = get_world_2d().direct_space_state.intersect_ray(front_cliff_ray)
+	return result.is_empty() # 没有碰撞 → 是悬崖
 
-	var result = space_state.intersect_ray(ray_forward)
-	return result.is_empty()  # 没撞到 → 是悬崖
+func _is_player_detected() -> bool:
+	# 检测玩家是否在检测范围内
+	player_ray.from = global_position
+	player_ray.to = global_position + Vector2(30 * facing, 0)
+
+	var result = get_world_2d().direct_space_state.intersect_ray(player_ray)
+	return result and result.collider is CharacterBody2D
 
 # —————— 工具函数 ——————
 func _update_facing_direction() -> void:
-	animated_sprite.scale.x = -SPRITE_SCALE * facing
+	animated_sprite.scale.x = - SPRITE_SCALE * facing
 
 # —————— 原有方法保留 ——————
 func _set_animation(anim_name: String):
