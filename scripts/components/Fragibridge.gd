@@ -8,7 +8,7 @@ func _ready():
 	$Area2D.body_entered.connect(_on_player_entered)
 
 func _on_player_entered(body):
-	if body.name == "Player" and not is_collapsing:
+	if body is CharacterBody2D and not is_collapsing:
 		is_collapsing = true
 		await get_tree().create_timer(collapse_delay).timeout
 		_collapse()
