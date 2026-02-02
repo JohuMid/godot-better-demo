@@ -23,8 +23,8 @@ const ANIM_SPEED = {
 	"default": 1.0
 }
 
-const ORIGINAL_FRAME_WIDTH: int = 72
-const ORIGINAL_FRAME_HEIGHT: int = 48
+var original_frame_width: int = 48
+var original_frame_height: int = 48
 
 ## 内部状态
 var facing: int = 1
@@ -47,13 +47,13 @@ func _ready() -> void:
 		push_error("请在检查器中指定 Atlas 纹理！")
 		return
 
-	var frames = TexturePackerImporter.create_sprite_frames(atlas, json_path, ORIGINAL_FRAME_WIDTH, ORIGINAL_FRAME_HEIGHT)
+	var frames = TexturePackerImporter.create_sprite_frames(atlas, json_path, original_frame_width, original_frame_height)
 	animated_sprite = $AnimatedSprite2D
 	animated_sprite.sprite_frames = frames
 
 	animated_sprite.scale = Vector2(SPRITE_SCALE, SPRITE_SCALE)
 	animated_sprite.centered = false
-	animated_sprite.offset = Vector2(-50, -36)
+	_set_animated_offset()
 
 	# 初始化射线查询参数（只创建一次）
 	front_block_ray = PhysicsRayQueryParameters2D.new()
@@ -105,7 +105,6 @@ func _handle_moving() -> void:
 		# 触发攻击状态
 		ai_state = AIState.ATTACKING
 		_enter_attack_state()
-		_set_animation("Attack")
 		velocity.x = 0
 		return
 
@@ -121,6 +120,9 @@ func _handle_waiting(delta: float) -> void:
 		# 等待结束，转身
 		facing *= -1
 		ai_state = AIState.MOVING
+
+func _set_animated_offset() -> void:
+	pass
 
 func _enter_attack_state() -> void:
 	pass
@@ -158,11 +160,11 @@ func _is_player_detected() -> bool:
 	var result = get_world_2d().direct_space_state.intersect_ray(player_ray)
 	return result and result.collider is CharacterBody2D
 
-# —————— 工具函数 ——————
+# —————— 更新面向方向 ——————
 func _update_facing_direction() -> void:
 	animated_sprite.scale.x = - SPRITE_SCALE * facing
 
-# —————— 原有方法保留 ——————
+# —————— 设置动画 ——————
 func _set_animation(anim_name: String):
 	if animated_sprite.animation == anim_name:
 		return

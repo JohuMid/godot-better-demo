@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cavasyxbgqg4n"]
+
+[ext_resource type="PackedScene" uid="uid://deq8fex5njp8x" path="res://scenes/emeny/Enemy.tscn" id="1_bep5h"]
+[ext_resource type="Texture2D" uid="uid://o8mxl7occlh0" path="res://resources/enemy/television/spritesheet.png" id="2_tqkui"]
+[ext_resource type="Script" uid="uid://qlr6syss28eb" path="res://scripts/entities/enemy/television/Television.gd" id="2_x1swn"]
+
+[node name="Television" instance=ExtResource("1_bep5h")]
+script = ExtResource("2_x1swn")
+atlas = ExtResource("2_tqkui")
+json_path = "res://resources/enemy/television/spritesheet.json"
+
+[node name="Sprite2D" parent="AnimatedSprite2D" index="0"]
+region_rect = Rect2(0, 192, 48, 48)

@@ -7,6 +7,8 @@ var has_hit_in_this_attack: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	original_frame_width = 72
+	original_frame_height = 48
 	super()
 
 
@@ -14,8 +16,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func _set_animated_offset() -> void:
+	animated_sprite.offset = Vector2(-50, -36)
+
 # 检查是否在攻击帧
 func _enter_attack_state() -> void:
+	_set_animation("Attack")
 	has_hit_in_this_attack = false
 	# 可播放攻击音效等
 	print("Lizard 开始攻击！")
