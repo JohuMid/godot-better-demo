@@ -27,6 +27,7 @@ func _enter_attack_state() -> void:
 	print("Lizard 开始攻击！")
 
 func _perform_attack_check() -> void:
+	velocity.x = 0
 	# 只在特定帧检测
 	if animated_sprite.frame in attack_frames:
 		if not has_hit_in_this_attack:

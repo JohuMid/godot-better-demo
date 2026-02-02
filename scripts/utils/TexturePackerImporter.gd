@@ -11,6 +11,8 @@ const NON_LOOPING_ANIMS = [
 	"PlatformJump",
 	"Death",
 	"Attack",
+	"Fall",
+	"Jump",
 	# 添加其他只需播放一次的动画名
 ]
 

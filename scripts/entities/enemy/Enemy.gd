@@ -59,10 +59,12 @@ func _ready() -> void:
 	front_block_ray = PhysicsRayQueryParameters2D.new()
 	front_block_ray.exclude = [self]
 	
+	# 初始化前方悬崖射线查询参数（只创建一次）
 	front_cliff_ray = PhysicsRayQueryParameters2D.new()
 	front_cliff_ray.exclude = [self]
 	front_cliff_ray.collision_mask = 1 # 仅检测地面层（假设 mask=1）
 
+	# 初始化玩家检测射线查询参数（只创建一次）
 	player_ray = PhysicsRayQueryParameters2D.new()
 	player_ray.exclude = [self]
 
@@ -105,7 +107,6 @@ func _handle_moving() -> void:
 		# 触发攻击状态
 		ai_state = AIState.ATTACKING
 		_enter_attack_state()
-		velocity.x = 0
 		return
 
 	# 正常移动
@@ -115,7 +116,6 @@ func _handle_moving() -> void:
 
 func _handle_waiting(delta: float) -> void:
 	wait_timer -= delta
-	velocity.x = 0 # 确保不动
 	if wait_timer <= 0.15:
 		# 等待结束，转身
 		facing *= -1
@@ -129,7 +129,6 @@ func _enter_attack_state() -> void:
 
 # —————— 攻击逻辑 ——————
 func _handle_attacking(delta: float) -> void:
-	velocity.x = 0
 	_perform_attack_check()
 
 func _perform_attack_check() -> void:
@@ -150,7 +149,7 @@ func _is_front_cliff() -> bool:
 	front_cliff_ray.to = global_position + Vector2(16 * facing, 20)
 
 	var result = get_world_2d().direct_space_state.intersect_ray(front_cliff_ray)
-	return result.is_empty() # 没有碰撞 → 是悬崖
+	return is_on_floor() and result.is_empty() # 没有碰撞 → 是悬崖
 
 func _is_player_detected() -> bool:
 	# 检测玩家是否在检测范围内
