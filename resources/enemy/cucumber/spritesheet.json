@@ -1,9 +1,29 @@
 {
 	"frames": {
+		"Fall.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 48,
+				"h": 48
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 48,
+				"h": 48
+			},
+			"sourceSize": {
+				"w": 48,
+				"h": 48
+			}
+		},
 		"Hit.png": {
 			"frame": {
-				"x": 1,
-				"y": 1,
+				"x": 0,
+				"y": 48,
 				"w": 240,
 				"h": 48
 			},
@@ -22,8 +42,8 @@
 		},
 		"Idle.png": {
 			"frame": {
-				"x": 1,
-				"y": 51,
+				"x": 0,
+				"y": 96,
 				"w": 528,
 				"h": 48
 			},
@@ -40,10 +60,30 @@
 				"h": 48
 			}
 		},
+		"Jump.png": {
+			"frame": {
+				"x": 0,
+				"y": 144,
+				"w": 48,
+				"h": 48
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 48,
+				"h": 48
+			},
+			"sourceSize": {
+				"w": 48,
+				"h": 48
+			}
+		},
 		"Run.png": {
 			"frame": {
-				"x": 1,
-				"y": 101,
+				"x": 0,
+				"y": 192,
 				"w": 576,
 				"h": 48
 			},
@@ -67,8 +107,8 @@
 		"image": "spritesheet.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 578,
-			"h": 150
+			"w": 576,
+			"h": 240
 		},
 		"scale": "1"
 	}

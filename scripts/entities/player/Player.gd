@@ -126,13 +126,11 @@ func _physics_process(delta):
 		velocity.y = jump_velocity
 		_set_animation("SideJumpUp" if abs(velocity.x) > 50 else "UpwardJumpUp")
 
+	var input_dir = Input.get_axis("move_left", "move_right")
 	# 4. 水平移动
 	if current_on_floor:
-		var input_dir = Input.get_axis("move_left", "move_right")
 		velocity.x = input_dir * speed
 	else:
-		# 空中移动处理
-		var input_dir = Input.get_axis("move_left", "move_right")
 		# 空中移动速度应小于地面，使用 air_control 系数（例如 0.5 倍）
 		var air_control = 0.5
 		var target_air_velocity = input_dir * speed * air_control
@@ -142,7 +140,6 @@ func _physics_process(delta):
 	var box_to_interact: RigidBody2D = null
 	# ===== 推/拉箱子逻辑 =====
 	if current_on_floor:
-		var input_dir = Input.get_axis("move_left", "move_right")
 		var has_input = abs(input_dir) > 0.1
 		var mouse_held = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 
@@ -161,7 +158,6 @@ func _physics_process(delta):
 				ray_forward.from = from
 				ray_forward.to = to_forward
 				ray_forward.exclude = [self]
-				ray_forward.collision_mask = 1
 				var res = get_world_2d().direct_space_state.intersect_ray(ray_forward)
 				if res and res.collider is RigidBody2D:
 					box_to_interact = res.collider
@@ -175,7 +171,6 @@ func _physics_process(delta):
 				ray_backward.from = from
 				ray_backward.to = to_backward
 				ray_backward.exclude = [self]
-				ray_backward.collision_mask = 1
 				var res = get_world_2d().direct_space_state.intersect_ray(ray_backward)
 				if res and res.collider is RigidBody2D:
 					box_to_interact = res.collider

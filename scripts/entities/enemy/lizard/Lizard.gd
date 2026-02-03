@@ -50,7 +50,8 @@ func _check_lizard_attack_hit() -> bool:
 	var query = PhysicsShapeQueryParameters2D.new()
 	query.transform = Transform2D(0, attack_pos)
 	query.shape = shape
-	query.collision_mask = 1
+	# 玩家层
+	query.collision_mask = 2
 	query.exclude = [self]
 
 	var results = space_state.intersect_shape(query)

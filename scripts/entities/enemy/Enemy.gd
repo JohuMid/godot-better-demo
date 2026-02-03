@@ -12,7 +12,8 @@ const DETECTION_RANGE: float = 40.0
 
 # —————— 动画相关 ——————
 @export var atlas: Texture2D
-@export var json_path: String = "res://resources/enemy/"
+@export var json_path: String = "res://resources/enemy//spritesheet.json
+"
 var animated_sprite: AnimatedSprite2D
 
 const ANIM_SPEED = {

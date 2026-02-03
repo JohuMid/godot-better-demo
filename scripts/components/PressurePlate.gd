@@ -4,8 +4,6 @@ signal activated   # 压力板被压下（打开通路）
 signal deactivated # 压力板释放（关闭通路）
 
 # --- 可配置的属性 ---
-@export var activation_layer: int = 1
-@export var activation_mask: int = 1
 @export var pressed_distance: float = 2.0
 @export var move_speed: float = 200.0
 
@@ -22,10 +20,6 @@ var target_position: Vector2
 func _ready() -> void:
 	# 初始化目标位置为视觉节点的初始位置
 	target_position = original_visual_position
-
-	# 配置检测器的属性
-	detector.collision_layer = activation_layer
-	detector.collision_mask = activation_mask
 
 	# 连接检测器的信号到本脚本的函数
 	detector.body_entered.connect(_on_body_entered)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfxq5uvma8rth"]
+
+[ext_resource type="PackedScene" uid="uid://deq8fex5njp8x" path="res://scenes/emeny/Enemy.tscn" id="1_e1red"]
+[ext_resource type="Script" uid="uid://dwtvl30lsvip4" path="res://scripts/entities/enemy/cucumber/Cucumber.gd" id="2_pjlpn"]
+[ext_resource type="Texture2D" uid="uid://diox8kn6p1qln" path="res://resources/enemy/cucumber/spritesheet.png" id="3_wejf8"]
+
+[node name="Cucumber" instance=ExtResource("1_e1red")]
+script = ExtResource("2_pjlpn")
+atlas = ExtResource("3_wejf8")
+json_path = "res://resources/enemy/cucumber/spritesheet.json"

@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjix2q018qnj4"]
+[gd_scene load_steps=8 format=3 uid="uid://dcfldxe3asuck"]
 
-[ext_resource type="Script" uid="uid://bjy3pp7ka7wex" path="res://scripts/components/Fragibridge.gd" id="1_bndg2"]
+[ext_resource type="Script" path="res://scripts/components/Fragibridge.gd" id="1_bndg2"]
 [ext_resource type="Texture2D" uid="uid://t1qep33el80v" path="res://resources/item/spritesheet.png" id="1_pnvfc"]
 
 [sub_resource type="Animation" id="Animation_itoaf"]
@@ -113,6 +113,8 @@ region_enabled = true
 region_rect = Rect2(0, 192, 336, 48)
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -4.5)
