@@ -18,7 +18,7 @@ var climb_target_y: float = 0.0
 var is_climbing: bool = false
 
 # —————— 推箱子相关 ——————
-@export var push_distance: float = 8.0 # 推箱子距离（像素）
+@export var box_distance: float = 8.0 # 推箱子距离（像素）
 var is_pushing: bool = false
 
 # —————— 动画帧偏移相关 ——————
@@ -27,7 +27,7 @@ var platform_jump_offset: float = -280.0 # PlatformJump最后两帧的向上偏�
 
 # —————— 受击相关 ——————
 var is_hit: bool = false
-@export var hit_duration: float = 0.3 # 受击僵直时间（秒）
+var hit_duration: float = 0.3 # 受击僵直时间（秒）
 var hit_timer: float = 0.0
 
 # —— 角色原始帧尺寸 ——
@@ -54,8 +54,11 @@ const ANIM_SPEED = {
 var animated_sprite: AnimatedSprite2D
 var was_on_floor: bool = false
 
+var box_ray: PhysicsRayQueryParameters2D
+
 # —————— 初始化 ——————
 func _ready():
+	add_to_group("player")
 	if not atlas:
 		push_error("请在检查器中指定 Atlas 纹理！")
 		return
@@ -80,6 +83,10 @@ func _ready():
 	animated_sprite.connect("frame_changed", Callable(self, "_on_frame_changed"))
 	_create_collision_shape()
 	_set_animation("Idle")
+
+	# 初始化推箱子射线查询参数（只创建一次）
+	box_ray = PhysicsRayQueryParameters2D.new()
+	box_ray.exclude = [self]
 
 # —————— 创建碰撞体 ——————
 func _create_collision_shape():
@@ -137,45 +144,23 @@ func _physics_process(delta):
 		# 平滑过渡到目标空中速度（避免突变）
 		velocity.x = lerp(velocity.x, target_air_velocity, 0.2)
 
-	var box_to_interact: RigidBody2D = null
+	var box_to_interact: RigidBody2D = _check_box()
 	# ===== 推/拉箱子逻辑 =====
-	if current_on_floor:
+	if current_on_floor and box_to_interact is RigidBody2D:
 		var has_input = abs(input_dir) > 0.1
 		var mouse_held = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 
 		if mouse_held and has_input:
 			var facing_dir = 1 if not animated_sprite.flip_h else -1
-			var ray_offset_y = - ORIGINAL_FRAME_HEIGHT * SPRITE_SCALE * 0.35
-			var from = global_position + Vector2(0, ray_offset_y)
-
 			
 			var target_vel_x: float = 0.0
-
 			# --- 推：前方有箱子 ---
 			if sign(input_dir) == facing_dir:
-				var to_forward = from + Vector2(push_distance * facing_dir, 0)
-				var ray_forward = PhysicsRayQueryParameters2D.new()
-				ray_forward.from = from
-				ray_forward.to = to_forward
-				ray_forward.exclude = [self]
-				var res = get_world_2d().direct_space_state.intersect_ray(ray_forward)
-				if res and res.collider is RigidBody2D:
-					box_to_interact = res.collider
-					target_vel_x = speed * facing_dir # 推
-
+				target_vel_x = speed * facing_dir # 推
 			# --- 拉（且输入方向与面朝相反）---
 			elif sign(input_dir) == -facing_dir:
-				var pull_distance = 8.0
-				var to_backward = from + Vector2(pull_distance * facing_dir, 0)
-				var ray_backward = PhysicsRayQueryParameters2D.new()
-				ray_backward.from = from
-				ray_backward.to = to_backward
-				ray_backward.exclude = [self]
-				var res = get_world_2d().direct_space_state.intersect_ray(ray_backward)
-				if res and res.collider is RigidBody2D:
-					box_to_interact = res.collider
-					target_vel_x = - speed * facing_dir # 拉
-
+				target_vel_x = - speed * facing_dir # 拉
+					
 			# --- 应用控制 ---
 			if box_to_interact:
 				is_pushing = true
@@ -303,6 +288,21 @@ func _on_animation_finished():
 		_update_animation(is_on_floor(), is_on_floor())
 	elif anim_name in ["Landing"]:
 		_update_animation(was_on_floor, is_on_floor())
+
+# 箱子检测
+func _check_box():
+	var facing_dir = 1 if not animated_sprite.flip_h else -1
+	var ray_offset_y = - ORIGINAL_FRAME_HEIGHT * SPRITE_SCALE * 0.35
+	var from = global_position + Vector2(0, ray_offset_y)
+	var to_forward = from + Vector2(box_distance * facing_dir, 0)
+	box_ray.from = from
+	box_ray.to = to_forward
+	box_ray.exclude = [self]
+	var res = get_world_2d().direct_space_state.intersect_ray(box_ray)
+	if res and res.collider is RigidBody2D:
+		return res.collider
+	else:
+		return null
 
 func take_hit(push_velocity: Vector2) -> void:
 	if is_hit:

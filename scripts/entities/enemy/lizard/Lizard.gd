@@ -19,13 +19,13 @@ func _process(delta: float) -> void:
 func _set_animated_offset() -> void:
 	animated_sprite.offset = Vector2(-50, -36)
 
-# 检查是否在攻击帧
 func _enter_attack_state() -> void:
 	_set_animation("Attack")
 	has_hit_in_this_attack = false
 	# 可播放攻击音效等
 	print("Lizard 开始攻击！")
 
+# 检查是否在攻击帧
 func _perform_attack_check() -> void:
 	velocity.x = 0
 	# 只在特定帧检测

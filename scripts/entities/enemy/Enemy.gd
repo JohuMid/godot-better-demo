@@ -56,14 +56,14 @@ func _ready() -> void:
 	animated_sprite.centered = false
 	_set_animated_offset()
 
-	# 初始化射线查询参数（只创建一次）
+	# 初始化前方障碍射线查询参数（只创建一次）
 	front_block_ray = PhysicsRayQueryParameters2D.new()
 	front_block_ray.exclude = [self]
 	
 	# 初始化前方悬崖射线查询参数（只创建一次）
 	front_cliff_ray = PhysicsRayQueryParameters2D.new()
 	front_cliff_ray.exclude = [self]
-	front_cliff_ray.collision_mask = 1 # 仅检测地面层（假设 mask=1）
+	front_cliff_ray.collision_mask = 1 # 仅检测地面层Ground
 
 	# 初始化玩家检测射线查询参数（只创建一次）
 	player_ray = PhysicsRayQueryParameters2D.new()

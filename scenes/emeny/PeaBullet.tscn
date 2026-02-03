@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://51oa1tcvjsci"]
+
+[ext_resource type="Script" uid="uid://cocakol07ibof" path="res://scripts/entities/enemy/pea/PeaBullet.gd" id="1_waswm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5o5qo"]
+size = Vector2(12, 10)
+
+[node name="PeaBullet" type="Area2D"]
+collision_layer = 32
+collision_mask = 3
+script = ExtResource("1_waswm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5o5qo")
