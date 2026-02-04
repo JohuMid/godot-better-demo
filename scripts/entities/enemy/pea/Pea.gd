@@ -9,7 +9,7 @@ const ATTACK_COOLDOWN: float = 1.0  # 1秒攻击一次
 @export var bullet_scene: PackedScene 
 
 func _ready() -> void:
-	detection_range = 200.0
+	detection_range = 150.0
 	super()
 
 # 注意：攻击逻辑在 _physics_process 中由父类调用，所以只需更新 timer

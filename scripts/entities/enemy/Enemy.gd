@@ -96,6 +96,7 @@ func _physics_process(delta: float) -> void:
 
 # —————— AI 行为 ——————
 func _handle_moving() -> void:
+	_update_facing_direction()
 	# 检测前方是否有障碍或者悬崖
 	if _is_front_blocked() or _is_front_cliff():
 		# 触发等待状态
@@ -113,11 +114,11 @@ func _handle_moving() -> void:
 	# 正常移动
 	velocity.x = speed * facing
 	_set_animation("Run")
-	_update_facing_direction()
+	
 
 func _handle_waiting(delta: float) -> void:
 	wait_timer -= delta
-	if wait_timer <= 0.15:
+	if wait_timer <= 0:
 		# 等待结束，转身
 		facing *= -1
 		ai_state = AIState.MOVING

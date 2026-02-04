@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://djmn7g20wluj"]
+
+[ext_resource type="PackedScene" uid="uid://deq8fex5njp8x" path="res://scenes/emeny/Enemy.tscn" id="1_ocs02"]
+[ext_resource type="Script" uid="uid://cane7j1tqgcis" path="res://scripts/entities/enemy/boom/Boom.gd" id="2_6cl86"]
+
+[sub_resource type="Animation" id="Animation_6cl86"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tv8yx"]
+_data = {
+&"RESET": SubResource("Animation_6cl86")
+}
+
+[node name="Boom" instance=ExtResource("1_ocs02")]
+script = ExtResource("2_6cl86")
+
+[node name="Sprite2D" parent="AnimatedSprite2D" index="0"]
+region_rect = Rect2(0, 0, 672, 96)
+
+[node name="AnimationPlayer" parent="AnimatedSprite2D" index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_tv8yx")
+}
