@@ -54,6 +54,7 @@ grab={
 2d_physics/layer_4="Machine"
 2d_physics/layer_5="Box"
 2d_physics/layer_6="Bullet"
+2d_physics/layer_7="Bridge"
 
 [rendering]
 

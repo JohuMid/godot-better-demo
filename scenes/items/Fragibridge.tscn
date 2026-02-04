@@ -96,7 +96,7 @@ size = Vector2(32, 8)
 size = Vector2(30, 1)
 
 [node name="Fragibridge" type="AnimatableBody2D"]
-collision_layer = 8
+collision_layer = 64
 collision_mask = 22
 script = ExtResource("1_bndg2")
 

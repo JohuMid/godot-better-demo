@@ -1,6 +1,9 @@
-[gd_scene load_steps=17 format=4 uid="uid://evr32afob2m7"]
+[gd_scene load_steps=20 format=4 uid="uid://evr32afob2m7"]
 
+[ext_resource type="Texture2D" uid="uid://b03tcjw6ul5v1" path="res://resources/background/background 1/1.png" id="1_nx170"]
 [ext_resource type="TileSet" uid="uid://bmowt2na06w2i" path="res://resources/tres/new_tile_set.tres" id="2_68ib6"]
+[ext_resource type="Texture2D" uid="uid://chsi83w5jl6f7" path="res://resources/background/background 1/2.png" id="2_h27y2"]
+[ext_resource type="Texture2D" uid="uid://bv2lxgjy8103p" path="res://resources/background/background 1/3.png" id="3_bmjl8"]
 [ext_resource type="PackedScene" uid="uid://b7drwybm3moq" path="res://scenes/items/PressurePlate.tscn" id="4_fh0io"]
 [ext_resource type="PackedScene" uid="uid://boqjb8fl55hyb" path="res://scenes/items/RightEdge.tscn" id="4_qcr8a"]
 [ext_resource type="PackedScene" uid="uid://i4ishioo27ak" path="res://scenes/items/Box.tscn" id="5_68ib6"]
@@ -8,10 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://ct458gb6jx10i" path="res://scenes/items/Stungun.tscn" id="6_in5bs"]
 [ext_resource type="PackedScene" uid="uid://dom5oi6nv5o0i" path="res://scenes/items/Chainsaw.tscn" id="7_ax2ff"]
 [ext_resource type="PackedScene" uid="uid://75o0w0fr0wum" path="res://scenes/emeny/Lizard.tscn" id="8_bbvxl"]
-[ext_resource type="PackedScene" uid="uid://dcfldxe3asuck" path="res://scenes/items/Fragibridge.tscn" id="9_e2o36"]
+[ext_resource type="PackedScene" uid="uid://cjix2q018qnj4" path="res://scenes/items/Fragibridge.tscn" id="9_e2o36"]
 [ext_resource type="PackedScene" uid="uid://cavasyxbgqg4n" path="res://scenes/emeny/Television.tscn" id="10_ue060"]
 [ext_resource type="PackedScene" uid="uid://bfxq5uvma8rth" path="res://scenes/emeny/Cucumber.tscn" id="11_oswwn"]
-[ext_resource type="PackedScene" uid="uid://mrfug6b22v44" path="res://scenes/emeny/Pea.tscn" id="12_c2uwi"]
+[ext_resource type="PackedScene" uid="uid://dq15p4xjpsb78" path="res://scenes/emeny/Pea.tscn" id="12_c2uwi"]
 [ext_resource type="PackedScene" uid="uid://djmn7g20wluj" path="res://scenes/emeny/Boom.tscn" id="13_n5l3n"]
 [ext_resource type="Texture2D" uid="uid://s4d3mpbvvlof" path="res://resources/enemy/boom/spritesheet.png" id="14_6se2n"]
 [ext_resource type="PackedScene" uid="uid://cwi5akjnpdj7l" path="res://scenes/items/Groundspike.tscn" id="15_hsw41"]
@@ -19,9 +22,39 @@
 
 [node name="Level0" type="Node2D"]
 
+[node name="ParallaxBackground" type="Node2D" parent="."]
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxBackground"]
+scale = Vector2(0.8, 0.8)
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(576, 324)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Parallax2D"]
+position = Vector2(288, 160)
+texture = ExtResource("1_nx170")
+
+[node name="Parallax2D2" type="Parallax2D" parent="ParallaxBackground"]
+scale = Vector2(0.8, 0.8)
+scroll_scale = Vector2(0.4, 0.4)
+repeat_size = Vector2(576, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Parallax2D2"]
+position = Vector2(288, 160)
+texture = ExtResource("2_h27y2")
+
+[node name="Parallax2D3" type="Parallax2D" parent="ParallaxBackground"]
+scale = Vector2(0.8, 0.8)
+scroll_scale = Vector2(0.8, 0.8)
+scroll_offset = Vector2(26.999998, 50.999996)
+repeat_size = Vector2(576, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Parallax2D3"]
+position = Vector2(288, 160)
+texture = ExtResource("3_bmjl8")
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(128, 32)
-tile_map_data = PackedByteArray("AAD9/wYAAAABAAIAAAD9/wUAAAADAAEAAAD9/wQAAAACAAEAAAD9/wMAAAACAAEAAAD9/wIAAAACAAEAAAD9/wEAAAACAAEAAAD9/wAAAAACAAEAAAD9////AAACAAAAAAD8/wYAAAAAAAIAAAD8/wUAAAAAAAEAAAD8/wQAAAAAAAEAAAD8/wMAAAAAAAEAAAD8/wIAAAAAAAEAAAD8/wEAAAAAAAEAAAD8/wAAAAAAAAEAAAD8////AAAAAAAAAAARAAYAAAACAAIAAAARAAUAAAACAAAAAAAQAAYAAAABAAIAAAAQAAUAAAABAAAAAAAPAAYAAAABAAIAAAAPAAUAAAABAAAAAAAOAAYAAAABAAIAAAAOAAUAAAABAAAAAAANAAYAAAABAAIAAAANAAUAAAABAAAAAAAMAAYAAAABAAIAAAAMAAUAAAABAAAAAAALAAYAAAABAAIAAAALAAUAAAABAAAAAAAKAAYAAAABAAIAAAAKAAUAAAABAAAAAAAJAAYAAAABAAIAAAAJAAUAAAABAAAAAAAIAAYAAAABAAIAAAAIAAUAAAABAAAAAAAHAAYAAAABAAIAAAAHAAUAAAABAAAAAAAGAAYAAAABAAIAAAAGAAUAAAABAAAAAAAFAAYAAAABAAIAAAAFAAUAAAABAAAAAAAEAAYAAAAAAAIAAAAEAAUAAAABAAAAAAADAAYAAAABAAIAAAACAAYAAAACAAIAAAACAAUAAAABAAAAAAABAAYAAAABAAIAAAAAAAYAAAABAAIAAAAAAAUAAAABAAAAAAD//wYAAAABAAIAAAD//wUAAAABAAAAAAD+/wYAAAABAAIAAAD+/wUAAAABAAAAAAAFAAEAAAABAAIAAAAGAAEAAAAEAAMAAAAHAAEAAAABAAIAAAAIAAEAAAABAAIAAAAJAAEAAAABAAIAAAAKAAEAAAACAAIAAAALAAEAAAAAAAIAAAAEAAEAAAABAAIAAAADAAEAAAABAAIAAAACAAEAAAABAAIAAAABAAEAAAABAAIAAAAAAAEAAAABAAIAAAAAAP7/AAABAAIAAAABAP7/AAABAAIAAAACAP7/AAABAAIAAAADAP7/AAABAAIAAAAEAP7/AAABAAIAAAAFAP7/AAABAAIAAAAGAP7/AAABAAIAAAAHAP7/AAABAAIAAAAIAP7/AAABAAIAAAALAP7/AAAAAAIAAAAJAP7/AAABAAIAAAAKAP7/AAACAAIAAAAAAPv/AAABAAIAAAABAPv/AAABAAIAAAACAPv/AAABAAIAAAADAPv/AAABAAIAAAAEAPv/AAABAAIAAAAFAPv/AAABAAIAAAAGAPv/AAABAAIAAAAHAPv/AAABAAIAAAAIAPv/AAABAAIAAAAJAPv/AAABAAIAAAAKAPv/AAACAAIAAAALAPv/AAAAAAIAAAAGAAAAAAAGAAQAAAAAAPj/AAABAAIAAAABAPj/AAABAAIAAAACAPj/AAABAAIAAAADAPj/AAABAAIAAAAEAPj/AAABAAIAAAAFAPj/AAABAAIAAAAGAPj/AAABAAIAAAAHAPj/AAABAAIAAAAIAPj/AAABAAIAAAAJAPj/AAABAAIAAAAKAPj/AAACAAIAAAALAPj/AAAAAAIAAAAGAP3/AAAGAAQAAAA=")
+tile_map_data = PackedByteArray("AAD9/wYAAAABAAIAAAD9/wUAAAADAAEAAAD9/wQAAAACAAEAAAD9/wMAAAACAAEAAAD9/wIAAAACAAEAAAD9/wEAAAACAAEAAAD9/wAAAAACAAEAAAD9////AAACAAAAAAD8/wYAAAAAAAIAAAD8/wUAAAAAAAEAAAD8/wQAAAAAAAEAAAD8/wMAAAAAAAEAAAD8/wIAAAAAAAEAAAD8/wEAAAAAAAEAAAD8/wAAAAAAAAEAAAD8////AAAAAAAAAAARAAYAAAACAAIAAAARAAUAAAACAAAAAAAQAAYAAAABAAIAAAAQAAUAAAABAAAAAAAPAAYAAAABAAIAAAAPAAUAAAABAAAAAAAOAAYAAAABAAIAAAAOAAUAAAABAAAAAAANAAYAAAABAAIAAAANAAUAAAABAAAAAAAMAAYAAAABAAIAAAAMAAUAAAABAAAAAAALAAYAAAABAAIAAAALAAUAAAABAAAAAAAKAAYAAAABAAIAAAAKAAUAAAABAAAAAAAJAAYAAAABAAIAAAAJAAUAAAABAAAAAAAIAAYAAAABAAIAAAAIAAUAAAABAAAAAAAHAAYAAAABAAIAAAAHAAUAAAABAAAAAAAGAAYAAAABAAIAAAAGAAUAAAABAAAAAAAFAAYAAAABAAIAAAAFAAUAAAABAAAAAAAEAAYAAAAAAAIAAAAEAAUAAAABAAAAAAADAAYAAAABAAIAAAACAAYAAAACAAIAAAACAAUAAAABAAAAAAABAAYAAAABAAIAAAAAAAYAAAABAAIAAAAAAAUAAAABAAAAAAD//wYAAAABAAIAAAD//wUAAAABAAAAAAD+/wYAAAABAAIAAAD+/wUAAAABAAAAAAAFAAEAAAABAAIAAAAGAAEAAAAEAAMAAAAHAAEAAAABAAIAAAAIAAEAAAABAAIAAAAJAAEAAAABAAIAAAAKAAEAAAACAAIAAAAEAAEAAAABAAIAAAADAAEAAAABAAIAAAACAAEAAAABAAIAAAABAAEAAAABAAIAAAAAAAEAAAABAAIAAAABAP7/AAABAAIAAAACAP7/AAABAAIAAAADAP7/AAABAAIAAAAEAP7/AAABAAIAAAAFAP7/AAABAAIAAAAGAP7/AAABAAIAAAAHAP7/AAABAAIAAAAIAP7/AAABAAIAAAALAP7/AAAAAAIAAAAJAP7/AAABAAIAAAAKAP7/AAACAAIAAAAAAPv/AAABAAIAAAABAPv/AAABAAIAAAACAPv/AAABAAIAAAADAPv/AAABAAIAAAAEAPv/AAABAAIAAAAFAPv/AAABAAIAAAAGAPv/AAABAAIAAAAHAPv/AAABAAIAAAAIAPv/AAABAAIAAAAJAPv/AAABAAIAAAAKAPv/AAACAAIAAAAGAAAAAAAGAAQAAAABAPj/AAABAAIAAAACAPj/AAABAAIAAAADAPj/AAABAAIAAAAEAPj/AAABAAIAAAAFAPj/AAABAAIAAAAGAPj/AAABAAIAAAAHAPj/AAABAAIAAAAIAPj/AAABAAIAAAAJAPj/AAABAAIAAAAKAPj/AAACAAIAAAALAPj/AAAAAAIAAAAGAP3/AAAGAAQAAAA=")
 tile_set = ExtResource("2_68ib6")
 
 [node name="PressurePlate" parent="." instance=ExtResource("4_fh0io")]
@@ -32,7 +65,7 @@ position = Vector2(216, 40)
 script = null
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
-position = Vector2(432, 168)
+position = Vector2(278, -175)
 
 [node name="RightEdge" parent="." instance=ExtResource("4_qcr8a")]
 position = Vector2(704, 192)
@@ -51,7 +84,7 @@ position = Vector2(432, -64)
 collision_layer = 1
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(72, 130)
+position = Vector2(72, 133)
 
 [node name="Fragibridge" parent="Node2D" instance=ExtResource("9_e2o36")]
 position = Vector2(16, 5)
@@ -86,7 +119,6 @@ json_path = "res://resources/enemy/boom/spritesheet.json"
 position = Vector2(400, 168)
 
 [node name="Node2D2" type="Node2D" parent="."]
-position = Vector2(-19, 0)
 
 [node name="Barricade" parent="Node2D2" instance=ExtResource("16_auvjl")]
 position = Vector2(555, 80)

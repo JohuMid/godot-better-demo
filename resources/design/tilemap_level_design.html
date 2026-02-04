@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雨林遗迹 - TileMap关卡设计图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a4d2e 0%, #0d2818 100%);
+            color: #fff;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: #7CFC00;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #90EE90;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .legend-section {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .legend-title {
+            font-size: 1.5em;
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0,0,0,0.3);
+            padding: 12px;
+            border-radius: 8px;
+        }
+        
+        .legend-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .level-section {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .level-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .level-title {
+            font-size: 2em;
+            color: #FFD700;
+        }
+        
+        .level-info {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9em;
+        }
+        
+        .info-tag {
+            background: rgba(124,252,0,0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #7CFC00;
+        }
+        
+        .tilemap-container {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .tilemap {
+            display: inline-grid;
+            gap: 2px;
+            min-width: 100%;
+        }
+        
+        .tile {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .tile:hover {
+            transform: scale(1.15);
+            z-index: 100;
+            border: 2px solid #FFD700;
+            box-shadow: 0 0 15px rgba(255,215,0,0.5);
+        }
+        
+        .tile:hover::after {
+            content: attr(data-info);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            color: #FFD700;
+            padding: 5px 10px;
+            border-radius: 5px;
+            white-space: nowrap;
+            font-size: 0.7em;
+            z-index: 1000;
+            margin-bottom: 5px;
+            border: 1px solid #FFD700;
+        }
+        
+        /* Tile类型样式 */
+        .ground { background: #3a2a1a; }
+        .platform { background: #4a3a2a; border: 2px solid #6a5a4a; }
+        .wall { background: #2a2a2a; }
+        .spike { background: #4a1a1a; color: #ff6b6b; }
+        .water { background: #1a3a5a; color: #6bb6ff; animation: wave 2s infinite; }
+        .vine { background: #2a4a1a; color: #7CFC00; }
+        .checkpoint { background: #1a4a4a; color: #00ffff; animation: pulse 1.5s infinite; }
+        .enemy { background: #5a1a1a; color: #ff4444; animation: enemy-move 3s infinite; }
+        .secret { background: #4a4a1a; color: #FFD700; animation: shine 2s infinite; }
+        .boss { background: #3a1a3a; color: #ff00ff; font-size: 1.5em; animation: boss-pulse 1s infinite; }
+        .air { background: transparent; border: 1px solid rgba(255,255,255,0.05); }
+        .movable { background: #3a3a2a; color: #8B7355; border: 2px dashed #6a6a4a; }
+        .trap { background: #3a2a1a; color: #ff9900; animation: trap-blink 1s infinite; }
+        .lever { background: #2a3a3a; color: #00ccff; }
+        
+        @keyframes wave {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.8; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        @keyframes enemy-move {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+        
+        @keyframes shine {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; box-shadow: 0 0 10px #FFD700; }
+        }
+        
+        @keyframes boss-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes trap-blink {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .notes {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(124,252,0,0.1);
+            border-radius: 8px;
+            border-left: 4px solid #7CFC00;
+        }
+        
+        .notes h4 {
+            color: #7CFC00;
+            margin-bottom: 10px;
+        }
+        
+        .notes ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .notes li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .notes li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #7CFC00;
+        }
+        
+        .grid-coordinates {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: #90EE90;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗺️ 雨林遗迹 - TileMap关卡地图 🗺️</h1>
+        <p class="subtitle">详细的Tile布局设计 | 可行走区域与障碍物标注</p>
+        
+        <!-- 图例说明 -->
+        <div class="legend-section">
+            <div class="legend-title">📖 TileMap图例</div>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <div class="legend-box ground">█</div>
+                    <div>
+                        <strong>地面</strong><br>
+                        <small>可行走的实心地板</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box platform">▬</div>
+                    <div>
+                        <strong>平台</strong><br>
+                        <small>可穿越的跳跃平台</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box wall">▓</div>
+                    <div>
+                        <strong>墙壁</strong><br>
+                        <small>不可穿越的障碍</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box spike">▲</div>
+                    <div>
+                        <strong>尖刺</strong><br>
+                        <small>伤害陷阱</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box water">≈</div>
+                    <div>
+                        <strong>水流</strong><br>
+                        <small>会被冲走的区域</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box vine">🌿</div>
+                    <div>
+                        <strong>藤蔓</strong><br>
+                        <small>可抓取摆荡</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box checkpoint">💾</div>
+                    <div>
+                        <strong>检查点</strong><br>
+                        <small>存档点</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box enemy">👹</div>
+                    <div>
+                        <strong>敌人</strong><br>
+                        <small>敌对单位</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box secret">💎</div>
+                    <div>
+                        <strong>隐藏彩蛋</strong><br>
+                        <small>秘密奖励</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box movable">📦</div>
+                    <div>
+                        <strong>可推动物</strong><br>
+                        <small>可移动的石块</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box trap">⚪</div>
+                    <div>
+                        <strong>滚石</strong><br>
+                        <small>移动陷阱</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box lever">🔧</div>
+                    <div>
+                        <strong>机关</strong><br>
+                        <small>可交互开关</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 关卡1地图 -->
+        <div class="level-section">
+            <div class="level-header">
+                <div class="level-title">关卡1：迷雾初境</div>
+                <div class="level-info">
+                    <div class="info-tag">尺寸: 30×10 Tiles</div>
+                    <div class="info-tag">难度: ★☆☆</div>
+                </div>
+            </div>
+            
+            <div class="tilemap-container">
+                <div class="tilemap" style="grid-template-columns: repeat(30, 40px); grid-template-rows: repeat(10, 40px);">
+                    <!-- 第1行 (天空) -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile secret" data-info="隐藏彩蛋">💎</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第2行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile vine" data-info="藤蔓1">🌿</div><div class="tile air"></div><div class="tile vine" data-info="藤蔓2">🌿</div><div class="tile wall" data-info="可破坏藤墙">▓</div><div class="tile vine" data-info="藤蔓3">🌿</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第3行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第4行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="跳跃平台">▬</div><div class="tile air"></div><div class="tile platform" data-info="跳跃平台">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="跳跃平台">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="平台">▬</div><div class="tile platform" data-info="平台">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第5行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第6行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile trap" data-info="滚石路径">⚪</div><div class="tile air"></div><div class="tile trap" data-info="滚石路径">⚪</div><div class="tile air"></div><div class="tile trap" data-info="滚石路径">⚪</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile enemy" data-info="蜥蜴守卫">👹</div><div class="tile air"></div><div class="tile checkpoint" data-info="终点">💾</div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第7行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="起始平台">▬</div><div class="tile platform" data-info="起始平台">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="休息平台">▬</div><div class="tile platform" data-info="休息平台">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="战斗平台">▬</div><div class="tile platform" data-info="战斗平台">▬</div><div class="tile platform" data-info="战斗平台">▬</div><div class="tile platform" data-info="战斗平台">▬</div><div class="tile platform" data-info="终点平台">▬</div><div class="tile platform" data-info="终点平台">▬</div><div class="tile air"></div>
+                    
+                    <!-- 第8行 -->
+                    <div class="tile wall" data-info="左侧墙壁">▓</div><div class="tile checkpoint" data-info="起点">💾</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile wall" data-info="右侧墙壁">▓</div>
+                    
+                    <!-- 第9行 -->
+                    <div class="tile wall" data-info="墙壁">▓</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile spike" data-info="尖刺陷阱">▲</div><div class="tile spike" data-info="尖刺陷阱">▲</div><div class="tile spike" data-info="尖刺陷阱">▲</div><div class="tile spike" data-info="尖刺陷阱">▲</div><div class="tile spike" data-info="尖刺陷阱">▲</div><div class="tile spike" data-info="尖刺陷阱">▲</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile spike" data-info="尖刺陷阱">▲</div><div class="tile spike" data-info="尖刺陷阱">▲</div><div class="tile spike" data-info="尖刺陷阱">▲</div><div class="tile spike" data-info="尖刺陷阱">▲</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile wall" data-info="墙壁">▓</div>
+                    
+                    <!-- 第10行 (底部基岩) -->
+                    <div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div>
+                </div>
+                <div class="grid-coordinates">
+                    <span>← X轴: 0</span>
+                    <span>X轴: 30 →</span>
+                </div>
+            </div>
+            
+            <div class="notes">
+                <h4>🔍 关卡1设计要点</h4>
+                <ul>
+                    <li><strong>藤蔓区 (X: 5-9)</strong>：三根藤蔓呈阶梯分布，教学摆荡机制，下方有安全平台</li>
+                    <li><strong>滚石走廊 (X: 13-17)</strong>：地面有裂纹预警，滚石按固定路径移动，需要观察节奏</li>
+                    <li><strong>Boss战区 (X: 23-28)</strong>：开阔平台便于新手战斗，周围有尖刺增加挑战</li>
+                    <li><strong>隐藏彩蛋 (X: 8, Y: 1)</strong>：需要二段跳+破坏藤墙才能到达</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 关卡2地图 -->
+        <div class="level-section">
+            <div class="level-header">
+                <div class="level-title">关卡2：瀑布圣殿</div>
+                <div class="level-info">
+                    <div class="info-tag">尺寸: 35×12 Tiles</div>
+                    <div class="info-tag">难度: ★★☆</div>
+                </div>
+            </div>
+            
+            <div class="tilemap-container">
+                <div class="tilemap" style="grid-template-columns: repeat(35, 40px); grid-template-rows: repeat(12, 40px);">
+                    <!-- 第1行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile secret" data-info="瀑布后隐藏洞穴">💎</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第2行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="最高石柱">▬</div><div class="tile wall" data-info="瀑布墙">▓</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile enemy" data-info="飞行蝙蝠">👹</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第3行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile wall" data-info="瀑布墙">▓</div><div class="tile platform" data-info="石柱2">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第4行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="起始平台">▬</div><div class="tile platform" data-info="起始平台">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile wall" data-info="瀑布墙">▓</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile enemy" data-info="飞行蝙蝠">👹</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="解谜区平台">▬</div><div class="tile platform" data-info="解谜区平台">▬</div><div class="tile platform" data-info="解谜区平台">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第5行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile wall" data-info="瀑布墙">▓</div><div class="tile air"></div><div class="tile platform" data-info="石柱3">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第6行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile water" data-info="瀑布水流">≈</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="中转平台">▬</div><div class="tile platform" data-info="中转平台">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile lever" data-info="机关开关-雨">🔧</div><div class="tile wall" data-info="墙壁">▓</div><div class="tile wall" data-info="墙壁">▓</div><div class="tile wall" data-info="石门">▓</div><div class="tile wall" data-info="墙壁">▓</div><div class="tile checkpoint" data-info="终点">💾</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第7行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="石柱4">▬</div><div class="tile air"></div><div class="tile water" data-info="瀑布水流">≈</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile lever" data-info="机关开关-林">🔧</div><div class="tile wall" data-info="墙壁">▓</div><div class="tile air"></div><div class="tile wall" data-info="墙壁">▓</div><div class="tile ground" data-info="终点平台">█</div><div class="tile ground" data-info="终点平台">█</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第8行 -->
+                    <div class="tile wall" data-info="左墙">▓</div><div class="tile checkpoint" data-info="起点">💾</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile air"></div><div class="tile air"></div><div class="tile water" data-info="瀑布水流">≈</div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="石柱5">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="战斗平台">▬</div><div class="tile platform" data-info="战斗平台">▬</div><div class="tile platform" data-info="战斗平台">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile wall" data-info="墙壁">▓</div><div class="tile air"></div><div class="tile wall" data-info="墙壁">▓</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第9行 -->
+                    <div class="tile wall" data-info="墙壁">▓</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile spike" data-info="尖刺">▲</div><div class="tile spike" data-info="尖刺">▲</div><div class="tile water" data-info="瀑布水流">≈</div><div class="tile spike" data-info="尖刺">▲</div><div class="tile spike" data-info="尖刺">▲</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile enemy" data-info="重甲蜥蜴">👹</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile lever" data-info="机关开关-神">🔧</div><div class="tile wall" data-info="墙壁">▓</div><div class="tile air"></div><div class="tile wall" data-info="墙壁">▓</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile wall" data-info="右墙">▓</div>
+                    
+                    <!-- 第10行 -->
+                    <div class="tile wall" data-info="墙壁">▓</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile water" data-info="瀑布池">≈</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile wall" data-info="墙壁">▓</div><div class="tile spike" data-info="尖刺陷阱">▲</div><div class="tile wall" data-info="墙壁">▓</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile spike" data-info="尖刺">▲</div><div class="tile spike" data-info="尖刺">▲</div><div class="tile spike" data-info="尖刺">▲</div><div class="tile wall" data-info="墙壁">▓</div>
+                    
+                    <!-- 第11行 -->
+                    <div class="tile wall" data-info="墙壁">▓</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile water" data-info="瀑布池">≈</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile wall" data-info="墙壁">▓</div><div class="tile ground" data-info="地面">█</div><div class="tile wall" data-info="墙壁">▓</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile wall" data-info="墙壁">▓</div>
+                    
+                    <!-- 第12行 (底部基岩) -->
+                    <div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div><div class="tile wall" data-info="基岩">▓</div>
+                </div>
+                <div class="grid-coordinates">
+                    <span>← X轴: 0</span>
+                    <span>X轴: 35 →</span>
+                </div>
+            </div>
+            
+            <div class="notes">
+                <h4>🔍 关卡2设计要点</h4>
+                <ul>
+                    <li><strong>升降石柱区 (X: 6-10)</strong>：5根石柱按不同节奏上下移动，触碰瀑布水流会被冲下</li>
+                    <li><strong>双层敌人区 (X: 18-23)</strong>：上层2只蝙蝠来回飞行，下层1只重甲蜥蜴缓慢巡逻</li>
+                    <li><strong>解谜机关区 (X: 24-28)</strong>：三个开关需按"雨-林-神"顺序激活（从下到中到上）</li>
+                    <li><strong>隐藏洞穴 (X: 7, Y: 1)</strong>：需要借助最高石柱跳入瀑布后方</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 关卡3地图 -->
+        <div class="level-section">
+            <div class="level-header">
+                <div class="level-title">关卡3：雷鸣祭坛</div>
+                <div class="level-info">
+                    <div class="info-tag">尺寸: 40×14 Tiles</div>
+                    <div class="info-tag">难度: ★★★</div>
+                </div>
+            </div>
+            
+            <div class="tilemap-container">
+                <div class="tilemap" style="grid-template-columns: repeat(40, 40px); grid-template-rows: repeat(14, 40px);">
+                    <!-- 第1-2行 (天空区域) -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <div class="tile secret" data-info="符文石1">💎</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile secret" data-info="符文石2">💎</div>
+                    
+                    <!-- 第3行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile enemy" data-info="蝙蝠1">👹</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第4行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile enemy" data-info="蝙蝠2">👹</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第5行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="移动平台1">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="移动平台2">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="移动平台3">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile enemy" data-info="蝙蝠3">👹</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第6行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile wall" data-info="墙壁">▓</div><div class="tile wall" data-info="墙壁">▓</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile wall" data-info="墙壁">▓</div><div class="tile wall" data-info="墙壁">▓</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第7行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile trap" data-info="雷电陷阱">⚡</div><div class="tile air"></div><div class="tile trap" data-info="雷电陷阱">⚡</div><div class="tile air"></div><div class="tile trap" data-info="雷电陷阱">⚡</div><div class="tile air"></div><div class="tile trap" data-info="雷电陷阱">⚡</div><div class="tile air"></div><div class="tile trap" data-info="雷电陷阱">⚡</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="中转平台">▬</div><div class="tile platform" data-info="中转平台">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile movable" data-info="可推石块">📦</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile wall" data-info="Boss平台墙">▓</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile wall" data-info="Boss平台墙">▓</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第8行 -->
+                    <div class="tile air"></div><div class="tile air"></div><div class="tile platform" data-info="起始">▬</div><div class="tile platform" data-info="起始">▬</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile enemy" data-info="投矛蜥蜴1">👹</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile enemy" data-info="投矛蜥蜴2">👹</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile wall" data-info="墙壁">▓</div><div class="tile air"></div><div class="tile air"></div><div class="tile boss" data-info="守护者BOSS">👹</div><div class="tile air"></div><div class="tile wall" data-info="墙壁">▓</div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div><div class="tile air"></div>
+                    
+                    <!-- 第9行 -->
+                    <div class="tile wall" data-info="左墙">▓</div><div class="tile checkpoint" data-info="起点">💾</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile wall" data-info="墙壁">▓</div><div class="tile ground" data-info="Boss平台">█</div><div class="tile ground" data-info="Boss平台">█</div><div class="tile ground" data-info="Boss平台">█</div><div class="tile ground" data-info="Boss平台">█</div><div class="tile wall" data-info="墙壁">▓</div><div class="tile checkpoint" data-info="终点">💾</div><div class="tile ground" data-info="地面">█</div><div class="tile ground" data-info="地面">█</div><div class="tile wall" data-info="右墙">▓</div>
+                    
+                    <!-- 第10-11行 -->
+                    <div class="tile wall">▓</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile wall">▓</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile wall">▓</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile wall">▓</div>
+                    
+                    <div class="tile wall">▓</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile wall">▓</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile wall">▓</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile wall">▓</div>
+                    
+                    <!-- 第12行 -->
+                    <div class="tile secret" data-info="符文石3">💎</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile wall">▓</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile wall">▓</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile secret" data-info="符文石4">💎</div>
+                    
+                    <!-- 第13行 -->
+                    <div class="tile wall">▓</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile wall">▓</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile wall">▓</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile ground">█</div><div class="tile wall">▓</div>
+                    
+                    <!-- 第14行 (基岩) -->
+                    <div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div><div class="tile wall">▓</div>
+                </div>
+                <div class="grid-coordinates">
+                    <span>← X轴: 0</span>
+                    <span>X轴: 40 →</span>
+                </div>
+            </div>
+            
+            <div class="notes">
+                <h4>🔍 关卡3设计要点</h4>
+                <ul>
+                    <li><strong>雷电迷宫 (X: 5-14)</strong>：雷电按固定路径闪现，同时需要在移动平台间跳跃</li>
+                    <li><strong>精英战区 (X: 18-25)</strong>：3只蝙蝠空中巡逻，2只投矛蜥蜴地面攻击，需推石块压机关开捷径</li>
+                    <li><strong>Boss战区 (X: 30-35)</strong>：独立封闭平台，Boss两阶段机制，需利用墙壁二段跳攻击背部弱点</li>
+                    <li><strong>四角符文 (四个角落)</strong>：需30秒内全部点亮解锁真结局，极高难度挑战</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 开发提示 -->
+        <div class="legend-section">
+            <div class="legend-title">💡 开发实现提示</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
+                <div style="background: rgba(76,175,80,0.2); padding: 20px; border-radius: 10px; border-left: 4px solid #4CAF50;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">🎨 Tile尺寸建议</h3>
+                    <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                        <li>• 单个Tile: 32x32 或 64x64 像素</li>
+                        <li>• 碰撞体积: 与视觉图形一致</li>
+                        <li>• 精灵图集: 建议按类型分组</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(255,152,0,0.2); padding: 20px; border-radius: 10px; border-left: 4px solid #FF9800;">
+                    <h3 style="color: #FF9800; margin-bottom: 10px;">⚙️ 碰撞层级</h3>
+                    <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                        <li>• 地面/墙壁: 完全阻挡</li>
+                        <li>• 平台: 单向碰撞（可从下穿过）</li>
+                        <li>• 尖刺/陷阱: 触发伤害事件</li>
+                        <li>• 检查点: 触发器型碰撞</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(244,67,54,0.2); padding: 20px; border-radius: 10px; border-left: 4px solid #F44336;">
+                    <h3 style="color: #F44336; margin-bottom: 10px;">🔄 动态元素</h3>
+                    <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                        <li>• 移动平台: Tween动画控制</li>
+                        <li>• 敌人: AI巡逻路径点</li>
+                        <li>• 陷阱: 定时器触发</li>
+                        <li>• 可推物: Rigidbody2D刚体</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 添加简单的交互效果
+        document.querySelectorAll('.tile').forEach(tile => {
+            tile.addEventListener('click', function() {
+                this.style.outline = '3px solid #FFD700';
+                setTimeout(() => {
+                    this.style.outline = '';
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -151,7 +151,7 @@ func _physics_process(delta):
 		var mouse_held = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 
 		if mouse_held and has_input:
-			var facing_dir = 1 if not animated_sprite.flip_h else -1
+			var facing_dir = _check_facing_dir()
 			
 			var target_vel_x: float = 0.0
 			# --- 推：前方有箱子 ---
@@ -289,9 +289,13 @@ func _on_animation_finished():
 	elif anim_name in ["Landing"]:
 		_update_animation(was_on_floor, is_on_floor())
 
+# 玩家朝向检测
+func _check_facing_dir():
+	return 1 if not animated_sprite.flip_h else -1
+
 # 箱子检测
 func _check_box():
-	var facing_dir = 1 if not animated_sprite.flip_h else -1
+	var facing_dir = _check_facing_dir()
 	var ray_offset_y = - ORIGINAL_FRAME_HEIGHT * SPRITE_SCALE * 0.35
 	var from = global_position + Vector2(0, ray_offset_y)
 	var to_forward = from + Vector2(box_distance * facing_dir, 0)
