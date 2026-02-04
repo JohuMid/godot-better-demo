@@ -9,6 +9,7 @@ const ATTACK_COOLDOWN: float = 1.0  # 1秒攻击一次
 @export var bullet_scene: PackedScene 
 
 func _ready() -> void:
+	detection_range = 200.0
 	super()
 
 # 注意：攻击逻辑在 _physics_process 中由父类调用，所以只需更新 timer
@@ -45,8 +46,7 @@ func _spawn_pea_bullet() -> void:
 	var facing_right = animated_sprite.scale.x < 0
 	# facing_right大于0换为1，小于0换为-1
 	var facing_index = -1 if facing_right else 1
-	# bullet.position = Vector2(-16 * facing_index, -6)
-	bullet.position = Vector2(-16 * facing_index, 0)
+	bullet.position = Vector2(-16 * facing_index, -6)
 	bullet.direction = Vector2.RIGHT if facing_right else Vector2.LEFT
 	bullet.fly_texture = pea_bullet_fly
 	bullet.start_texture  = pea_bullet_start

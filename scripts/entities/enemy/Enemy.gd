@@ -8,7 +8,7 @@ class_name Enemy
 @export var gravity: float = 1000.0
 const SPRITE_SCALE: float = 1.0
 # 检测范围
-const DETECTION_RANGE: float = 40.0
+var detection_range: float = 40.0
 
 # —————— 动画相关 ——————
 @export var atlas: Texture2D
@@ -155,7 +155,7 @@ func _is_front_cliff() -> bool:
 func _is_player_detected() -> bool:
 	# 检测玩家是否在检测范围内
 	player_ray.from = global_position
-	player_ray.to = global_position + Vector2(DETECTION_RANGE * facing, 0)
+	player_ray.to = global_position + Vector2(detection_range * facing, 0)
 
 	var result = get_world_2d().direct_space_state.intersect_ray(player_ray)
 	return result and result.collider is CharacterBody2D

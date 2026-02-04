@@ -6,9 +6,6 @@ extends Area2D
 @export var start_texture: Texture2D
 @export var fly_texture: Texture2D
 
-# 缓存查询参数（提升性能）
-var shape_query := PhysicsShapeQueryParameters2D.new()
-
 func _ready():
 	if not $Sprite2D:
 		push_error("Missing Sprite2D!")
@@ -22,6 +19,8 @@ func _ready():
 	if is_queued_for_deletion():
 		return
 	$Sprite2D.texture = fly_texture
+
+	body_entered.connect(_on_body_entered)
 
 func _process(delta):
 
@@ -37,6 +36,10 @@ func _process(delta):
 			queue_free()
 			return
 
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		queue_free()
+		body.take_hit(Vector2(200 * direction.x, 0))
 
 func _detect_player_collision() -> void:
 	pass
