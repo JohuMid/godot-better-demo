@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 	if not down_distance:
 		var ground_result = get_world_2d().direct_space_state.intersect_ray(ground_ray)
 		if ground_result and ground_result.collider is TileMapLayer:
-			print('down_distance', ground_result.position.y, global_position.y)
+			# print('down_distance', ground_result.position.y, global_position.y)
 			down_distance = ground_result.position.y - global_position.y - ground_offset
 
 	# 检测正下方是否有玩家

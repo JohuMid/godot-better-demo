@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://evr32afob2m7"]
+[gd_scene load_steps=21 format=4 uid="uid://evr32afob2m7"]
 
 [ext_resource type="Texture2D" uid="uid://b03tcjw6ul5v1" path="res://resources/background/background 1/1.png" id="1_nx170"]
 [ext_resource type="TileSet" uid="uid://bmowt2na06w2i" path="res://resources/tres/new_tile_set.tres" id="2_68ib6"]
@@ -14,15 +14,17 @@
 [ext_resource type="PackedScene" uid="uid://cjix2q018qnj4" path="res://scenes/items/Fragibridge.tscn" id="9_e2o36"]
 [ext_resource type="PackedScene" uid="uid://cavasyxbgqg4n" path="res://scenes/emeny/Television.tscn" id="10_ue060"]
 [ext_resource type="PackedScene" uid="uid://bfxq5uvma8rth" path="res://scenes/emeny/Cucumber.tscn" id="11_oswwn"]
-[ext_resource type="PackedScene" uid="uid://dq15p4xjpsb78" path="res://scenes/emeny/Pea.tscn" id="12_c2uwi"]
+[ext_resource type="PackedScene" uid="uid://mrfug6b22v44" path="res://scenes/emeny/Pea.tscn" id="12_c2uwi"]
 [ext_resource type="PackedScene" uid="uid://djmn7g20wluj" path="res://scenes/emeny/Boom.tscn" id="13_n5l3n"]
 [ext_resource type="Texture2D" uid="uid://s4d3mpbvvlof" path="res://resources/enemy/boom/spritesheet.png" id="14_6se2n"]
 [ext_resource type="PackedScene" uid="uid://cwi5akjnpdj7l" path="res://scenes/items/Groundspike.tscn" id="15_hsw41"]
 [ext_resource type="PackedScene" uid="uid://opaftik2c1qw" path="res://scenes/items/Barricade.tscn" id="16_auvjl"]
+[ext_resource type="PackedScene" uid="uid://rbwvetm6ww4y" path="res://scenes/items/Rope.tscn" id="20_jkdna"]
 
 [node name="Level0" type="Node2D"]
 
 [node name="ParallaxBackground" type="Node2D" parent="."]
+visible = false
 
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxBackground"]
 scale = Vector2(0.8, 0.8)
@@ -30,7 +32,8 @@ scroll_scale = Vector2(0.2, 0.2)
 repeat_size = Vector2(576, 324)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Parallax2D"]
-position = Vector2(288, 160)
+position = Vector2(288, 161)
+scale = Vector2(1, 0.99382716)
 texture = ExtResource("1_nx170")
 
 [node name="Parallax2D2" type="Parallax2D" parent="ParallaxBackground"]
@@ -39,17 +42,19 @@ scroll_scale = Vector2(0.4, 0.4)
 repeat_size = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Parallax2D2"]
-position = Vector2(288, 160)
+position = Vector2(288.00003, 161.00002)
+scale = Vector2(1, 0.99382716)
 texture = ExtResource("2_h27y2")
 
 [node name="Parallax2D3" type="Parallax2D" parent="ParallaxBackground"]
 scale = Vector2(0.8, 0.8)
 scroll_scale = Vector2(0.8, 0.8)
-scroll_offset = Vector2(26.999998, 50.999996)
+scroll_offset = Vector2(-6.1035156e-05, 3.8146973e-06)
 repeat_size = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Parallax2D3"]
-position = Vector2(288, 160)
+position = Vector2(288.00003, 161.00002)
+scale = Vector2(0.99999976, 0.99382716)
 texture = ExtResource("3_bmjl8")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -65,7 +70,7 @@ position = Vector2(216, 40)
 script = null
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
-position = Vector2(278, -175)
+position = Vector2(616, 160)
 
 [node name="RightEdge" parent="." instance=ExtResource("4_qcr8a")]
 position = Vector2(704, 192)
@@ -121,10 +126,13 @@ position = Vector2(400, 168)
 [node name="Node2D2" type="Node2D" parent="."]
 
 [node name="Barricade" parent="Node2D2" instance=ExtResource("16_auvjl")]
-position = Vector2(555, 80)
+position = Vector2(512, 80)
 
 [node name="Barricade2" parent="Node2D2" instance=ExtResource("16_auvjl")]
-position = Vector2(587, 80)
+position = Vector2(544, 80)
 
 [node name="Barricade3" parent="Node2D2" instance=ExtResource("16_auvjl")]
-position = Vector2(619, 80)
+position = Vector2(576, 80)
+
+[node name="Rope" parent="." instance=ExtResource("20_jkdna")]
+position = Vector2(664, 136)

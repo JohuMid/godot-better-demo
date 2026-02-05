@@ -55,6 +55,7 @@ var animated_sprite: AnimatedSprite2D
 var was_on_floor: bool = false
 
 var box_ray: PhysicsRayQueryParameters2D
+var climb_ray: PhysicsRayQueryParameters2D
 
 # —————— 初始化 ——————
 func _ready():
@@ -79,14 +80,19 @@ func _ready():
 	original_offset = animated_sprite.offset
 
 	# 连接动画信号
-	animated_sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
-	animated_sprite.connect("frame_changed", Callable(self, "_on_frame_changed"))
+	animated_sprite.connect("animation_finished", Callable(self , "_on_animation_finished"))
+	animated_sprite.connect("frame_changed", Callable(self , "_on_frame_changed"))
 	_create_collision_shape()
 	_set_animation("Idle")
 
 	# 初始化推箱子射线查询参数（只创建一次）
 	box_ray = PhysicsRayQueryParameters2D.new()
-	box_ray.exclude = [self]
+	box_ray.exclude = [ self ]
+
+	climb_ray = PhysicsRayQueryParameters2D.new()
+	climb_ray.exclude = [ self ]
+	# 检测1和8层
+	climb_ray.collision_mask = 1 | 8
 
 # —————— 创建碰撞体 ——————
 func _create_collision_shape():
@@ -133,7 +139,7 @@ func _physics_process(delta):
 		velocity.y = jump_velocity
 		_set_animation("SideJumpUp" if abs(velocity.x) > 50 else "UpwardJumpUp")
 
-	var input_dir = Input.get_axis("move_left", "move_right")
+	var input_dir = _check_input_dir()
 	# 4. 水平移动
 	if current_on_floor:
 		velocity.x = input_dir * speed
@@ -175,7 +181,7 @@ func _physics_process(delta):
 					var behind_ray = PhysicsRayQueryParameters2D.new()
 					behind_ray.from = global_position
 					behind_ray.to = global_position + behind_offset
-					behind_ray.exclude = [self]
+					behind_ray.exclude = [ self ]
 					behind_ray.collision_mask = 1
 
 					var hit_behind = get_world_2d().direct_space_state.intersect_ray(behind_ray)
@@ -199,7 +205,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 	# 攀爬检测
-	if not is_climbing and not current_on_floor and velocity.y > 0:
+	if not is_climbing and not current_on_floor:
 		_try_climb_edge()
 
 	# 动画更新
@@ -227,7 +233,7 @@ func _update_animation(prev_on_floor: bool, current_on_floor: bool):
 		return
 	
 	# 3. 移动状态
-	var input_dir = Input.get_axis("move_left", "move_right")
+	var input_dir = _check_input_dir()
 	if abs(input_dir) > 0.1:
 		# 跑步
 		_set_animation("Running")
@@ -293,6 +299,9 @@ func _on_animation_finished():
 func _check_facing_dir():
 	return 1 if not animated_sprite.flip_h else -1
 
+func _check_input_dir() -> float:
+	return Input.get_axis("move_left", "move_right")
+
 # 箱子检测
 func _check_box():
 	var facing_dir = _check_facing_dir()
@@ -301,7 +310,7 @@ func _check_box():
 	var to_forward = from + Vector2(box_distance * facing_dir, 0)
 	box_ray.from = from
 	box_ray.to = to_forward
-	box_ray.exclude = [self]
+	box_ray.exclude = [ self ]
 	var res = get_world_2d().direct_space_state.intersect_ray(box_ray)
 	if res and res.collider is RigidBody2D:
 		return res.collider
@@ -323,17 +332,19 @@ func _try_climb_edge():
 	var from = global_position
 	var to = from + Vector2(climb_check_forward * direction, climb_check_up)
 
-	# 创建射线查询参数
-	var ray_query = PhysicsRayQueryParameters2D.new()
-	ray_query.from = from
-	ray_query.to = to
-	ray_query.exclude = [self]
-	ray_query.collision_mask = collision_mask
+	# 创建爬墙射线查询参数
+	climb_ray.from = from
+	climb_ray.to = to
 
-	var result = space_state.intersect_ray(ray_query)
-	# 攀爬的对象只能是TileMap
-	if result and result["collider"] is TileMapLayer:
-		var input_dir = Input.get_axis("move_left", "move_right") # -1 ～ 1
+	var result = space_state.intersect_ray(climb_ray)
+
+	if result and result["collider"].is_in_group("Rope"):
+		print("检测到绳子")
+		return
+
+	# 攀爬的对象只能是TileMap，玩家下落的时候才检测
+	if result and result["collider"] is TileMapLayer and velocity.y > 0:
+		var input_dir = _check_input_dir() # -1 ～ 1
 
 		# 检查输入方向是否与平台方向一致
 		if direction > 0 and input_dir <= 0:
@@ -358,7 +369,7 @@ func _try_climb_edge():
 		shape_query.transform = Transform2D(0, shape_center)
 		shape_query.shape = shape
 		shape_query.collision_mask = collision_mask
-		shape_query.exclude = [self]
+		shape_query.exclude = [ self ]
 
 		var collisions = space_state.intersect_shape(shape_query)
 		if collisions.is_empty():
