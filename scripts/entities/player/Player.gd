@@ -32,10 +32,22 @@ var hit_timer: float = 0.0
 
 # —————— 绳子相关 ——————
 var on_rope: bool = false
-var rope_segment: RigidBody2D = null  # 当前附着的绳子段
+var rope_segment: RigidBody2D = null
 var climbing: bool = false
-var swing_force: float = 10.0
-var climb_speed: float = 80.0
+var swing_force: float = 15.0
+var climb_speed: float = 40.0  # ✅ 降低爬行速度（30-50 之间）
+
+var rope_climb_offset: float = 0.0  # 玩家在当前绳段上的偏移量
+var target_position: Vector2 = Vector2.ZERO  # 目标位置
+var position_smoothness: float = 12.0  # 位置平滑系数（8-15 之间）
+
+var is_swinging: bool = false  # 是否正在荡秋千
+var swing_smoothness: float = 20.0  # 荡秋千时的快速跟随系数
+
+# 挂点和旋转
+var hang_offset_y: float = 12.0  # 玩家在绳子下方的距离
+var rotation_smoothness: float = 15.0  # 旋转平滑系数
+var max_rotation_angle: float = PI / 3  # 最大旋转角度（60度）
 
 # —— 角色原始帧尺寸 ——
 const ORIGINAL_FRAME_WIDTH: int = 128
@@ -316,36 +328,104 @@ func _check_input_dir() -> float:
 	return Input.get_axis("move_left", "move_right")
 
 func handle_rope_physics(delta):
-	# 1. 跟随绳子段位置（保持附着）
-	position = rope_segment.global_position
-	_set_animation("ClimbingRopeIdle")
-	var facing_dir = _check_facing_dir()
-	var impulse = Vector2(facing_dir * swing_force, 0)
-
-	var swing_dir = _check_input_dir()
-	if swing_dir != 0:
-		# 冲量方向：与当前速度方向一致则加速，相反则减速
-		impulse = Vector2(swing_dir * swing_force, 0)
-		rope_segment.apply_impulse(impulse, Vector2.ZERO)
-
-	var climb_dir = 0
 	var rope_node = rope_segment.get_parent()
+	
+	# ===== 1. 检测是否在荡秋千 =====
+	var swing_dir = _check_input_dir()
+	is_swinging = (swing_dir != 0)
+	
+	# ===== 2. 处理爬行输入 =====
+	var climb_input = 0
 	if Input.is_action_pressed("jump"):
-		climb_dir = -1
-		climbing = true
-		rope_segment = rope_node.get_prev_segment(rope_segment)
+		climb_input = -1
 	elif Input.is_action_pressed("down"):
-		climb_dir = 1
+		climb_input = 1
+	
+	if climb_input != 0:
 		climbing = true
-		rope_segment = rope_node.get_next_segment(rope_segment)
+		rope_climb_offset += climb_input * climb_speed * delta
+		
+		var segment_length = rope_node.segment_length
+		
+		# 向上爬行
+		while rope_climb_offset < -segment_length * 0.5:
+			var prev = rope_node.get_prev_segment(rope_segment)
+			if prev != rope_segment:
+				rope_segment = prev
+				rope_climb_offset += segment_length
+			else:
+				rope_climb_offset = -segment_length * 0.5
+				break
+		
+		# 向下爬行
+		while rope_climb_offset > segment_length * 0.5:
+			var next = rope_node.get_next_segment(rope_segment)
+			if next != rope_segment:
+				rope_segment = next
+				rope_climb_offset -= segment_length
+			else:
+				rope_climb_offset = segment_length * 0.5
+				break
 	else:
 		climbing = false
+		rope_climb_offset = lerp(rope_climb_offset, 0.0, 5.0 * delta)
 	
-	# 4. 播放攀爬动画
-	if climbing:
-		_set_animation("ClimbingLadder")
+	# ===== 3. 计算绳子上的逻辑位置 =====
+	var current_segment_pos = rope_segment.global_position
+	var climb_direction = Vector2.ZERO
+	
+	if abs(rope_climb_offset) > 0.1:
+		if rope_climb_offset < 0:  # 向上
+			var prev = rope_node.get_prev_segment(rope_segment)
+			if prev != rope_segment:
+				climb_direction = (prev.global_position - current_segment_pos).normalized()
+		else:  # 向下
+			var next = rope_node.get_next_segment(rope_segment)
+			if next != rope_segment:
+				climb_direction = (next.global_position - current_segment_pos).normalized()
+	
+	# 绳子上的挂点位置
+	var rope_hang_point = current_segment_pos + climb_direction * abs(rope_climb_offset)
+	
+	# ===== 4. ✅ 计算绳子的角度和方向（修正） =====
+	var rope_direction = Vector2(0, 1)  # 默认向下
+	var rope_angle = 0.0
+	
+	# 获取上一段绳子来计算角度
+	var prev_segment = rope_node.get_prev_segment(rope_segment)
+	if prev_segment != rope_segment:
+		# 从上一段指向当前段的方向
+		rope_direction = (current_segment_pos - prev_segment.global_position).normalized()
+		# ✅ 修正：反转角度（加负号）
+		rope_angle = -atan2(rope_direction.x, rope_direction.y)
 	else:
-		_set_animation("ClimbingRopeIdle")
+		# 如果在最顶端，使用下一段计算
+		var next_segment = rope_node.get_next_segment(rope_segment)
+		if next_segment != rope_segment:
+			rope_direction = (next_segment.global_position - current_segment_pos).normalized()
+			# ✅ 修正：反转角度（加负号）
+			rope_angle = -atan2(rope_direction.x, rope_direction.y)
+	
+	# ===== 5. 计算玩家位置（沿着绳子方向向下偏移） =====
+	target_position = rope_hang_point + rope_direction * hang_offset_y
+	
+	# ===== 6. 平滑移动和旋转 =====
+	var smoothness = swing_smoothness if is_swinging else position_smoothness
+	position = position.lerp(target_position, smoothness * delta)
+	
+	# 限制旋转角度
+	var clamped_angle = clamp(rope_angle, -max_rotation_angle, max_rotation_angle)
+	
+	# 平滑旋转到绳子的角度
+	rotation = lerp_angle(rotation, clamped_angle, rotation_smoothness * delta)
+	
+	# ===== 7. 应用荡秋千力 =====
+	if is_swinging:
+		var impulse = Vector2(swing_dir * swing_force, 0)
+		rope_segment.apply_impulse(impulse, Vector2.ZERO)
+	
+	# ===== 8. 动画 =====
+	_set_animation("ClimbingLadder" if climbing else "ClimbingRopeIdle")
 
 # 箱子检测
 func _check_box():
