@@ -135,4 +135,4 @@ position = Vector2(544, 80)
 position = Vector2(576, 80)
 
 [node name="Rope" parent="." instance=ExtResource("20_jkdna")]
-position = Vector2(664, 136)
+position = Vector2(664, 120)

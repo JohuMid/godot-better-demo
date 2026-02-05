@@ -40,7 +40,7 @@ func create_segment(index: int) -> RigidBody2D:
 	segment.name = "Segment_" + str(index)
 	
 	# 设置物理属性
-	segment.mass = 0.5
+	segment.mass = 0.8
 	segment.linear_damp = damping
 	segment.angular_damp = damping * 2
 	segment.gravity_scale = gravity_scale
@@ -48,7 +48,7 @@ func create_segment(index: int) -> RigidBody2D:
 	# 添加碰撞形状（细长的胶囊体）
 	var collision = CollisionShape2D.new()
 	var shape = CapsuleShape2D.new()
-	shape.height = segment_length * 1.5
+	shape.height = segment_length * 1.1
 	shape.radius = rope_width
 	collision.shape = shape
 	segment.add_child(collision)
@@ -92,13 +92,17 @@ func get_bottom_segment() -> RigidBody2D:
 		return segments[-1]
 	return null
 
-# 绘制绳子（可选，用于调试）
-func _draw():
-	if segments.size() == 0:
-		return
-	
-	# 绘制连续的曲线
-	var points: PackedVector2Array = []
-	points.append(Vector2.ZERO)
-	for segment in segments:
-		points.append(segment.position)
+func get_segment_index(segment: RigidBody2D) -> int:
+	return segments.find(segment)
+
+func get_prev_segment(segment: RigidBody2D) -> RigidBody2D:
+	var index = get_segment_index(segment)
+	if index > 0:
+		return segments[index - 1]
+	return segments[0]
+
+func get_next_segment(segment: RigidBody2D) -> RigidBody2D:
+	var index = get_segment_index(segment)
+	if index < segments.size() - 1:
+		return segments[index + 1]
+	return segments[-1]

@@ -30,6 +30,13 @@ var is_hit: bool = false
 var hit_duration: float = 0.3 # 受击僵直时间（秒）
 var hit_timer: float = 0.0
 
+# —————— 绳子相关 ——————
+var on_rope: bool = false
+var rope_segment: RigidBody2D = null  # 当前附着的绳子段
+var climbing: bool = false
+var swing_force: float = 10.0
+var climb_speed: float = 80.0
+
 # —— 角色原始帧尺寸 ——
 const ORIGINAL_FRAME_WIDTH: int = 128
 const ORIGINAL_FRAME_HEIGHT: int = 128
@@ -48,6 +55,7 @@ const ANIM_SPEED = {
 	"PlatformJump": 2.0, # 跳跃平台
 	"Death": 2.0, # 死亡
 	"TakingDamage": 2.0, # 受击
+	"ClimbingLadder": 2.0, # 攀爬
 	"default": 1.0
 }
 
@@ -112,6 +120,11 @@ func _create_collision_shape():
 
 # —————— 物理处理 ——————
 func _physics_process(delta):
+	# ===== 绳子 physics_process =====
+	if on_rope:
+		handle_rope_physics(delta)
+		return
+
 	# ===== 受击期间不处理输入 =====
 	if is_hit:
 		hit_timer -= delta
@@ -302,6 +315,38 @@ func _check_facing_dir():
 func _check_input_dir() -> float:
 	return Input.get_axis("move_left", "move_right")
 
+func handle_rope_physics(delta):
+	# 1. 跟随绳子段位置（保持附着）
+	position = rope_segment.global_position
+	_set_animation("ClimbingRopeIdle")
+	var facing_dir = _check_facing_dir()
+	var impulse = Vector2(facing_dir * swing_force, 0)
+
+	var swing_dir = _check_input_dir()
+	if swing_dir != 0:
+		# 冲量方向：与当前速度方向一致则加速，相反则减速
+		impulse = Vector2(swing_dir * swing_force, 0)
+		rope_segment.apply_impulse(impulse, Vector2.ZERO)
+
+	var climb_dir = 0
+	var rope_node = rope_segment.get_parent()
+	if Input.is_action_pressed("jump"):
+		climb_dir = -1
+		climbing = true
+		rope_segment = rope_node.get_prev_segment(rope_segment)
+	elif Input.is_action_pressed("down"):
+		climb_dir = 1
+		climbing = true
+		rope_segment = rope_node.get_next_segment(rope_segment)
+	else:
+		climbing = false
+	
+	# 4. 播放攀爬动画
+	if climbing:
+		_set_animation("ClimbingLadder")
+	else:
+		_set_animation("ClimbingRopeIdle")
+
 # 箱子检测
 func _check_box():
 	var facing_dir = _check_facing_dir()
@@ -340,6 +385,7 @@ func _try_climb_edge():
 
 	if result and result["collider"].is_in_group("Rope"):
 		print("检测到绳子")
+		attach_to_rope(result.collider)
 		return
 
 	# 攀爬的对象只能是TileMap，玩家下落的时候才检测
@@ -375,6 +421,11 @@ func _try_climb_edge():
 		if collisions.is_empty():
 			climb_target_y = stand_y
 			_start_climb(Vector2(stand_pos.x, stand_y))
+
+func attach_to_rope(segment: RigidBody2D):
+	on_rope = true
+	rope_segment = segment
+	climbing = false
 
 func _start_climb(ledge_pos: Vector2):
 	# 计算抓取位置（视觉起始点）
