@@ -49,6 +49,10 @@ var hang_offset_y: float = 12.0  # 玩家在绳子下方的距离
 var rotation_smoothness: float = 15.0  # 旋转平滑系数
 var max_rotation_angle: float = PI / 3  # 最大旋转角度（60度）
 
+# 跳离冷却
+var rope_detach_cooldown: float = 0.0  # 冷却计时器
+var rope_detach_cooldown_time: float = 0.3  # 冷却时间（秒）
+
 # —— 角色原始帧尺寸 ——
 const ORIGINAL_FRAME_WIDTH: int = 128
 const ORIGINAL_FRAME_HEIGHT: int = 128
@@ -132,10 +136,17 @@ func _create_collision_shape():
 
 # —————— 物理处理 ——————
 func _physics_process(delta):
+	# ===== 更新跳离冷却 =====
+	if rope_detach_cooldown > 0:
+		rope_detach_cooldown -= delta
+
 	# ===== 绳子 physics_process =====
 	if on_rope:
 		handle_rope_physics(delta)
 		return
+
+	if abs(rotation) > 0.01:
+		rotation = lerp_angle(rotation, 0.0, 10.0 * delta)  # 10.0 是平滑系数
 
 	# ===== 受击期间不处理输入 =====
 	if is_hit:
@@ -340,6 +351,14 @@ func handle_rope_physics(delta):
 		climb_input = -1
 	elif Input.is_action_pressed("down"):
 		climb_input = 1
+
+	# 脱离绳子
+	if swing_dir and Input.is_action_just_pressed("jump"):
+		climbing = false
+		on_rope = false
+		velocity.y = jump_velocity * 0.7  # 带初速度脱离
+		rope_detach_cooldown = rope_detach_cooldown_time
+		return
 	
 	if climb_input != 0:
 		climbing = true
@@ -463,7 +482,7 @@ func _try_climb_edge():
 
 	var result = space_state.intersect_ray(climb_ray)
 
-	if result and result["collider"].is_in_group("Rope"):
+	if result and result["collider"].is_in_group("Rope") and rope_detach_cooldown <= 0:
 		print("检测到绳子")
 		attach_to_rope(result.collider)
 		return
@@ -503,6 +522,7 @@ func _try_climb_edge():
 			_start_climb(Vector2(stand_pos.x, stand_y))
 
 func attach_to_rope(segment: RigidBody2D):
+	rope_detach_cooldown = 0.0
 	on_rope = true
 	rope_segment = segment
 	climbing = false
