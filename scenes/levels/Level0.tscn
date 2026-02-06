@@ -1,24 +1,10 @@
-[gd_scene load_steps=21 format=4 uid="uid://evr32afob2m7"]
+[gd_scene load_steps=7 format=4 uid="uid://evr32afob2m7"]
 
 [ext_resource type="Texture2D" uid="uid://b03tcjw6ul5v1" path="res://resources/background/background 1/1.png" id="1_nx170"]
-[ext_resource type="TileSet" uid="uid://bmowt2na06w2i" path="res://resources/tres/new_tile_set.tres" id="2_68ib6"]
 [ext_resource type="Texture2D" uid="uid://chsi83w5jl6f7" path="res://resources/background/background 1/2.png" id="2_h27y2"]
 [ext_resource type="Texture2D" uid="uid://bv2lxgjy8103p" path="res://resources/background/background 1/3.png" id="3_bmjl8"]
-[ext_resource type="PackedScene" uid="uid://b7drwybm3moq" path="res://scenes/items/PressurePlate.tscn" id="4_fh0io"]
-[ext_resource type="PackedScene" uid="uid://boqjb8fl55hyb" path="res://scenes/items/RightEdge.tscn" id="4_qcr8a"]
-[ext_resource type="PackedScene" uid="uid://i4ishioo27ak" path="res://scenes/items/Box.tscn" id="5_68ib6"]
-[ext_resource type="PackedScene" uid="uid://bxn3kxy6gjxcc" path="res://scenes/items/Bounce.tscn" id="5_rbe81"]
-[ext_resource type="PackedScene" uid="uid://ct458gb6jx10i" path="res://scenes/items/Stungun.tscn" id="6_in5bs"]
-[ext_resource type="PackedScene" uid="uid://dom5oi6nv5o0i" path="res://scenes/items/Chainsaw.tscn" id="7_ax2ff"]
-[ext_resource type="PackedScene" uid="uid://75o0w0fr0wum" path="res://scenes/emeny/Lizard.tscn" id="8_bbvxl"]
-[ext_resource type="PackedScene" uid="uid://cjix2q018qnj4" path="res://scenes/items/Fragibridge.tscn" id="9_e2o36"]
-[ext_resource type="PackedScene" uid="uid://cavasyxbgqg4n" path="res://scenes/emeny/Television.tscn" id="10_ue060"]
-[ext_resource type="PackedScene" uid="uid://bfxq5uvma8rth" path="res://scenes/emeny/Cucumber.tscn" id="11_oswwn"]
-[ext_resource type="PackedScene" uid="uid://mrfug6b22v44" path="res://scenes/emeny/Pea.tscn" id="12_c2uwi"]
-[ext_resource type="PackedScene" uid="uid://djmn7g20wluj" path="res://scenes/emeny/Boom.tscn" id="13_n5l3n"]
-[ext_resource type="Texture2D" uid="uid://s4d3mpbvvlof" path="res://resources/enemy/boom/spritesheet.png" id="14_6se2n"]
+[ext_resource type="TileSet" uid="uid://bemfy54u2to4h" path="res://resources/tres/tilemap.tres" id="4_qcr8a"]
 [ext_resource type="PackedScene" uid="uid://cwi5akjnpdj7l" path="res://scenes/items/Groundspike.tscn" id="15_hsw41"]
-[ext_resource type="PackedScene" uid="uid://opaftik2c1qw" path="res://scenes/items/Barricade.tscn" id="16_auvjl"]
 [ext_resource type="PackedScene" uid="uid://rbwvetm6ww4y" path="res://scenes/items/Rope.tscn" id="20_jkdna"]
 
 [node name="Level0" type="Node2D"]
@@ -58,81 +44,51 @@ scale = Vector2(0.99999976, 0.99382716)
 texture = ExtResource("3_bmjl8")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-position = Vector2(128, 32)
-tile_map_data = PackedByteArray("AAD9/wYAAAABAAIAAAD9/wUAAAADAAEAAAD9/wQAAAACAAEAAAD9/wMAAAACAAEAAAD9/wIAAAACAAEAAAD9/wEAAAACAAEAAAD9/wAAAAACAAEAAAD9////AAACAAAAAAD8/wYAAAAAAAIAAAD8/wUAAAAAAAEAAAD8/wQAAAAAAAEAAAD8/wMAAAAAAAEAAAD8/wIAAAAAAAEAAAD8/wEAAAAAAAEAAAD8/wAAAAAAAAEAAAD8////AAAAAAAAAAARAAYAAAACAAIAAAARAAUAAAACAAAAAAAQAAYAAAABAAIAAAAQAAUAAAABAAAAAAAPAAYAAAABAAIAAAAPAAUAAAABAAAAAAAOAAYAAAABAAIAAAAOAAUAAAABAAAAAAANAAYAAAABAAIAAAANAAUAAAABAAAAAAAMAAYAAAABAAIAAAAMAAUAAAABAAAAAAALAAYAAAABAAIAAAALAAUAAAABAAAAAAAKAAYAAAABAAIAAAAKAAUAAAABAAAAAAAJAAYAAAABAAIAAAAJAAUAAAABAAAAAAAIAAYAAAABAAIAAAAIAAUAAAABAAAAAAAHAAYAAAABAAIAAAAHAAUAAAABAAAAAAAGAAYAAAABAAIAAAAGAAUAAAABAAAAAAAFAAYAAAABAAIAAAAFAAUAAAABAAAAAAAEAAYAAAAAAAIAAAAEAAUAAAABAAAAAAADAAYAAAABAAIAAAACAAYAAAACAAIAAAACAAUAAAABAAAAAAABAAYAAAABAAIAAAAAAAYAAAABAAIAAAAAAAUAAAABAAAAAAD//wYAAAABAAIAAAD//wUAAAABAAAAAAD+/wYAAAABAAIAAAD+/wUAAAABAAAAAAAFAAEAAAABAAIAAAAGAAEAAAAEAAMAAAAHAAEAAAABAAIAAAAIAAEAAAABAAIAAAAJAAEAAAABAAIAAAAKAAEAAAACAAIAAAAEAAEAAAABAAIAAAADAAEAAAABAAIAAAACAAEAAAABAAIAAAABAAEAAAABAAIAAAAAAAEAAAABAAIAAAABAP7/AAABAAIAAAACAP7/AAABAAIAAAADAP7/AAABAAIAAAAEAP7/AAABAAIAAAAFAP7/AAABAAIAAAAGAP7/AAABAAIAAAAHAP7/AAABAAIAAAAIAP7/AAABAAIAAAALAP7/AAAAAAIAAAAJAP7/AAABAAIAAAAKAP7/AAACAAIAAAAAAPv/AAABAAIAAAABAPv/AAABAAIAAAACAPv/AAABAAIAAAADAPv/AAABAAIAAAAEAPv/AAABAAIAAAAFAPv/AAABAAIAAAAGAPv/AAABAAIAAAAHAPv/AAABAAIAAAAIAPv/AAABAAIAAAAJAPv/AAABAAIAAAAKAPv/AAACAAIAAAAGAAAAAAAGAAQAAAABAPj/AAABAAIAAAACAPj/AAABAAIAAAADAPj/AAABAAIAAAAEAPj/AAABAAIAAAAFAPj/AAABAAIAAAAGAPj/AAABAAIAAAAHAPj/AAABAAIAAAAIAPj/AAABAAIAAAAJAPj/AAABAAIAAAAKAPj/AAACAAIAAAALAPj/AAAAAAIAAAAGAP3/AAAGAAQAAAA=")
-tile_set = ExtResource("2_68ib6")
+tile_map_data = PackedByteArray("AAAAAAQAAgACAAUAAAAAAAUAAgACAAUAAAAAAAMAAgACAAUAAAAAAAIAAgACAAUAAAAAAAEAAgACAAUAAAAAAAAAAgACAAUAAAAAAP//AgACAAUAAAAAAAYAAgACAAUAAAAAAAcAAgACAAUAAAABAAgAAgACAAQAAAABAAkAAgACAAUAAAAAAAkAAgABAAUAAAAAAAgAAgADAAUAAAAAAAoAAgABAAUAAAABAAoAAgACAAUAAAAAAA4AAgABAAUAAAABAA4AAgABAAUAAAACAA4AAgABAAUAAAADAA4AAgABAAUAAAAEAA4AAgABAAUAAAAFAA4AAgABAAUAAAAGAA4AAgABAAUAAAAHAA4AAgABAAUAAAAIAA4AAgABAAUAAAAJAA4AAgABAAUAAAAKAA4AAgABAAUAAAALAA4AAgABAAUAAAAMAA4AAgABAAUAAAANAA4AAgABAAUAAAAOAA4AAgABAAUAAAAPAA4AAgABAAUAAAAQAA4AAgABAAUAAAARAA4AAgABAAUAAAASAA4AAgABAAUAAAATAA4AAgABAAUAAAAUAA4AAgABAAUAAAAVAA4AAgABAAUAAAAWAA4AAgABAAUAAAAXAA4AAgABAAUAAAAAAA0AAgABAAUAAAABAA0AAgADAAUAAAACAA0AAgABAAQAAAADAA0AAgABAAQAAAAEAA0AAgABAAQAAAAFAA0AAgABAAQAAAAGAA0AAgABAAQAAAAHAA0AAgABAAQAAAAIAA0AAgABAAQAAAAJAA0AAgABAAQAAAAKAA0AAgABAAQAAAALAA0AAgABAAQAAAAMAA0AAgABAAQAAAANAA0AAgABAAQAAAAOAA0AAgABAAQAAAAPAA0AAgABAAQAAAAQAA0AAgABAAQAAAARAA0AAgABAAQAAAASAA0AAgABAAQAAAATAA0AAgABAAQAAAAUAA0AAgABAAQAAAAVAA0AAgABAAQAAAAWAA0AAgABAAQAAAAXAA0AAgABAAQAAAABAAsAAgACAAUAAAABAAwAAgACAAUAAAAAAAsAAgABAAUAAAAAAAwAAgABAAUAAAAXAAwAAAACAAIAAAAXAAsAAAACAAEAAAAWAAwAAAABAAIAAAAWAAsAAAABAAEAAAAVAAwAAAABAAIAAAAVAAsAAAABAAEAAAAUAAwAAAABAAIAAAAUAAsAAAABAAEAAAATAAwAAAABAAIAAAATAAsAAAABAAEAAAASAAwAAAABAAIAAAASAAsAAAABAAEAAAARAAwAAAABAAIAAAARAAsAAAABAAEAAAAQAAwAAAABAAIAAAAQAAsAAAABAAEAAAAPAAwAAAABAAIAAAAPAAsAAAABAAEAAAAOAAwAAAABAAIAAAAOAAsAAAABAAEAAAANAAwAAAABAAIAAAANAAsAAAABAAEAAAAMAAwAAAABAAIAAAAMAAsAAAABAAEAAAALAAwAAAABAAIAAAALAAsAAAABAAEAAAAKAAwAAAABAAIAAAAKAAsAAAABAAEAAAAJAAwAAAABAAIAAAAJAAsAAAABAAEAAAAIAAwAAAABAAIAAAAIAAsAAAABAAEAAAAHAAwAAAABAAIAAAAHAAsAAAABAAEAAAAGAAwAAAABAAIAAAAGAAsAAAABAAEAAAAFAAwAAAABAAIAAAAFAAsAAAABAAEAAAAEAAwAAAABAAIAAAAEAAsAAAABAAEAAAADAAwAAAABAAIAAAADAAsAAAABAAEAAAACAAwAAAAAAAIAAAACAAsAAAAAAAEAAAADAAoAAAABAAEAAAADAAkAAAABAAEAAAADAAgAAAABAAAAAAACAAoAAAAAAAEAAAACAAkAAAAAAAEAAAACAAgAAAAAAAAAAAAXAAoAAAACAAAAAAAWAAoAAAABAAAAAAAVAAoAAAABAAAAAAAUAAoAAAABAAAAAAATAAoAAAABAAAAAAASAAoAAAABAAAAAAARAAoAAAABAAEAAAAQAAoAAAABAAEAAAAPAAoAAAABAAAAAAAOAAoAAAABAAAAAAANAAoAAAABAAAAAAAMAAoAAAABAAAAAAALAAoAAAABAAAAAAAKAAoAAAABAAAAAAAJAAoAAAABAAAAAAAIAAoAAAABAAAAAAAHAAoAAAABAAAAAAAGAAoAAAABAAAAAAAFAAoAAAABAAAAAAAEAAoAAAACAAEAAAAEAAkAAAACAAEAAAAEAAgAAAACAAAAAAAEAAYAAAANAAgAAAAGAAQAAAANAAgAAAAIAAEAAAAMAAEAAAAKAAQAAAANAAgAAAAOAAQAAAANAAgAAAAMAAEAAAAMAAEAAAARAAkAAAABAAEAAAARAAgAAAABAAAAAAAQAAkAAAABAAEAAAAQAAgAAAABAAAAAAA=")
+tile_set = ExtResource("4_qcr8a")
 
-[node name="PressurePlate" parent="." instance=ExtResource("4_fh0io")]
-position = Vector2(352, 192)
+[node name="Sprike" type="Node2D" parent="."]
+position = Vector2(88, 136)
 
-[node name="Box" parent="." instance=ExtResource("5_68ib6")]
-position = Vector2(216, 40)
-script = null
+[node name="Groundspike" parent="Sprike" instance=ExtResource("15_hsw41")]
+
+[node name="Groundspike2" parent="Sprike" instance=ExtResource("15_hsw41")]
+position = Vector2(16, 0)
+
+[node name="Groundspike3" parent="Sprike" instance=ExtResource("15_hsw41")]
+position = Vector2(32, 0)
+
+[node name="Groundspike4" parent="Sprike" instance=ExtResource("15_hsw41")]
+position = Vector2(48, 0)
+
+[node name="Groundspike5" parent="Sprike" instance=ExtResource("15_hsw41")]
+position = Vector2(64, 0)
+
+[node name="Groundspike6" parent="Sprike" instance=ExtResource("15_hsw41")]
+position = Vector2(80, 0)
+
+[node name="Groundspike7" parent="Sprike" instance=ExtResource("15_hsw41")]
+position = Vector2(96, 0)
+
+[node name="Groundspike8" parent="Sprike" instance=ExtResource("15_hsw41")]
+position = Vector2(112, 0)
+
+[node name="Groundspike9" parent="Sprike" instance=ExtResource("15_hsw41")]
+position = Vector2(128, 0)
+
+[node name="Groundspike10" parent="Sprike" instance=ExtResource("15_hsw41")]
+position = Vector2(144, 0)
+
+[node name="Groundspike11" parent="Sprike" instance=ExtResource("15_hsw41")]
+position = Vector2(160, 0)
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
-position = Vector2(616, 160)
+position = Vector2(32, 112)
 
-[node name="RightEdge" parent="." instance=ExtResource("4_qcr8a")]
-position = Vector2(704, 192)
+[node name="Ropes" type="Node2D" parent="."]
 
-[node name="Bounce" parent="." instance=ExtResource("5_rbe81")]
-position = Vector2(176, 200)
+[node name="Rope" parent="Ropes" instance=ExtResource("20_jkdna")]
+position = Vector2(136, 32)
 
-[node name="Stungun" parent="." instance=ExtResource("6_in5bs")]
-position = Vector2(312, 168)
-
-[node name="Chainsaw" parent="." instance=ExtResource("7_ax2ff")]
-position = Vector2(240, 208)
-
-[node name="Lizard" parent="." instance=ExtResource("8_bbvxl")]
-position = Vector2(432, -64)
-collision_layer = 1
-
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(72, 133)
-
-[node name="Fragibridge" parent="Node2D" instance=ExtResource("9_e2o36")]
-position = Vector2(16, 5)
-
-[node name="Fragibridge2" parent="Node2D" instance=ExtResource("9_e2o36")]
-position = Vector2(48, 5)
-
-[node name="Fragibridge3" parent="Node2D" instance=ExtResource("9_e2o36")]
-position = Vector2(79, 5)
-
-[node name="Fragibridge4" parent="Node2D" instance=ExtResource("9_e2o36")]
-position = Vector2(111, 5)
-
-[node name="Fragibridge5" parent="Node2D" instance=ExtResource("9_e2o36")]
-position = Vector2(143, 5)
-
-[node name="Television" parent="." instance=ExtResource("10_ue060")]
-position = Vector2(372, 31)
-
-[node name="Cucumber" parent="." instance=ExtResource("11_oswwn")]
-position = Vector2(276, -71)
-
-[node name="Pea" parent="." instance=ExtResource("12_c2uwi")]
-position = Vector2(209, -158)
-
-[node name="Boom" parent="." instance=ExtResource("13_n5l3n")]
-position = Vector2(220, -263)
-atlas = ExtResource("14_6se2n")
-json_path = "res://resources/enemy/boom/spritesheet.json"
-
-[node name="Groundspike" parent="." instance=ExtResource("15_hsw41")]
-position = Vector2(400, 168)
-
-[node name="Node2D2" type="Node2D" parent="."]
-
-[node name="Barricade" parent="Node2D2" instance=ExtResource("16_auvjl")]
-position = Vector2(512, 80)
-
-[node name="Barricade2" parent="Node2D2" instance=ExtResource("16_auvjl")]
-position = Vector2(544, 80)
-
-[node name="Barricade3" parent="Node2D2" instance=ExtResource("16_auvjl")]
-position = Vector2(576, 80)
-
-[node name="Rope" parent="." instance=ExtResource("20_jkdna")]
-position = Vector2(664, 120)
+[node name="Rope2" parent="Ropes" instance=ExtResource("20_jkdna")]
+position = Vector2(200, 32)

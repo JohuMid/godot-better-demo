@@ -1,0 +1,115 @@
+{
+	"frames": {
+		"Checkpoint_Flag_Idle1.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 336,
+				"h": 48
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 336,
+				"h": 48
+			},
+			"sourceSize": {
+				"w": 336,
+				"h": 48
+			}
+		},
+		"Checkpoint_Flag_Idle2.png": {
+			"frame": {
+				"x": 0,
+				"y": 48,
+				"w": 336,
+				"h": 48
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 336,
+				"h": 48
+			},
+			"sourceSize": {
+				"w": 336,
+				"h": 48
+			}
+		},
+		"Checkpoint_Flag_Out1.png": {
+			"frame": {
+				"x": 0,
+				"y": 96,
+				"w": 336,
+				"h": 48
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 336,
+				"h": 48
+			},
+			"sourceSize": {
+				"w": 336,
+				"h": 48
+			}
+		},
+		"Checkpoint_Flag_Out2.png": {
+			"frame": {
+				"x": 0,
+				"y": 144,
+				"w": 336,
+				"h": 48
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 336,
+				"h": 48
+			},
+			"sourceSize": {
+				"w": 336,
+				"h": 48
+			}
+		},
+		"Pointer_Idle.png": {
+			"frame": {
+				"x": 0,
+				"y": 192,
+				"w": 336,
+				"h": 48
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 336,
+				"h": 48
+			},
+			"sourceSize": {
+				"w": 336,
+				"h": 48
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 336,
+			"h": 240
+		},
+		"scale": "1"
+	}
+}
