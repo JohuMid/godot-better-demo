@@ -330,6 +330,9 @@ func _on_animation_finished():
 	elif anim_name in ["Landing"]:
 		_update_animation(was_on_floor, is_on_floor())
 	elif anim_name in ["Death"]:
+		# 隐藏玩家
+		visible = false
+		
 		# 玩家重生尝试获取当前场景的 LevelManager，如果不存在则报错
 		var level_manager = get_tree().get_first_node_in_group("level_manager")
 		if level_manager and level_manager.has_method("respawn_player"):
