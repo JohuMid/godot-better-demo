@@ -58,7 +58,7 @@ func create_segment(index: int) -> RigidBody2D:
 	
 	# 添加视觉表现
 	var line = Line2D.new()
-	line.add_point(Vector2(-segment_length / 2, 0))
+	line.add_point(Vector2((-segment_length - 3) / 2, 0))
 	line.add_point(Vector2(segment_length / 2, 0))
 	line.width = rope_width * 2
 	line.default_color = rope_color

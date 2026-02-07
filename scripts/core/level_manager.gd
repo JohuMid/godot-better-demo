@@ -5,7 +5,7 @@ extends Node2D
 @export var levels_container: Node2D
 
 var player: CharacterBody2D = null
-var current_player_level: int = -1  # 初始化为 -1
+var current_player_level: int = -1 # 初始化为 -1
 var loaded_levels: Dictionary = {}
 var level_meta = preload("res://scripts/data/level_metadata.gd").LEVELS
 
@@ -32,10 +32,14 @@ func spawn_player():
 func respawn_player():
 	if not player:
 		return
+	var spawn_point
+	if get_player_level_id() == 0:
+		spawn_point = load_and_ensure_level(0).find_child("PlayerSpawn", true, false).global_position
+	else:
+		# 当前关卡的
+		spawn_point = Vector2(get_total_width_before(get_player_level_id()) + 50, 0)
 
-	var level0 = load_and_ensure_level(0)
-	var spawn_point = level0.find_child("PlayerSpawn", true, false)
-	var pos = spawn_point.global_position if spawn_point else Vector2(100, 200)
+	var pos = spawn_point
 	# 镜头缓慢移动到新位置
 	var tween = create_tween()
 	tween.tween_property(player, "global_position", pos, 0.5)
@@ -98,7 +102,7 @@ func update_level_window():
 
 	var new_level = get_player_level_id()
 	if new_level == current_player_level:
-		return  # 未跨关，无需更新
+		return # 未跨关，无需更新
 
 	print("➡️ 进入关卡 %d" % new_level)
 	current_player_level = new_level
@@ -109,7 +113,7 @@ func update_level_window():
 		var id = current_player_level + offset
 		if level_meta.has(id):
 			keep_ids.append(id)
-			load_and_ensure_level(id)  # 确保加载
+			load_and_ensure_level(id) # 确保加载
 
 	# 卸载不在 keep_ids 中的已加载关卡
 	var to_unload = []

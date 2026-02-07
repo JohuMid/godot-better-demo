@@ -1,6 +1,6 @@
 {
 	"frames": {
-		"Checkpoint_Flag_Idle1.png": {
+		"idle": {
 			"frame": {
 				"x": 0,
 				"y": 0,
@@ -20,7 +20,7 @@
 				"h": 48
 			}
 		},
-		"Checkpoint_Flag_Idle2.png": {
+		"end": {
 			"frame": {
 				"x": 0,
 				"y": 48,
@@ -40,7 +40,7 @@
 				"h": 48
 			}
 		},
-		"Checkpoint_Flag_Out1.png": {
+		"idle_start.png": {
 			"frame": {
 				"x": 0,
 				"y": 96,
@@ -60,7 +60,7 @@
 				"h": 48
 			}
 		},
-		"Checkpoint_Flag_Out2.png": {
+		"end_start.png": {
 			"frame": {
 				"x": 0,
 				"y": 144,
@@ -80,7 +80,7 @@
 				"h": 48
 			}
 		},
-		"Pointer_Idle.png": {
+		"next.png": {
 			"frame": {
 				"x": 0,
 				"y": 192,

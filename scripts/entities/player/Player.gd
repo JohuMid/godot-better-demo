@@ -2,7 +2,7 @@
 extends CharacterBody2D
 
 # —————— 导出属性（可在编辑器调整）——————
-@export var speed: float = 120.0
+@export var speed: float = 80.0
 @export var jump_velocity: float = -200.0
 @export var gravity: float = 800.0
 
@@ -23,7 +23,7 @@ var is_pushing: bool = false
 
 # —————— 动画帧偏移相关 ——————
 var original_offset: Vector2 = Vector2.ZERO # 原始偏移量
-var platform_jump_offset: float = -280.0 # PlatformJump最后两帧的向上偏移
+var platform_jump_offset: float = -44 # PlatformJump最后两帧的向上偏移
 
 # —————— 受击相关 ——————
 var is_hit: bool = false
@@ -35,23 +35,23 @@ var on_rope: bool = false
 var rope_segment: RigidBody2D = null
 var climbing: bool = false
 var swing_force: float = 15.0
-var climb_speed: float = 40.0  # ✅ 降低爬行速度（30-50 之间）
+var climb_speed: float = 40.0 # ✅ 降低爬行速度（30-50 之间）
 
-var rope_climb_offset: float = 0.0  # 玩家在当前绳段上的偏移量
-var target_position: Vector2 = Vector2.ZERO  # 目标位置
-var position_smoothness: float = 12.0  # 位置平滑系数（8-15 之间）
+var rope_climb_offset: float = 0.0 # 玩家在当前绳段上的偏移量
+var target_position: Vector2 = Vector2.ZERO # 目标位置
+var position_smoothness: float = 12.0 # 位置平滑系数（8-15 之间）
 
-var is_swinging: bool = false  # 是否正在荡秋千
-var swing_smoothness: float = 20.0  # 荡秋千时的快速跟随系数
+var is_swinging: bool = false # 是否正在荡秋千
+var swing_smoothness: float = 20.0 # 荡秋千时的快速跟随系数
 
 # 挂点和旋转
-var hang_offset_y: float = 12.0  # 玩家在绳子下方的距离
-var rotation_smoothness: float = 15.0  # 旋转平滑系数
-var max_rotation_angle: float = PI / 3  # 最大旋转角度（60度）
+var hang_offset_y: float = 12.0 # 玩家在绳子下方的距离
+var rotation_smoothness: float = 15.0 # 旋转平滑系数
+var max_rotation_angle: float = PI / 3 # 最大旋转角度（60度）
 
 # 跳离冷却
-var rope_detach_cooldown: float = 0.0  # 冷却计时器
-var rope_detach_cooldown_time: float = 0.3  # 冷却时间（秒）
+var rope_detach_cooldown: float = 0.0 # 冷却计时器
+var rope_detach_cooldown_time: float = 0.3 # 冷却时间（秒）
 
 # —— 角色原始帧尺寸 ——
 const ORIGINAL_FRAME_WIDTH: int = 128
@@ -104,17 +104,17 @@ func _ready():
 	original_offset = animated_sprite.offset
 
 	# 连接动画信号
-	animated_sprite.connect("animation_finished", Callable(self , "_on_animation_finished"))
-	animated_sprite.connect("frame_changed", Callable(self , "_on_frame_changed"))
+	animated_sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
+	animated_sprite.connect("frame_changed", Callable(self, "_on_frame_changed"))
 	_create_collision_shape()
 	_set_animation("Idle")
 
 	# 初始化推箱子射线查询参数（只创建一次）
 	box_ray = PhysicsRayQueryParameters2D.new()
-	box_ray.exclude = [ self ]
+	box_ray.exclude = [self]
 
 	climb_ray = PhysicsRayQueryParameters2D.new()
-	climb_ray.exclude = [ self ]
+	climb_ray.exclude = [self]
 	# 检测1和8层
 	climb_ray.collision_mask = 1 | 8
 
@@ -146,7 +146,7 @@ func _physics_process(delta):
 		return
 
 	if abs(rotation) > 0.01:
-		rotation = lerp_angle(rotation, 0.0, 10.0 * delta)  # 10.0 是平滑系数
+		rotation = lerp_angle(rotation, 0.0, 10.0 * delta) # 10.0 是平滑系数
 
 	# ===== 受击期间不处理输入 =====
 	if is_hit:
@@ -216,7 +216,7 @@ func _physics_process(delta):
 					var behind_ray = PhysicsRayQueryParameters2D.new()
 					behind_ray.from = global_position
 					behind_ray.to = global_position + behind_offset
-					behind_ray.exclude = [ self ]
+					behind_ray.exclude = [self]
 					behind_ray.collision_mask = 1
 
 					var hit_behind = get_world_2d().direct_space_state.intersect_ray(behind_ray)
@@ -299,10 +299,14 @@ func _on_frame_changed():
 		var current_frame = animated_sprite.frame
 		var total_frames = animated_sprite.sprite_frames.get_frame_count("PlatformJump")
 		
-		# 检查是否是最后两帧
-		if current_frame >= total_frames - 2:
+		# 检查是否是最后一帧
+		if current_frame == total_frames - 1:
 			# 设置向上偏移
-			animated_sprite.offset = original_offset + Vector2(0, platform_jump_offset * SPRITE_SCALE)
+			animated_sprite.offset = original_offset + Vector2(0, platform_jump_offset)
+		# 检查是否是倒数第二帧
+		elif current_frame == total_frames - 2:
+			# 设置向上偏移
+			animated_sprite.offset = original_offset + Vector2(0, platform_jump_offset + 18)
 		else:
 			# 恢复原始偏移
 			animated_sprite.offset = original_offset
@@ -365,7 +369,7 @@ func handle_rope_physics(delta):
 	if swing_dir and Input.is_action_just_pressed("jump"):
 		climbing = false
 		on_rope = false
-		velocity.y = jump_velocity * 0.7  # 带初速度脱离
+		velocity.y = jump_velocity * 0.7 # 带初速度脱离
 		rope_detach_cooldown = rope_detach_cooldown_time
 		return
 	
@@ -382,7 +386,7 @@ func handle_rope_physics(delta):
 				rope_segment = prev
 				rope_climb_offset += segment_length
 			else:
-				rope_climb_offset = -segment_length * 0.5
+				rope_climb_offset = - segment_length * 0.5
 				break
 		
 		# 向下爬行
@@ -403,11 +407,11 @@ func handle_rope_physics(delta):
 	var climb_direction = Vector2.ZERO
 	
 	if abs(rope_climb_offset) > 0.1:
-		if rope_climb_offset < 0:  # 向上
+		if rope_climb_offset < 0: # 向上
 			var prev = rope_node.get_prev_segment(rope_segment)
 			if prev != rope_segment:
 				climb_direction = (prev.global_position - current_segment_pos).normalized()
-		else:  # 向下
+		else: # 向下
 			var next = rope_node.get_next_segment(rope_segment)
 			if next != rope_segment:
 				climb_direction = (next.global_position - current_segment_pos).normalized()
@@ -416,7 +420,7 @@ func handle_rope_physics(delta):
 	var rope_hang_point = current_segment_pos + climb_direction * abs(rope_climb_offset)
 	
 	# ===== 4. ✅ 计算绳子的角度和方向（修正） =====
-	var rope_direction = Vector2(0, 1)  # 默认向下
+	var rope_direction = Vector2(0, 1) # 默认向下
 	var rope_angle = 0.0
 	
 	# 获取上一段绳子来计算角度
@@ -425,14 +429,14 @@ func handle_rope_physics(delta):
 		# 从上一段指向当前段的方向
 		rope_direction = (current_segment_pos - prev_segment.global_position).normalized()
 		# ✅ 修正：反转角度（加负号）
-		rope_angle = -atan2(rope_direction.x, rope_direction.y)
+		rope_angle = - atan2(rope_direction.x, rope_direction.y)
 	else:
 		# 如果在最顶端，使用下一段计算
 		var next_segment = rope_node.get_next_segment(rope_segment)
 		if next_segment != rope_segment:
 			rope_direction = (next_segment.global_position - current_segment_pos).normalized()
 			# ✅ 修正：反转角度（加负号）
-			rope_angle = -atan2(rope_direction.x, rope_direction.y)
+			rope_angle = - atan2(rope_direction.x, rope_direction.y)
 	
 	# ===== 5. 计算玩家位置（沿着绳子方向向下偏移） =====
 	target_position = rope_hang_point + rope_direction * hang_offset_y
@@ -463,7 +467,7 @@ func _check_box():
 	var to_forward = from + Vector2(box_distance * facing_dir, 0)
 	box_ray.from = from
 	box_ray.to = to_forward
-	box_ray.exclude = [ self ]
+	box_ray.exclude = [self]
 	var res = get_world_2d().direct_space_state.intersect_ray(box_ray)
 	if res and res.collider is RigidBody2D:
 		return res.collider
@@ -523,11 +527,11 @@ func _try_climb_edge():
 		shape_query.transform = Transform2D(0, shape_center)
 		shape_query.shape = shape
 		shape_query.collision_mask = collision_mask
-		shape_query.exclude = [ self ]
+		shape_query.exclude = [self]
 
 		var collisions = space_state.intersect_shape(shape_query)
 		if collisions.is_empty():
-			climb_target_y = stand_y
+			climb_target_y = stand_y + 3
 			_start_climb(Vector2(stand_pos.x, stand_y))
 
 func attach_to_rope(segment: RigidBody2D):

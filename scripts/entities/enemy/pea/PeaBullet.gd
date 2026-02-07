@@ -37,7 +37,9 @@ func _process(delta):
 			return
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if body is TileMapLayer:
+		pass
+	if body.is_in_group("player") :
 		queue_free()
 		body.take_hit(Vector2(200 * direction.x, 0))
 

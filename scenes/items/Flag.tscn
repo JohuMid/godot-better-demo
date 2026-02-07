@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://q6jos15cwh3u"]
+
+[ext_resource type="Script" uid="uid://dpij4pwhsx2d8" path="res://scripts/components/Flag.gd" id="1_g7sma"]
+[ext_resource type="Texture2D" uid="uid://7gtxnhqx8nhj" path="res://resources/item/flag/spritesheet.png" id="2_g7sma"]
+
+[node name="Flag" type="Node2D"]
+script = ExtResource("1_g7sma")
+atlas = ExtResource("2_g7sma")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
