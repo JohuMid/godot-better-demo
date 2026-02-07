@@ -159,7 +159,7 @@ func _is_player_detected() -> bool:
 	player_ray.to = global_position + Vector2(detection_range * facing, 0)
 
 	var result = get_world_2d().direct_space_state.intersect_ray(player_ray)
-	return result and result.collider is CharacterBody2D
+	return result and result.collider.is_in_group("player")
 
 # —————— 更新面向方向 ——————
 func _update_facing_direction() -> void:

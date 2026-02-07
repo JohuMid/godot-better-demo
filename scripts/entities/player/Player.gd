@@ -27,7 +27,7 @@ var platform_jump_offset: float = -280.0 # PlatformJump最后两帧的向上偏�
 
 # —————— 受击相关 ——————
 var is_hit: bool = false
-var hit_duration: float = 0.3 # 受击僵直时间（秒）
+var hit_duration: float = 1 # 受击僵直时间（秒）
 var hit_timer: float = 0.0
 
 # —————— 绳子相关 ——————
@@ -153,9 +153,8 @@ func _physics_process(delta):
 		hit_timer -= delta
 		if hit_timer <= 0:
 			is_hit = false
-		move_and_slide()
-		# 受击动画
-		_set_animation("TakingDamage")
+		# 死亡动画
+		_set_animation("Death")
 		return
 
 	if is_climbing:
@@ -330,6 +329,13 @@ func _on_animation_finished():
 		_update_animation(is_on_floor(), is_on_floor())
 	elif anim_name in ["Landing"]:
 		_update_animation(was_on_floor, is_on_floor())
+	elif anim_name in ["Death"]:
+		# 玩家重生尝试获取当前场景的 LevelManager，如果不存在则报错
+		var level_manager = get_tree().get_first_node_in_group("level_manager")
+		if level_manager and level_manager.has_method("respawn_player"):
+			level_manager.respawn_player()
+		else:
+			push_error("未找到 LevelManager 节点或 respawn_player 方法！")
 
 # 玩家朝向检测
 func _check_facing_dir():

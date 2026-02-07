@@ -27,6 +27,25 @@ func spawn_player():
 	load_and_ensure_level(1)
 	update_level_window()
 
+
+# 玩家重生函数
+func respawn_player():
+	if not player:
+		return
+	
+	# player._set_animation("UpwardJumpDown")
+	player.is_hit = false
+	player.hit_timer = 0.0
+	player.on_rope = false
+	player.rope_segment = null
+
+	var level0 = load_and_ensure_level(0)
+	var spawn_point = level0.find_child("PlayerSpawn", true, false)
+	var pos = spawn_point.global_position if spawn_point else Vector2(100, 200)
+	# 镜头缓慢移动到新位置
+	var tween = create_tween()
+	tween.tween_property(player, "global_position", pos, 0.5)
+	
 # 获取玩家当前所在的关卡 ID（基于 x 坐标）
 func get_player_level_id() -> int:
 	if not player:
