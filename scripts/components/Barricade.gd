@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 
 	var result = get_world_2d().direct_space_state.intersect_ray(player_ray)
 	
-	if result and result.collider is CharacterBody2D:
+	if result and result.collider.is_in_group("player"):
 		is_attacking = true
 		_start_attack()
 

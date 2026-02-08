@@ -38,6 +38,7 @@ func _process(delta):
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is TileMapLayer:
+		queue_free()
 		pass
 	if body.is_in_group("player") :
 		queue_free()

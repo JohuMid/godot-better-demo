@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://tixetb20hek"]
+
+[ext_resource type="PackedScene" uid="uid://deq8fex5njp8x" path="res://scenes/emeny/Enemy.tscn" id="1_wuqah"]
+[ext_resource type="Script" uid="uid://5a032i0yvvvi" path="res://scripts/entities/enemy/spike/Spike.gd" id="2_usdwt"]
+[ext_resource type="Texture2D" uid="uid://bdcgcua4pwvlg" path="res://resources/enemy/spike/spritesheet.png" id="3_hfhx5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hfhx5"]
+size = Vector2(20, 7.5)
+
+[node name="Spike" instance=ExtResource("1_wuqah")]
+script = ExtResource("2_usdwt")
+atlas = ExtResource("3_hfhx5")
+json_path = "res://resources/enemy/spike/spritesheet.json"
+
+[node name="Sprite2D" parent="AnimatedSprite2D" index="0"]
+position = Vector2(0, 5)
+region_rect = Rect2(0, 144, 48, 48)
+
+[node name="Detector" type="Area2D" parent="." index="2"]
+collision_layer = 8
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector" index="0"]
+position = Vector2(0, 11.25)
+shape = SubResource("RectangleShape2D_hfhx5")

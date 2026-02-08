@@ -35,7 +35,7 @@ var is_grounded: bool = false
 enum AIState {MOVING, WAITING, ATTACKING}
 var ai_state: int = AIState.WAITING
 var wait_timer: float = 0.0
-const TURN_WAIT_TIME: float = 2.0
+var turn_wait_time: float = 2.0
 
 # 缓存射线查询参数，避免每帧新建
 var front_block_ray: PhysicsRayQueryParameters2D
@@ -90,9 +90,13 @@ func _physics_process(delta: float) -> void:
 			_handle_attacking(delta)
 
 	# 添加重力
+	_handle_gravity(delta)
+	
+	move_and_slide()
+
+func _handle_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	move_and_slide()
 
 # —————— AI 行为 ——————
 func _handle_moving() -> void:
@@ -101,7 +105,7 @@ func _handle_moving() -> void:
 	if _is_front_blocked() or _is_front_cliff():
 		# 触发等待状态
 		ai_state = AIState.WAITING
-		wait_timer = TURN_WAIT_TIME
+		wait_timer = turn_wait_time
 		_set_animation("Idle")
 		velocity.x = 0
 		return
