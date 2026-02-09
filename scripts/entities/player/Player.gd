@@ -145,6 +145,10 @@ func _physics_process(delta):
 		handle_rope_physics(delta)
 		return
 
+
+	
+
+	# ===== 旋转平滑处理 =====
 	if abs(rotation) > 0.01:
 		rotation = lerp_angle(rotation, 0.0, 10.0 * delta) # 10.0 是平滑系数
 
@@ -163,19 +167,19 @@ func _physics_process(delta):
 
 	var current_on_floor = is_on_floor()
 
-		# 2. 重力处理
+	# 重力处理
 	if not current_on_floor:
 		velocity.y += gravity * delta
 	else:
 		velocity.y = 0
 
-	# 3. 跳跃处理
+	# 跳跃处理
 	if Input.is_action_just_pressed("jump") and current_on_floor:
 		velocity.y = jump_velocity
 		_set_animation("SideJumpUp" if abs(velocity.x) > 50 else "UpwardJumpUp")
 
 	var input_dir = _check_input_dir()
-	# 4. 水平移动
+	# 水平移动
 	if current_on_floor:
 		velocity.x = input_dir * speed
 	else:
@@ -236,7 +240,15 @@ func _physics_process(delta):
 	if box_to_interact and current_on_floor:
 		velocity.x = box_to_interact.linear_velocity.x * 0.9
 
-	# 5. 碰撞与移动
+	# —— 玩家和平台同步速度 ——
+	if is_on_floor():
+		var coll = get_last_slide_collision()
+		if coll:
+			var body = coll.get_collider()
+			if body and "current_velocity" in body:
+				velocity += body.current_velocity
+		
+	# 碰撞与移动
 	move_and_slide()
 
 	# 攀爬检测
@@ -501,7 +513,7 @@ func _try_climb_edge():
 		return
 
 	# 攀爬的对象只能是TileMap，玩家下落的时候才检测
-	if ((result and result["collider"] is TileMapLayer) or (result and result["collider"].is_in_group("fragibridge"))) and velocity.y > 0:
+	if ((result and result["collider"] is TileMapLayer) or (result and result["collider"].is_in_group("fragibridge")) or (result and result["collider"].is_in_group("moveplate"))) and velocity.y > 0:
 		var input_dir = _check_input_dir() # -1 ～ 1
 
 		# 检查输入方向是否与平台方向一致

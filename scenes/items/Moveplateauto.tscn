@@ -1,20 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1uib8mi2r60m"]
+[gd_scene load_steps=4 format=3 uid="uid://kxqat14orjjt"]
 
-[ext_resource type="Script" uid="uid://b7nrvqitnqkxc" path="res://scripts/components/Moveplate.gd" id="1_35fq4"]
-[ext_resource type="Texture2D" uid="uid://bha6cd4fgsdvy" path="res://resources/tileset/Tileset.png" id="1_un8mp"]
+[ext_resource type="Script" uid="uid://gt47dpix2vcq" path="res://scripts/components/Moveplateauto.gd" id="1_twi3o"]
+[ext_resource type="Texture2D" uid="uid://bha6cd4fgsdvy" path="res://resources/tileset/Tileset.png" id="2_mbb66"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_35fq4"]
 size = Vector2(48, 6.9491377)
 
-[node name="Moveplate" type="StaticBody2D"]
+[node name="Moveplateauto" type="StaticBody2D"]
 collision_layer = 64
 collision_mask = 3
-script = ExtResource("1_35fq4")
+script = ExtResource("1_twi3o")
+speed = 60.0
 
 [node name="Visual" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual"]
-texture = ExtResource("1_un8mp")
+texture = ExtResource("2_mbb66")
 region_enabled = true
 region_rect = Rect2(192, 144, 48, 7)
 

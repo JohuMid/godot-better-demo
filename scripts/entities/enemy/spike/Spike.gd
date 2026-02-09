@@ -3,7 +3,7 @@ extends "res://scripts/entities/enemy/Enemy.gd"
 var has_hit_in_this_attack: bool = false
 var down_ray: PhysicsRayQueryParameters2D
 var is_attacking: bool = false
-var down_distance: float # 攻击距离（可调节）
+var down_distance: float = 40.0 # 攻击距离（可调节）
 var original_position: Vector2 # 保存初始位置
 var ground_offset: float = 10.0 # 地面偏移（可调节）
 var detector: Area2D
@@ -33,17 +33,11 @@ func _is_player_detected() -> bool:
 		return false # 攻击中，不重复检测
 	# 检测正下方是否有玩家
 	down_ray.from = global_position
-	down_ray.to = global_position + Vector2(0, 200)
+	down_ray.to = global_position + Vector2(0, down_distance)
 
 	var result = get_world_2d().direct_space_state.intersect_ray(down_ray)
 
 	if result and result.collider.is_in_group("player"):
-		# 如果down_distance未设置，尝试计算
-		if not down_distance:
-			var down_result = get_world_2d().direct_space_state.intersect_ray(down_ray)
-			if down_result and down_result.collider.is_in_group("player"):
-				# print('down_distance', down_result.position.y, global_position.y)
-				down_distance = down_result.position.y - global_position.y - ground_offset
 		is_attacking = true
 		return true
 	else:

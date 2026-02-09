@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bxn3kxy6gjxcc"]
 
-[ext_resource type="Script" uid="uid://cq3yw788lv4c0" path="res://scripts/components/Bounce.gd" id="1_17ctv"]
+[ext_resource type="Script" path="res://scripts/components/Bounce.gd" id="1_17ctv"]
 [ext_resource type="Texture2D" uid="uid://t1qep33el80v" path="res://resources/item/spritesheet.png" id="1_qonue"]
 
 [sub_resource type="Animation" id="Animation_17ctv"]
@@ -90,7 +90,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qonue"]
-size = Vector2(32, 16)
+size = Vector2(32, 10.162319)
 
 [node name="Bounce" type="Node2D"]
 script = ExtResource("1_17ctv")
@@ -98,6 +98,7 @@ script = ExtResource("1_17ctv")
 [node name="Visual" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual"]
+position = Vector2(0, -8)
 texture = ExtResource("1_qonue")
 hframes = 7
 region_enabled = true
@@ -113,5 +114,5 @@ collision_layer = 8
 collision_mask = 22
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
-position = Vector2(0, 8)
+position = Vector2(0, 10.91884)
 shape = SubResource("RectangleShape2D_qonue")
