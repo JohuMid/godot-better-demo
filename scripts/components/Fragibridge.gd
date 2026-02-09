@@ -4,6 +4,7 @@ extends AnimatableBody2D
 var is_collapsing: bool = false
 
 func _ready():
+	add_to_group("fragibridge")
 	# 连接 Area2D 的信号
 	$Area2D.body_entered.connect(_on_player_entered)
 

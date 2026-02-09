@@ -1,7 +1,7 @@
 extends Node2D # <--- 脚本现在继承自 Node2D
 
-signal activated   # 压力板被压下（打开通路）
-signal deactivated # 压力板释放（关闭通路）
+signal activated   # 压力板被压下
+signal deactivated # 压力板释放
 
 # --- 可配置的属性 ---
 @export var pressed_distance: float = 2.0

@@ -104,19 +104,19 @@ func _ready():
 	original_offset = animated_sprite.offset
 
 	# 连接动画信号
-	animated_sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
-	animated_sprite.connect("frame_changed", Callable(self, "_on_frame_changed"))
+	animated_sprite.connect("animation_finished", Callable(self , "_on_animation_finished"))
+	animated_sprite.connect("frame_changed", Callable(self , "_on_frame_changed"))
 	_create_collision_shape()
 	_set_animation("Idle")
 
 	# 初始化推箱子射线查询参数（只创建一次）
 	box_ray = PhysicsRayQueryParameters2D.new()
-	box_ray.exclude = [self]
+	box_ray.exclude = [ self ]
 
 	climb_ray = PhysicsRayQueryParameters2D.new()
-	climb_ray.exclude = [self]
-	# 检测1和8层
-	climb_ray.collision_mask = 1 | 8
+	climb_ray.exclude = [ self ]
+	# 检测层，添加 64 层以检测断桥
+	climb_ray.collision_mask = 1 | 64 | 128
 
 # —————— 创建碰撞体 ——————
 func _create_collision_shape():
@@ -216,7 +216,7 @@ func _physics_process(delta):
 					var behind_ray = PhysicsRayQueryParameters2D.new()
 					behind_ray.from = global_position
 					behind_ray.to = global_position + behind_offset
-					behind_ray.exclude = [self]
+					behind_ray.exclude = [ self ]
 					behind_ray.collision_mask = 1
 
 					var hit_behind = get_world_2d().direct_space_state.intersect_ray(behind_ray)
@@ -467,7 +467,7 @@ func _check_box():
 	var to_forward = from + Vector2(box_distance * facing_dir, 0)
 	box_ray.from = from
 	box_ray.to = to_forward
-	box_ray.exclude = [self]
+	box_ray.exclude = [ self ]
 	var res = get_world_2d().direct_space_state.intersect_ray(box_ray)
 	if res and res.collider is RigidBody2D:
 		return res.collider
@@ -501,7 +501,7 @@ func _try_climb_edge():
 		return
 
 	# 攀爬的对象只能是TileMap，玩家下落的时候才检测
-	if result and result["collider"] is TileMapLayer and velocity.y > 0:
+	if ((result and result["collider"] is TileMapLayer) or (result and result["collider"].is_in_group("fragibridge"))) and velocity.y > 0:
 		var input_dir = _check_input_dir() # -1 ～ 1
 
 		# 检查输入方向是否与平台方向一致
@@ -527,7 +527,7 @@ func _try_climb_edge():
 		shape_query.transform = Transform2D(0, shape_center)
 		shape_query.shape = shape
 		shape_query.collision_mask = collision_mask
-		shape_query.exclude = [self]
+		shape_query.exclude = [ self ]
 
 		var collisions = space_state.intersect_shape(shape_query)
 		if collisions.is_empty():

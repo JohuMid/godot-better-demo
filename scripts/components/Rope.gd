@@ -52,7 +52,8 @@ func create_segment(index: int) -> RigidBody2D:
 	shape.radius = rope_width
 	collision.shape = shape
 	segment.add_child(collision)
-	segment.collision_layer = 8
+	# 开启碰撞层Rope
+	segment.collision_layer = 128
 	segment.collision_mask = 1
 	segment.add_to_group("Rope")
 	

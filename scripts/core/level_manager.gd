@@ -37,7 +37,7 @@ func respawn_player():
 		spawn_point = load_and_ensure_level(0).find_child("PlayerSpawn", true, false).global_position
 	else:
 		# 当前关卡的
-		spawn_point = Vector2(get_total_width_before(get_player_level_id()) + 50, 0)
+		spawn_point = Vector2(get_total_width_before(get_player_level_id()) + 10, 0)
 
 	var pos = spawn_point
 	# 镜头缓慢移动到新位置
@@ -52,6 +52,11 @@ func respawn_player():
 	player.hit_timer = 0.0
 	player.on_rope = false
 	player.rope_segment = null
+
+	# 卸载当前关卡，重新加载当前关卡
+	loaded_levels[current_player_level].queue_free()
+	loaded_levels.erase(current_player_level)
+	load_and_ensure_level(current_player_level)
 	
 # 获取玩家当前所在的关卡 ID（基于 x 坐标）
 func get_player_level_id() -> int:
