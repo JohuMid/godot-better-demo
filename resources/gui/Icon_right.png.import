@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dw8lqmhg3fgos"
-path="res://.godot/imported/Desappearing.png-fa8d26d3cb81927d8f129395dc3b35c6.ctex"
+uid="uid://dyx47dypltrqh"
+path="res://.godot/imported/Icon_right.png-6d1b0277d6005ac47cebd9f1180228c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/enemy/Desappearing.png"
-dest_files=["res://.godot/imported/Desappearing.png-fa8d26d3cb81927d8f129395dc3b35c6.ctex"]
+source_file="res://resources/gui/Icon_right.png"
+dest_files=["res://.godot/imported/Icon_right.png-6d1b0277d6005ac47cebd9f1180228c4.ctex"]
 
 [params]
 

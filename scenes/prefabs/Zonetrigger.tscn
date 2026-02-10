@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6dwj52k47srk"]
+
+[ext_resource type="Script" uid="uid://cufmotudtapbx" path="res://scripts/prefabs/Zonetrigger.gd" id="1_fvfaf"]
+[ext_resource type="Texture2D" uid="uid://ddv60xk46xksx" path="res://resources/gui/GUI.png" id="2_jxqkf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvfaf"]
+size = Vector2(24, 12)
+
+[node name="Zonetrigger" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_fvfaf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_jxqkf")
+region_enabled = true
+region_rect = Rect2(96, 0, 48, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fvfaf")

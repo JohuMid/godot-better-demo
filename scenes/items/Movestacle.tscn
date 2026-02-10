@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dl1mgkyfyp5tr"]
+
+[ext_resource type="Script" uid="uid://bv0wwath24xey" path="res://scripts/components/Movestacle.gd" id="1_nrbv5"]
+[ext_resource type="Texture2D" uid="uid://bha6cd4fgsdvy" path="res://resources/tileset/Tileset.png" id="1_wbed5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nrbv5"]
+size = Vector2(48, 16)
+
+[node name="Movestacle" type="StaticBody2D"]
+collision_mask = 3
+script = ExtResource("1_nrbv5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wbed5")
+region_enabled = true
+region_rect = Rect2(192, 0, 48, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nrbv5")

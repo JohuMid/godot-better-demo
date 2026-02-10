@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpqood28y6qda"]
+
+[ext_resource type="Texture2D" uid="uid://ksma2uixwani" path="res://resources/gui/Button_01.png" id="1_p2f55"]
+[ext_resource type="Script" uid="uid://bwnwucxgkn5kf" path="res://scripts/components/Dirprompt.gd" id="1_xd0a5"]
+[ext_resource type="Texture2D" uid="uid://dgo34inyqcuuv" path="res://resources/gui/Icon_left.png" id="3_0g2w5"]
+[ext_resource type="Texture2D" uid="uid://dseik5qmetx1a" path="res://resources/gui/Icon_up.png" id="3_nuqh3"]
+[ext_resource type="Texture2D" uid="uid://j85s5aivs2us" path="res://resources/gui/Icon_down.png" id="4_mhhnt"]
+[ext_resource type="Texture2D" uid="uid://dyx47dypltrqh" path="res://resources/gui/Icon_right.png" id="5_wfc35"]
+
+[node name="Dirprompt" type="Node2D"]
+script = ExtResource("1_xd0a5")
+
+[node name="Up" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Up"]
+texture = ExtResource("1_p2f55")
+
+[node name="IconUp" type="Sprite2D" parent="Up"]
+position = Vector2(0, -2)
+texture = ExtResource("3_nuqh3")
+
+[node name="Left" type="Node2D" parent="."]
+position = Vector2(-18, 18)
+
+[node name="Sprite2D" type="Sprite2D" parent="Left"]
+texture = ExtResource("1_p2f55")
+
+[node name="IconUp" type="Sprite2D" parent="Left"]
+position = Vector2(0, -2)
+texture = ExtResource("3_0g2w5")
+
+[node name="Down" type="Node2D" parent="."]
+position = Vector2(0, 18)
+
+[node name="Sprite2D" type="Sprite2D" parent="Down"]
+texture = ExtResource("1_p2f55")
+
+[node name="IconUp" type="Sprite2D" parent="Down"]
+position = Vector2(0, -2)
+texture = ExtResource("4_mhhnt")
+
+[node name="Right" type="Node2D" parent="."]
+position = Vector2(18, 18)
+
+[node name="Sprite2D" type="Sprite2D" parent="Right"]
+texture = ExtResource("1_p2f55")
+
+[node name="IconUp" type="Sprite2D" parent="Right"]
+position = Vector2(0, -2)
+texture = ExtResource("5_wfc35")

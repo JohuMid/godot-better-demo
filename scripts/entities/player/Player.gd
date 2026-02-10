@@ -374,7 +374,7 @@ func handle_rope_physics(delta):
 	var climb_input = 0
 	if Input.is_action_pressed("jump"):
 		climb_input = -1
-	elif Input.is_action_pressed("down"):
+	elif Input.is_action_pressed("move_down"):
 		climb_input = 1
 
 	# 脱离绳子

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://djmn7g20wluj"]
+[gd_scene load_steps=6 format=3 uid="uid://djmn7g20wluj"]
 
 [ext_resource type="PackedScene" uid="uid://deq8fex5njp8x" path="res://scenes/emeny/Enemy.tscn" id="1_ocs02"]
 [ext_resource type="Script" uid="uid://cane7j1tqgcis" path="res://scripts/entities/enemy/boom/Boom.gd" id="2_6cl86"]
+[ext_resource type="Texture2D" uid="uid://s4d3mpbvvlof" path="res://resources/enemy/boom/spritesheet.png" id="3_tv8yx"]
 
 [sub_resource type="Animation" id="Animation_6cl86"]
 length = 0.001
@@ -13,6 +14,8 @@ _data = {
 
 [node name="Boom" instance=ExtResource("1_ocs02")]
 script = ExtResource("2_6cl86")
+atlas = ExtResource("3_tv8yx")
+json_path = "res://resources/enemy/boom/spritesheet.json"
 
 [node name="Sprite2D" parent="AnimatedSprite2D" index="0"]
 region_rect = Rect2(0, 0, 672, 96)

@@ -91,7 +91,7 @@ func _physics_process(delta: float) -> void:
 
 	# 添加重力
 	_handle_gravity(delta)
-	
+		
 	move_and_slide()
 
 func _handle_gravity(delta: float) -> void:

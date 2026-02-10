@@ -3,7 +3,7 @@ const SPRITE_SCALE: float = 1.0
 # —————— 动画相关 ——————
 @export var atlas: Texture2D
 @export var json_path: String = "res://resources/item/flag/spritesheet.json"
-@export var type: String = "star"
+@export var type: String = "idle"
 var original_frame_width: int = 48
 var original_frame_height: int = 48
 var animated_sprite: AnimatedSprite2D
