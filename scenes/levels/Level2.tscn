@@ -1,13 +1,35 @@
-[gd_scene load_steps=3 format=4 uid="uid://bc74sp3vn081h"]
+[gd_scene load_steps=5 format=4 uid="uid://bc74sp3vn081h"]
 
-[ext_resource type="TileSet" uid="uid://bmowt2na06w2i" path="res://resources/tres/new_tile_set.tres" id="1_twaqj"]
+[ext_resource type="TileSet" uid="uid://bemfy54u2to4h" path="res://resources/tres/tilemap.tres" id="1_oblk4"]
 [ext_resource type="PackedScene" uid="uid://boqjb8fl55hyb" path="res://scenes/items/RightEdge.tscn" id="2_oblk4"]
+[ext_resource type="PackedScene" uid="uid://opaftik2c1qw" path="res://scenes/items/Barricade.tscn" id="3_a3cud"]
+[ext_resource type="PackedScene" uid="uid://i4ishioo27ak" path="res://scenes/items/Box.tscn" id="4_1xtnv"]
 
 [node name="Level2" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAKAAYAAAABAAIAAAAKAAUAAAABAAAAAAAJAAYAAAABAAIAAAAJAAUAAAABAAAAAAAIAAYAAAABAAIAAAAIAAUAAAABAAAAAAAHAAYAAAABAAIAAAAHAAUAAAABAAAAAAAGAAYAAAABAAIAAAAGAAUAAAABAAAAAAAFAAYAAAABAAIAAAAFAAUAAAABAAAAAAAEAAYAAAABAAIAAAAEAAUAAAABAAAAAAADAAYAAAABAAIAAAADAAUAAAABAAAAAAACAAYAAAABAAIAAAACAAUAAAABAAAAAAABAAYAAAABAAIAAAABAAUAAAABAAAAAAAAAAYAAAAAAAIAAAAAAAUAAAAAAAAAAAAEAP//AAAAAAAAAAAFAP//AAAAAAAAAAAGAP//AAAAAAAAAAAGAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAMAAAAAAAAAAAANAAYAAAACAAIAAAANAAUAAAACAAAAAAAMAAYAAAABAAIAAAAMAAUAAAABAAAAAAALAAYAAAABAAIAAAALAAUAAAABAAAAAAA=")
-tile_set = ExtResource("1_twaqj")
+tile_map_data = PackedByteArray("AAAOAAwAAAACAAYAAAAOAAsAAAACAAUAAAAOAAoAAAACAAQAAAANAAwAAAABAAYAAAANAAsAAAABAAUAAAANAAoAAAABAAQAAAAMAAwAAAABAAYAAAAMAAsAAAABAAUAAAAMAAoAAAABAAQAAAALAAwAAAABAAYAAAALAAsAAAABAAUAAAALAAoAAAABAAQAAAAKAAwAAAABAAYAAAAKAAsAAAABAAUAAAAKAAoAAAABAAQAAAAJAAwAAAABAAYAAAAJAAsAAAABAAUAAAAJAAoAAAABAAQAAAAIAAwAAAABAAYAAAAIAAsAAAABAAUAAAAIAAoAAAABAAQAAAAHAAwAAAABAAYAAAAHAAsAAAABAAUAAAAHAAoAAAABAAQAAAAGAAwAAAABAAYAAAAGAAsAAAABAAUAAAAGAAoAAAABAAQAAAAFAAwAAAABAAYAAAAFAAsAAAABAAUAAAAFAAoAAAAAAAQAAAAEAAwAAAABAAYAAAAEAAsAAAABAAUAAAAEAAoAAAACAAQAAAADAAwAAAABAAYAAAADAAsAAAABAAUAAAADAAoAAAABAAQAAAACAAwAAAABAAYAAAACAAsAAAABAAUAAAACAAoAAAABAAQAAAABAAwAAAABAAYAAAABAAsAAAABAAUAAAABAAoAAAABAAQAAAAAAAwAAAAAAAYAAAAAAAsAAAAAAAUAAAAAAAoAAAAAAAQAAAA=")
+tile_set = ExtResource("1_oblk4")
 
 [node name="RightEdge" parent="." instance=ExtResource("2_oblk4")]
 position = Vector2(448, 160)
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(48, 120)
+
+[node name="Barricades" type="Node2D" parent="."]
+position = Vector2(80, 72)
+
+[node name="Barricade" parent="Barricades" instance=ExtResource("3_a3cud")]
+
+[node name="Barricade2" parent="Barricades" instance=ExtResource("3_a3cud")]
+position = Vector2(32, 0)
+
+[node name="Barricade3" parent="Barricades" instance=ExtResource("3_a3cud")]
+position = Vector2(64, 0)
+
+[node name="Barricade4" parent="Barricades" instance=ExtResource("3_a3cud")]
+position = Vector2(96, 0)
+
+[node name="Box" parent="." instance=ExtResource("4_1xtnv")]
+position = Vector2(16, 128)

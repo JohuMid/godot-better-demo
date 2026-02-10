@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://i4ishioo27ak"]
 
-[ext_resource type="Texture2D" uid="uid://dlpyfq6xxhgvw" path="res://resources/tileset/Prefabs1.png" id="1_brk01"]
 [ext_resource type="Script" uid="uid://cvfdpn6fxyxs6" path="res://scripts/components/Box.gd" id="1_f8jd8"]
+[ext_resource type="Texture2D" uid="uid://dxy3bjl2ioyg" path="res://resources/item/box/box.png" id="2_f8jd8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f8jd8"]
-friction = 0.5
+friction = 0.3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f8jd8"]
-size = Vector2(13, 13)
+size = Vector2(22, 22)
 
 [node name="Box" type="RigidBody2D"]
 collision_layer = 16
@@ -18,11 +18,10 @@ freeze_mode = 1
 script = ExtResource("1_f8jd8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_brk01")
-region_enabled = true
+scale = Vector2(1.1875, 1.1875)
+texture = ExtResource("2_f8jd8")
 region_rect = Rect2(448, 320, 64, 64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(0.99999994, 0.99999994)
+scale = Vector2(1.2, 1.2)
 shape = SubResource("RectangleShape2D_f8jd8")

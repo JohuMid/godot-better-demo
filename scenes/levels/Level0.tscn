@@ -91,4 +91,3 @@ type = "next"
 
 [node name="Flag2" parent="." instance=ExtResource("11_oswwn")]
 position = Vector2(768, 136)
-type = "idle"
