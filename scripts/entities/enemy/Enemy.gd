@@ -91,7 +91,18 @@ func _physics_process(delta: float) -> void:
 
 	# 添加重力
 	_handle_gravity(delta)
-		
+
+	# —— 敌人和平台同步速度 ——
+	if is_on_floor():
+		var coll = get_last_slide_collision()
+		if coll:
+			var enemy = coll.get_collider()
+			if enemy and "current_velocity" in enemy:
+				if ai_state == AIState.WAITING:
+					velocity = enemy.current_velocity
+				elif ai_state == AIState.MOVING:
+					velocity += enemy.current_velocity
+				
 	move_and_slide()
 
 func _handle_gravity(delta: float) -> void:
