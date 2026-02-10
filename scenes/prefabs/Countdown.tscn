@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://btexelthij3so"]
+
+[ext_resource type="Script" uid="uid://bs3npn6o7ybrp" path="res://scripts/components/Countdown.gd" id="1_1u7qf"]
+[ext_resource type="Texture2D" uid="uid://ddv60xk46xksx" path="res://resources/gui/GUI.png" id="1_o1it4"]
+[ext_resource type="Texture2D" uid="uid://dodu06oosq3wb" path="res://resources/gui/number/spritesheet.png" id="2_1u7qf"]
+
+[node name="Countdown" type="Node2D"]
+script = ExtResource("1_1u7qf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_o1it4")
+region_enabled = true
+region_rect = Rect2(96, 0, 48, 48)
+
+[node name="Number" type="Sprite2D" parent="."]
+scale = Vector2(0.9411765, 0.9411765)
+texture = ExtResource("2_1u7qf")
+region_enabled = true
+region_rect = Rect2(0, 0, 17, 17)
