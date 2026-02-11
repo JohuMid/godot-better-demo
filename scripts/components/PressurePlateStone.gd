@@ -20,7 +20,6 @@ func _ready() -> void:
 
 	# 连接检测器的信号到本脚本的函数
 	detector.body_entered.connect(_on_body_entered)
-	detector.body_exited.connect(_on_body_exited)
 
 func _physics_process(delta: float) -> void:
 	# 移动的是 visual 节点，而不是根节点
@@ -35,13 +34,6 @@ func _on_body_entered(body: Node2D) -> void:
 		if object_count == 1:
 			activate()
 
-func _on_body_exited(body: Node2D) -> void:
-	if body is CharacterBody2D or body is RigidBody2D:
-		object_count -= 1
-		object_count = max(object_count, 0)
-		if object_count == 0:
-			deactivate()
-
 func activate() -> void:
 	if is_pressed:
 		return
@@ -51,12 +43,3 @@ func activate() -> void:
 	target_position = original_visual_position + Vector2(0, pressed_distance)
 	print("Pressure Plate Activated!")
 	EventManager.emit(EventNames.PRESSURE_PLATE_ACTIVATED)
-
-func deactivate() -> void:
-	if not is_pressed:
-		return
-
-	is_pressed = false
-	target_position = original_visual_position
-	print("Pressure Plate Deactivated!")
-	EventManager.emit(EventNames.PRESSURE_PLATE_DEACTIVATED)

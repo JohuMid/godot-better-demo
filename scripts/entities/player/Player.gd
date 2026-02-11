@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var speed: float = 80.0
 @export var jump_velocity: float = -200.0
 @export var gravity: float = 800.0
+@export var gravity_scale: float = 1
 
 # —————— 动画相关 ——————
 @export var atlas: Texture2D
@@ -87,6 +88,9 @@ func _ready():
 	if not atlas:
 		push_error("请在检查器中指定 Atlas 纹理！")
 		return
+	
+	EventManager.subscribe(EventNames.COUNTDOWN_START, Callable(self, "_on_countdown_start"))
+	EventManager.subscribe(EventNames.COUNTDOWN_END, Callable(self, "_on_countdown_end"))
 
 	var frames = TexturePackerImporter.create_sprite_frames(atlas, json_path, ORIGINAL_FRAME_WIDTH, ORIGINAL_FRAME_HEIGHT)
 	animated_sprite = $AnimatedSprite2D
@@ -169,7 +173,7 @@ func _physics_process(delta):
 
 	# 重力处理
 	if not current_on_floor:
-		velocity.y += gravity * delta
+		velocity.y += gravity * gravity_scale * delta
 	else:
 		velocity.y = 0
 
@@ -355,6 +359,16 @@ func _on_animation_finished():
 			level_manager.respawn_player()
 		else:
 			push_error("未找到 LevelManager 节点或 respawn_player 方法！")
+
+# 倒计时开始回调
+func _on_countdown_start() -> void:
+	gravity_scale = 0.1
+	jump_velocity = -100
+
+func _on_countdown_end():
+	# 玩家重力恢复
+	gravity_scale = 1.0
+	jump_velocity = -200
 
 # 玩家朝向检测
 func _check_facing_dir():

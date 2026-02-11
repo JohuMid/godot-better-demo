@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://xo1q7lqtprfl"]
+[gd_scene load_steps=7 format=3 uid="uid://xo1q7lqtprfl"]
 
+[ext_resource type="Script" uid="uid://bjpnii465dk8p" path="res://scripts/core/game_manager.gd" id="1_4crkd"]
 [ext_resource type="PackedScene" uid="uid://cqa4utnaakybx" path="res://scenes/player/Player.tscn" id="1_vqfyl"]
 [ext_resource type="Texture2D" uid="uid://b03tcjw6ul5v1" path="res://resources/background/background 1/1.png" id="1_yo3cr"]
 [ext_resource type="Texture2D" uid="uid://chsi83w5jl6f7" path="res://resources/background/background 1/2.png" id="2_4crkd"]
@@ -7,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bv2lxgjy8103p" path="res://resources/background/background 1/3.png" id="3_f4bdu"]
 
 [node name="GameManager" type="Node2D"]
+script = ExtResource("1_4crkd")
 
 [node name="levels_container" type="Node2D" parent="."]
 

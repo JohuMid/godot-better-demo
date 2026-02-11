@@ -2,7 +2,7 @@ extends Node
 
 @onready var pressure_plate = get_node("../PressurePlate")
 # 倒计时初始值（可在编辑器中设置）
-@export var count_number = 10
+@export var count_number = 15
 # 是否允许控制倒计时
 var is_can_control = false
 # 数字精灵节点引用
@@ -19,8 +19,7 @@ var initial_count_number = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 
-	if pressure_plate:
-		pressure_plate.activated.connect(start_countdown)
+	EventManager.subscribe(EventNames.PRESSURE_PLATE_ACTIVATED, Callable(self, "start_countdown"))
 
 	initial_count_number = count_number
 	# 获取数字精灵节点
@@ -44,11 +43,16 @@ func start_countdown() -> void:
 	update_number_sprite(count_number)
 	is_can_control = true
 	countdown_timer.start()
+	sprite_number.visible = true
+	# 通过事件中心发送倒计时开始事件
+	EventManager.emit(EventNames.COUNTDOWN_START)
 
 # 停止倒计时
 func stop_countdown() -> void:
 	is_can_control = false
 	countdown_timer.stop()
+	# 计时结束信号
+	EventManager.emit(EventNames.COUNTDOWN_END)
 
 # 计时器超时回调（每秒执行一次）
 func _on_countdown_timeout() -> void:
@@ -61,6 +65,7 @@ func _on_countdown_timeout() -> void:
 	# 倒计时结束判断
 	if count_number <= 0:
 		stop_countdown()
+		sprite_number.visible = false
 		return
 		# 这里可以添加倒计时结束后的逻辑
 	

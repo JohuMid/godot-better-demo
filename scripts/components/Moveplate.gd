@@ -12,8 +12,6 @@ var original_position: Vector2
 var current_tween: Tween
 var prev_global_position: Vector2
 
-@onready var pressure_plate = get_node("../PressurePlate")
-
 func _ready():
 	add_to_group("moveplate")
 	original_position = global_position
@@ -22,11 +20,8 @@ func _ready():
 	if not move_node:
 		move_node = self
 
-	if pressure_plate:
-		pressure_plate.activated.connect(on_activated)
-		pressure_plate.deactivated.connect(on_deactivated)
-	else:
-		push_error("未找到 PressurePlate 节点！")
+	EventManager.subscribe(EventNames.PRESSURE_PLATE_ACTIVATED, Callable(self, "_on_pressure_plate_activated"))
+	EventManager.subscribe(EventNames.PRESSURE_PLATE_DEACTIVATED, Callable(self, "_on_pressure_plate_deactivated"))
 
 func _physics_process(delta):
 	# 每帧计算平台的瞬时速度（用于玩家同步）
@@ -34,7 +29,7 @@ func _physics_process(delta):
 	current_velocity = (global_position - prev_global_position) / delta
 	prev_global_position = global_position
 
-func on_activated():
+func _on_pressure_plate_activated():
 	_stop_current_tween()
 	
 	var target = original_position + move_offset
@@ -48,7 +43,7 @@ func on_activated():
 	current_tween.tween_property(move_node, "global_position", target, duration)
 	current_tween.set_trans(Tween.TRANS_LINEAR)
 
-func on_deactivated():
+func _on_pressure_plate_deactivated():
 	_stop_current_tween()
 	
 	var distance = global_position.distance_to(original_position)
@@ -60,6 +55,7 @@ func on_deactivated():
 	current_tween = create_tween()
 	current_tween.tween_property(move_node, "global_position", original_position, duration)
 	current_tween.set_trans(Tween.TRANS_LINEAR)
+	
 
 func _stop_current_tween():
 	if current_tween and current_tween.is_running():

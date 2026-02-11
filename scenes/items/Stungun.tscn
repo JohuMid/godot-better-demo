@@ -90,7 +90,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jo0fo"]
-size = Vector2(20, 24)
+size = Vector2(10, 16)
 
 [node name="Stungun" type="Node2D"]
 script = ExtResource("1_76ate")
@@ -113,5 +113,5 @@ collision_layer = 8
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
-position = Vector2(0, 12)
+position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_jo0fo")

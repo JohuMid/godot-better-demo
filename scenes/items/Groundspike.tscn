@@ -90,7 +90,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uqmhj"]
-size = Vector2(16, 11)
+size = Vector2(16, 6)
 
 [node name="Groundspike" type="Node2D"]
 script = ExtResource("1_txlvn")
@@ -113,5 +113,5 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
-position = Vector2(0, 18.5)
+position = Vector2(0, 21)
 shape = SubResource("RectangleShape2D_uqmhj")

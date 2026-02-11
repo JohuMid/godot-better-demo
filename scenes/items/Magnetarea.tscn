@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://buie1u0vi8dbe"]
+
+[ext_resource type="Script" uid="uid://cum7moplb5pb3" path="res://scripts/components/Magnetarea.gd" id="1_cju00"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_718ay"]
+size = Vector2(96, 16)
+
+[node name="Magnetarea" type="Area2D"]
+collision_mask = 18
+script = ExtResource("1_cju00")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_718ay")
