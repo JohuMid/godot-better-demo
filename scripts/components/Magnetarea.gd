@@ -1,5 +1,6 @@
 extends Area2D
 
+var wait_timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,9 +15,18 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is RigidBody2D and body.is_in_group("box"):
-		EventManager.emit(EventNames.MAGNETAREA_ENTERED)
+		# 三秒之后再触发，防止玩家刚进入就被拉走
+		if wait_timer:
+			wait_timer.timeout.disconnect(_disable_magnet)
+		wait_timer = get_tree().create_timer(3.0)
+		wait_timer.timeout.connect(_disable_magnet)
+		
 
 
 func _on_body_exited(body: Node2D) -> void:
-	if body is RigidBody2D and body.is_in_group("box"):
-		EventManager.emit(EventNames.MAGNETAREA_EXITED)
+	pass
+
+
+func _disable_magnet() -> void:
+	EventManager.emit(EventNames.MAGNETAREA_ENTERED)
+	wait_timer = null

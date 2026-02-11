@@ -1,6 +1,5 @@
 extends Node
 
-@onready var pressure_plate = get_node("../PressurePlate")
 # 倒计时初始值（可在编辑器中设置）
 @export var count_number = 15
 # 是否允许控制倒计时

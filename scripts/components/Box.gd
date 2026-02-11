@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@export var magnet_force: float = 1200.0  # 吸引力强度（可调）
+@export var magnet_force: float = 1000.0  # 吸引力强度（可调）
 var is_in_magnet_area: bool = false
 var magnet_timer: SceneTreeTimer = null
 
@@ -15,7 +15,6 @@ func _ready():
 
 func _physics_process(delta):
 	if is_in_magnet_area:
-		print("is_in_magnet_area",Vector2.UP * -magnet_force)
 		apply_central_force(Vector2.UP * magnet_force)  # 向上拉
 
 func _on_magnetarea_entered() -> void:
@@ -27,7 +26,7 @@ func _on_magnetarea_entered() -> void:
 		magnet_timer.timeout.disconnect(_disable_magnet)
 	
 	# 创建新定时器：5秒后关闭磁力
-	magnet_timer = get_tree().create_timer(2.0)
+	magnet_timer = get_tree().create_timer(10.0)
 	magnet_timer.timeout.connect(_disable_magnet)
 
 

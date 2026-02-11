@@ -13,4 +13,4 @@ static var PRESSURE_PLATE_ACTIVATED = "pressure_plate_activated"
 static var PRESSURE_PLATE_DEACTIVATED = "pressure_plate_deactivated"
 
 static var MAGNETAREA_ENTERED = "magnetarea_entered"
-static var MAGNETAREA_EXITED = "magnetarea_exited"
+
