@@ -89,7 +89,7 @@ func _ready():
 		push_error("请在检查器中指定 Atlas 纹理！")
 		return
 	
-	EventManager.subscribe(EventNames.COUNTDOWN_START, Callable(self, "_on_countdown_start"))
+	EventManager.subscribe(EventNames.PRESSURE_PLATE_ACTIVATED, Callable(self, "_on_pressure_plate_activated"))
 	EventManager.subscribe(EventNames.COUNTDOWN_END, Callable(self, "_on_countdown_end"))
 
 	var frames = TexturePackerImporter.create_sprite_frames(atlas, json_path, ORIGINAL_FRAME_WIDTH, ORIGINAL_FRAME_HEIGHT)
@@ -359,14 +359,16 @@ func _on_animation_finished():
 			push_error("未找到 LevelManager 节点或 respawn_player 方法！")
 
 # 倒计时开始回调
-func _on_countdown_start() -> void:
-	gravity_scale = 0.1
-	jump_velocity = -100
+func _on_pressure_plate_activated(tag: String) -> void:
+	if tag == "player":
+		gravity_scale = 0.1
+		jump_velocity = -100
 
-func _on_countdown_end():
-	# 玩家重力恢复
-	gravity_scale = 1.0
-	jump_velocity = -200
+func _on_countdown_end(tag: String) -> void:
+	if tag == "player":
+		# 玩家重力恢复
+		gravity_scale = 1.0
+		jump_velocity = -200
 
 # 玩家朝向检测
 func _check_facing_dir():

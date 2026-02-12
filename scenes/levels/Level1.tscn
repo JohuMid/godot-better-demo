@@ -88,6 +88,7 @@ position = Vector2(72, -60.5)
 
 [node name="PressurePlate" parent="Node2D2" instance=ExtResource("5_68ib6")]
 position = Vector2(0, -3.4532623)
+trigger_tags = Array[String](["moveplate"])
 
 [node name="Moveplate" parent="Node2D2" node_paths=PackedStringArray("move_node") instance=ExtResource("5_76cw8")]
 move_offset = Vector2(200, 0)

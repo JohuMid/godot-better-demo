@@ -1,5 +1,6 @@
 extends Area2D
 
+@export var trigger_tags: Array[String] = []
 var wait_timer
 
 # Called when the node enters the scene tree for the first time.
@@ -20,13 +21,12 @@ func _on_body_entered(body: Node2D) -> void:
 			wait_timer.timeout.disconnect(_disable_magnet)
 		wait_timer = get_tree().create_timer(3.0)
 		wait_timer.timeout.connect(_disable_magnet)
-		
-
 
 func _on_body_exited(body: Node2D) -> void:
 	pass
 
 
 func _disable_magnet() -> void:
-	EventManager.emit(EventNames.MAGNETAREA_ENTERED)
+	for tag in trigger_tags:
+		EventManager.emit(EventNames.MAGNETAREA_ENTERED, [tag])
 	wait_timer = null

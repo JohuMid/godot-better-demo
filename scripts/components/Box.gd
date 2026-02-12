@@ -17,9 +17,9 @@ func _physics_process(delta):
 	if is_in_magnet_area:
 		apply_central_force(Vector2.UP * magnet_force)  # 向上拉
 
-func _on_magnetarea_entered() -> void:
-	print("magnetarea_entered")
-	is_in_magnet_area = true
+func _on_magnetarea_entered(tag: String) -> void:
+	if tag == "box":
+		is_in_magnet_area = true
 	
 	# 取消之前的定时器（防止多次进入重叠）
 	if magnet_timer:

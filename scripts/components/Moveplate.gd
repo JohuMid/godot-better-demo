@@ -29,7 +29,10 @@ func _physics_process(delta):
 	current_velocity = (global_position - prev_global_position) / delta
 	prev_global_position = global_position
 
-func _on_pressure_plate_activated():
+func _on_pressure_plate_activated(tag: String):
+	print('tag',tag)
+	if "moveplate" != tag:
+		return
 	_stop_current_tween()
 	
 	var target = original_position + move_offset
@@ -43,7 +46,9 @@ func _on_pressure_plate_activated():
 	current_tween.tween_property(move_node, "global_position", target, duration)
 	current_tween.set_trans(Tween.TRANS_LINEAR)
 
-func _on_pressure_plate_deactivated():
+func _on_pressure_plate_deactivated(trigger_names: Array[String]):
+	if "moveplate" not in trigger_names:
+		return
 	_stop_current_tween()
 	
 	var distance = global_position.distance_to(original_position)

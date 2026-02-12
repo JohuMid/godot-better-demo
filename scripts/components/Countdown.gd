@@ -2,6 +2,8 @@ extends Node
 
 # 倒计时初始值（可在编辑器中设置）
 @export var count_number = 15
+@export var listen_tag: String = ""
+@export var trigger_tags: Array[String] = []
 # 是否允许控制倒计时
 var is_can_control = false
 # 数字精灵节点引用
@@ -19,6 +21,7 @@ var initial_count_number = 0
 func _ready() -> void:
 
 	EventManager.subscribe(EventNames.PRESSURE_PLATE_ACTIVATED, Callable(self, "start_countdown"))
+	EventManager.subscribe(EventNames.MAGNETAREA_ENTERED, Callable(self, "start_countdown"))
 
 	initial_count_number = count_number
 	# 获取数字精灵节点
@@ -36,7 +39,9 @@ func _ready() -> void:
 	add_child(countdown_timer)
 
 # 启动倒计时
-func start_countdown() -> void:
+func start_countdown(tag: String) -> void:
+	if listen_tag != tag:
+		return
 	count_number = initial_count_number
 	# 立即更新显示初始值
 	update_number_sprite(count_number)
@@ -44,14 +49,16 @@ func start_countdown() -> void:
 	countdown_timer.start()
 	sprite_number.visible = true
 	# 通过事件中心发送倒计时开始事件
-	EventManager.emit(EventNames.COUNTDOWN_START)
+	# for countdown_tag in trigger_tags:
+	# 	EventManager.emit(EventNames.COUNTDOWN_START, [countdown_tag])
 
 # 停止倒计时
 func stop_countdown() -> void:
 	is_can_control = false
 	countdown_timer.stop()
 	# 计时结束信号
-	EventManager.emit(EventNames.COUNTDOWN_END)
+	for countdown_tag in trigger_tags:
+		EventManager.emit(EventNames.COUNTDOWN_END, [countdown_tag])
 
 # 计时器超时回调（每秒执行一次）
 func _on_countdown_timeout() -> void:

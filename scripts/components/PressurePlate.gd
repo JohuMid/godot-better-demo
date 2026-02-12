@@ -1,8 +1,10 @@
 extends Node2D
 
-# --- 可配置的属性 ---
-@export var pressed_distance: float = 2.0
-@export var move_speed: float = 200.0
+# --- 可配置的属性 --
+@export var trigger_tags: Array[String] = []
+
+var pressed_distance: float = 2.0
+var move_speed: float = 200.0
 
 # --- 内部状态变量 ---
 var is_pressed: bool = false
@@ -50,7 +52,8 @@ func activate() -> void:
 	# 目标位置是相对于 visual 节点的父节点 (PressurePlate) 的局部位置
 	target_position = original_visual_position + Vector2(0, pressed_distance)
 	print("Pressure Plate Activated!")
-	EventManager.emit(EventNames.PRESSURE_PLATE_ACTIVATED)
+	for tag in trigger_tags:
+		EventManager.emit(EventNames.PRESSURE_PLATE_ACTIVATED, [tag])
 
 func deactivate() -> void:
 	if not is_pressed:
@@ -59,4 +62,5 @@ func deactivate() -> void:
 	is_pressed = false
 	target_position = original_visual_position
 	print("Pressure Plate Deactivated!")
-	EventManager.emit(EventNames.PRESSURE_PLATE_DEACTIVATED)
+	for tag in trigger_tags:
+		EventManager.emit(EventNames.PRESSURE_PLATE_DEACTIVATED, [tag])
