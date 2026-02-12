@@ -52,6 +52,9 @@ func respawn_player():
 	player.hit_timer = 0.0
 	player.on_rope = false
 	player.rope_segment = null
+	player.gravity = 800.0
+	player.gravity_scale = 1
+	player.jump_velocity = -200.0
 
 	# 卸载当前关卡，重新加载当前关卡
 	loaded_levels[current_player_level].queue_free()

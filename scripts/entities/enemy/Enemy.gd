@@ -158,7 +158,7 @@ func _is_front_blocked() -> bool:
 	front_block_ray.to = global_position + Vector2(20 * facing, 0)
 
 	var result = get_world_2d().direct_space_state.intersect_ray(front_block_ray)
-	return result and result.collider is TileMapLayer
+	return result and (result.collider is TileMapLayer or result.collider.is_in_group("box"))
 
 func _is_front_cliff() -> bool:
 	# 检测正下方是否有地面（用于防掉落）

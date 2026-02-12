@@ -46,8 +46,8 @@ func _on_pressure_plate_activated(tag: String):
 	current_tween.tween_property(move_node, "global_position", target, duration)
 	current_tween.set_trans(Tween.TRANS_LINEAR)
 
-func _on_pressure_plate_deactivated(trigger_names: Array[String]):
-	if "moveplate" not in trigger_names:
+func _on_pressure_plate_deactivated(tag: String):
+	if "moveplate" != tag:
 		return
 	_stop_current_tween()
 	
