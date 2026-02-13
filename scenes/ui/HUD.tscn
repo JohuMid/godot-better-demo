@@ -1,3 +1,20 @@
-[gd_scene format=3 uid="uid://dfkvclg1er6d5"]
+[gd_scene load_steps=2 format=3 uid="uid://dfkvclg1er6d5"]
 
-[node name="Hud" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://ch7216fjdlyxm" path="res://resources/gui/icon/Icon_stop.png" id="1_kw0id"]
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 17.0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_kw0id")

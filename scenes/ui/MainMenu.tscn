@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://sm0qnc6jq367"]
+[gd_scene load_steps=10 format=3 uid="uid://sm0qnc6jq367"]
 
+[ext_resource type="Script" uid="uid://cu0sjv0gg0ctq" path="res://scripts/ui/MainMenu.gd" id="1_nqjyj"]
 [ext_resource type="Texture2D" uid="uid://cug1prbph7vrk" path="res://resources/background/background 5/2304x1296.png" id="1_vjtqc"]
 [ext_resource type="Texture2D" uid="uid://dnn0mxhmbjf1o" path="res://resources/gui/letters/split_18.png" id="2_7mi0g"]
 [ext_resource type="Texture2D" uid="uid://cs6vnyqr4tu8i" path="res://resources/gui/letters/split_15.png" id="3_nqjyj"]
@@ -16,6 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_nqjyj")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -111,22 +113,22 @@ scale = Vector2(0.6, 0.6)
 pivot_offset = Vector2(150, 0)
 alignment = 1
 
-[node name="Button" type="Button" parent="HBoxContainer"]
+[node name="StartButton" type="Button" parent="HBoxContainer"]
 modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 text = "开始游戏"
 
-[node name="Button2" type="Button" parent="HBoxContainer"]
+[node name="ResumeButton" type="Button" parent="HBoxContainer"]
 modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 text = "继续游戏"
 
-[node name="Button3" type="Button" parent="HBoxContainer"]
+[node name="SelectButton" type="Button" parent="HBoxContainer"]
 modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 text = "选择关卡"
 
-[node name="Button4" type="Button" parent="HBoxContainer"]
+[node name="QuitButton" type="Button" parent="HBoxContainer"]
 modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 text = "退出游戏"
