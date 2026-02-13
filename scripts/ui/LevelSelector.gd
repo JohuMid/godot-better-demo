@@ -4,6 +4,7 @@ extends Control
 const FADE_DURATION = 0.2
 var is_switching = false
 var current_level_index: int = 0
+var center_image
 
 @export var level_textures: Array[Texture2D]  # 在编辑器中拖入3张图
 
@@ -11,11 +12,18 @@ func _ready():
 	if level_textures.size() == 0:
 		push_warning("请在 Inspector 中为 level_textures 赋值！")
 		return
+	center_image = $Panel/CenterImage
 
-	$CenterImage.modulate.a = 1.0  # 确保初始可见
+	center_image.modulate.a = 1.0  # 确保初始可见
+
+	var timer = get_tree().create_timer(0.05)  # 50 毫秒足够 UI 布局完成
+	timer.timeout.connect(_initialize_ui)
+
+
+# 定时器触发后调用此函数
+func _initialize_ui():
 	_update_center_image()
 	_create_indicator_buttons()
-
 
 func _create_indicator_buttons():
 	var hbox = $IndicatorBox
@@ -68,7 +76,7 @@ func _on_level_button_pressed(index: int):
 
 func _switch_to_level_with_fade(target_index: int):
 	var tween = create_tween()
-	var img = $CenterImage
+	var img = center_image
 
 	tween.tween_property(img, "modulate:a", 0.0, FADE_DURATION)
 	tween.tween_callback(func(): 
@@ -78,7 +86,7 @@ func _switch_to_level_with_fade(target_index: int):
 	tween.finished.connect(func(): is_switching = false)
 
 func _update_center_image():
-	$CenterImage.texture = level_textures[current_level_index]
+	center_image.texture = level_textures[current_level_index]
 
 func _set_button_selected(selected_index: int):
 	for i in range($IndicatorBox.get_child_count()):

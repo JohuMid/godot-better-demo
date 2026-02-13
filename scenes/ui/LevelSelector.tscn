@@ -1,10 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://oh8l0vb1mcl6"]
+[gd_scene load_steps=10 format=3 uid="uid://oh8l0vb1mcl6"]
 
 [ext_resource type="Script" uid="uid://c1r0hw1cn3w7c" path="res://scripts/ui/LevelSelector.gd" id="1_ag8rw"]
 [ext_resource type="Texture2D" uid="uid://cug1prbph7vrk" path="res://resources/background/background 5/2304x1296.png" id="2_s0din"]
 [ext_resource type="Texture2D" uid="uid://d1aiduigiore2" path="res://resources/gui/levels/level1.png" id="2_vqrkd"]
 [ext_resource type="Texture2D" uid="uid://cff2raexkswm7" path="res://resources/gui/levels/level2.png" id="3_xdiqg"]
 [ext_resource type="Texture2D" uid="uid://cqg8gbu0vtqm0" path="res://resources/gui/levels/level3.png" id="4_oufs3"]
+[ext_resource type="Texture2D" uid="uid://ce6bgcqa73kv4" path="res://resources/gui/letters/split_12.png" id="5_2pkmu"]
+[ext_resource type="Texture2D" uid="uid://dqkv1u2f7k3d7" path="res://resources/gui/letters/split_5.png" id="6_yvd70"]
+[ext_resource type="Texture2D" uid="uid://dsrjomo4vckes" path="res://resources/gui/letters/split_22.png" id="7_jsv1k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqrkd"]
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="LevelSelector" type="Control"]
 layout_mode = 3
@@ -27,38 +36,63 @@ texture = ExtResource("2_s0din")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="CenterImage" type="TextureRect" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.0
+offset_top = 4.0
+offset_right = 43.0
+offset_bottom = 18.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_2pkmu")
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_yvd70")
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("7_jsv1k")
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_yvd70")
+
+[node name="TextureRect5" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_2pkmu")
+
+[node name="Panel" type="Panel" parent="."]
+clip_children = 1
+clip_contents = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
-anchor_top = 0.1
+anchor_top = 0.2
 anchor_right = 0.9
 anchor_bottom = 0.8
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 5
-stretch_mode = 5
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vqrkd")
 
-[node name="BackLayer" type="TextureRect" parent="CenterContainer"]
-layout_mode = 2
-
-[node name="FrontLayer" type="TextureRect" parent="CenterContainer"]
-layout_mode = 2
+[node name="CenterImage" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 5
+stretch_mode = 5
 
 [node name="IndicatorBox" type="HBoxContainer" parent="."]
 layout_mode = 1
