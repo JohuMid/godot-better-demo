@@ -34,82 +34,99 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -144.0
-offset_top = 24.0
+offset_top = 8.0
 offset_right = 144.0
 offset_bottom = 80.0
 grow_horizontal = 2
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(1, 1, 1, 0.5882353)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("2_7mi0g")
 
 [node name="TextureRect2" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(1, 1, 1, 0.5882353)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("3_nqjyj")
 
 [node name="TextureRect3" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(1, 1, 1, 0.5882353)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("3_nqjyj")
 
 [node name="TextureRect4" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(1, 1, 1, 0.5882353)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("4_7vr37")
 
 [node name="TextureRect5" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(1, 1, 1, 0.5882353)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("5_kncl5")
 
 [node name="TextureRect6" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(1, 1, 1, 0.5882353)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("3_nqjyj")
 
 [node name="TextureRect7" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(1, 1, 1, 0.5882353)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("6_clp4r")
 
 [node name="TextureRect8" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(1, 1, 1, 0.5882353)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("7_ee60a")
 
 [node name="TextureRect9" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(1, 1, 1, 0.5882353)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("8_qjd48")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.95
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.95
+anchor_bottom = 1.0
 offset_left = -150.0
-offset_top = -31.0
+offset_top = -23.0
 offset_right = 150.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(0.6, 0.6)
+pivot_offset = Vector2(150, 0)
+alignment = 1
 
 [node name="Button" type="Button" parent="HBoxContainer"]
+modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 text = "开始游戏"
 
 [node name="Button2" type="Button" parent="HBoxContainer"]
+modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 text = "继续游戏"
 
 [node name="Button3" type="Button" parent="HBoxContainer"]
+modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 text = "选择关卡"
 
 [node name="Button4" type="Button" parent="HBoxContainer"]
+modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 text = "退出游戏"
