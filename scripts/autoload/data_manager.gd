@@ -4,11 +4,12 @@ extends Node
 # --- 数据结构 ---
 var save_data = {
 	"current_level": 0,
-	"unlocked_level": 0,        # 已解锁关卡
-	"achievements": {},            # 成就字典，如 {"found_secret": true}
+	"unlocked_level": 0, # 已解锁关卡
+	"achievements": {}, # 成就字典，如 {"found_secret": true}
 	"sound_enabled": true,
 	"music_volume": 0.8,
-    "death_count": 0
+	"death_count": 0,
+	"start_game_status": "new"
 }
 
 # --- 文件路径 ---
@@ -23,11 +24,26 @@ func get_current_level() -> int:
 	return save_data.current_level
 
 func get_unlock_level() -> int:
+	print(save_data)
 	return save_data.unlocked_level
+
+func get_start_game_status() -> String:
+	return save_data.start_game_status
 
 func set_current_level(level: int):
 	save_data.current_level = level
 	save()
+
+func set_start_game_status(status: String):
+	save_data.start_game_status = status
+	save()
+
+func set_death_count(count: int):
+	save_data.death_count = count
+	save()
+
+func get_death_count() -> int:
+	return save_data.death_count
 
 func unlock_level(level: int):
 	save_data.unlocked_level = max(save_data.unlocked_level, level)
@@ -59,7 +75,7 @@ func load_data():
 		var parse_result = json.parse(content)
 		
 		if parse_result == OK:
-			save_data = json.data.duplicate(true)  # 深拷贝
+			save_data = json.data.duplicate(true) # 深拷贝
 			print("Save data loaded successfully.")
 		else:
 			push_error("Failed to parse save file: %s" % json.get_error_message())
@@ -71,7 +87,7 @@ func save():
 	
 	var file = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
 	if file:
-		var json_str = JSON.stringify(save_data, "\t")  # 格式化缩进
+		var json_str = JSON.stringify(save_data, "\t") # 格式化缩进
 		file.store_string(json_str)
 		file.close()
 		print("Game saved.")
@@ -82,10 +98,11 @@ func save():
 func reset_save():
 	save_data = {
 		"current_level": 0,
-		"unlocked_levels": 0,
-		"achievements": {},
+		"unlocked_level": 0, # 已解锁关卡
+		"achievements": {}, # 成就字典，如 {"found_secret": true}
 		"sound_enabled": true,
 		"music_volume": 0.8,
-        "death_count": 0
+		"death_count": 0,
+		"start_game_status": "new"
 	}
 	save()

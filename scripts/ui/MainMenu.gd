@@ -21,11 +21,14 @@ func _ready() -> void:
 # 开始按钮点击事件处理函数
 func _on_start_button_pressed() -> void:
 	# 加载游戏场景MainGame.tscn
+	DataManager.set_start_game_status("new")
 	get_tree().change_scene_to_file("res://scenes/core/MainGame.tscn")
 
 # 继续按钮点击事件处理函数
 func _on_resume_button_pressed() -> void:
 	print("继续游戏！")
+	DataManager.set_start_game_status("resume")
+	get_tree().change_scene_to_file("res://scenes/core/MainGame.tscn")
 
 # 退出按钮点击事件处理函数
 func _on_quit_button_pressed() -> void:

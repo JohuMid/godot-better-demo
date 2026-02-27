@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://oh8l0vb1mcl6"]
+[gd_scene load_steps=14 format=3 uid="uid://oh8l0vb1mcl6"]
 
 [ext_resource type="Script" uid="uid://c1r0hw1cn3w7c" path="res://scripts/ui/LevelSelector.gd" id="1_ag8rw"]
 [ext_resource type="Texture2D" uid="uid://cug1prbph7vrk" path="res://resources/background/background 5/2304x1296.png" id="2_s0din"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ce6bgcqa73kv4" path="res://resources/gui/letters/split_12.png" id="5_2pkmu"]
 [ext_resource type="Texture2D" uid="uid://dqkv1u2f7k3d7" path="res://resources/gui/letters/split_5.png" id="6_yvd70"]
 [ext_resource type="Texture2D" uid="uid://dsrjomo4vckes" path="res://resources/gui/letters/split_22.png" id="7_jsv1k"]
+[ext_resource type="Texture2D" uid="uid://d2yvsodo7n8rn" path="res://resources/gui/icon/Icon_restart.png" id="9_hqwx3"]
 [ext_resource type="Texture2D" uid="uid://dcqq77c13u8eo" path="res://resources/gui/icon/Icon_menu.png" id="9_vgkmy"]
 [ext_resource type="Texture2D" uid="uid://bt5x7k2tp3mu" path="res://resources/gui/icon/Icon_close.png" id="9_yvd70"]
 [ext_resource type="Texture2D" uid="uid://dg4dwk4qvn4y5" path="res://resources/gui/icon/Icon_lock.png" id="10_jsv1k"]
@@ -78,6 +79,10 @@ size_flags_horizontal = 3
 [node name="BackHome" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 icon = ExtResource("9_vgkmy")
+
+[node name="ResetGame" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("9_hqwx3")
 
 [node name="CloseSelector" type="Button" parent="HBoxContainer"]
 layout_mode = 2

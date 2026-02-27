@@ -11,22 +11,86 @@ var level_meta = preload("res://scripts/data/level_metadata.gd").LEVELS
 
 func _ready():
 	add_to_group("level_manager")
-	spawn_player()
+	initialize_game()
 
-func spawn_player():
-	var level0 = load_and_ensure_level(0)
-	var spawn_point = level0.find_child("PlayerSpawn", true, false)
-	var pos = spawn_point.global_position if spawn_point else Vector2(100, 200)
+func initialize_game():
+	var status = DataManager.get_start_game_status()
+	
+	if status == "new":
+		# 新游戏：重置存档（可选）
+		DataManager.reset_save()  # 或只重置关卡相关字段
+		start_new_game()
+	elif status == "resume":
+		# 继续游戏：从存档读取
+		start_resume_game()
+	else:
+		# 默认当新游戏
+		start_new_game()
+
+func start_new_game():
+	print("🎮 Starting NEW game")
+	current_player_level = 0
+	DataManager.set_current_level(0)
+	DataManager.unlock_level(0)
+	
+	# 加载初始关卡窗口 [0, 1]
+	load_and_ensure_level(0)
+	load_and_ensure_level(1)
+	
+	# 生成玩家
+	spawn_player_at_level(0)
+
+func start_resume_game():
+	print("🔄 Resuming game from level %d" % DataManager.get_current_level())
+	current_player_level = DataManager.get_current_level()
+	
+	# 确保至少加载 current-1, current, current+1
+	for offset in [-1, 0, 1]:
+		var lid = current_player_level + offset
+		if level_meta.has(lid):
+			load_and_ensure_level(lid)
+	
+	# 生成玩家到当前关卡
+	spawn_player_at_level(current_player_level)
+
+# 通用玩家生成函数（替代原来的 spawn_player）
+func spawn_player_at_level(level_id: int):
+	var spawn_pos: Vector2
+	
+	if level_id == 0:
+		# 第一关使用 PlayerSpawn
+		var level0 = load_and_ensure_level(0)
+		var spawn_point = level0.find_child("PlayerSpawn", true, false)
+		spawn_pos = spawn_point.global_position if spawn_point else Vector2(100, 200)
+	else:
+		# 其他关卡：放在关卡起始位置
+		spawn_pos = Vector2(get_total_width_before(level_id) + 50, 100)
 	
 	player = player_scene.instantiate()
-	player.global_position = pos
+	player.global_position = spawn_pos
 	add_child(player)
+	
+	print("👤 Player spawned at level %d, pos: %s" % [level_id, spawn_pos])
 
-	# 初始时设置当前关卡并加载窗口
-	current_player_level = 0
-	load_and_ensure_level(1)
-	update_level_window()
+# 生成指定关卡的窗口
+func update_level_window_index(level_id: int = -1):
+	# 如果是当前关卡，不做处理
+	if level_id == current_player_level:
+		return
+		
+	if level_id < 0:
+		level_id = current_player_level
+	if level_id < 0 or level_id >= level_meta.size():
+		return
 
+	# 确保加载当前关卡和前后各一级
+	for i in range(level_id - 1, level_id + 2):
+		if i >= 0 and i < level_meta.size():
+			load_and_ensure_level(i)
+	
+	# 生成玩家到当前关卡
+	if player:
+		player.global_position = Vector2(get_total_width_before(level_id) + 10, 0)
 
 # 玩家重生函数
 func respawn_player():

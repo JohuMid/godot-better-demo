@@ -8,6 +8,7 @@ var center_image
 var close_selector
 var back_home
 var level_lock
+var reset_game
 
 @export var level_textures: Array[Texture2D]  # 在编辑器中拖入3张图
 
@@ -21,6 +22,9 @@ func _ready():
 	close_selector.pressed.connect(_on_close_selector_pressed)
 	back_home = $HBoxContainer/BackHome
 	back_home.pressed.connect(_on_back_home_pressed)
+	reset_game = $HBoxContainer/ResetGame
+	reset_game.pressed.connect(_on_reset_game_pressed)
+	
 
 	center_image.modulate.a = 1.0  # 确保初始可见
 
@@ -53,8 +57,7 @@ func _on_center_image_pressed():
 	visible = false
 	var level_manager = get_tree().get_first_node_in_group("level_manager")
 	if level_manager:
-		# TODO：加载对应关卡
-		pass
+		level_manager.update_level_window_index(current_level_index)
 
 # 关闭关卡选择器按钮点击事件处理函数
 func _on_close_selector_pressed():
@@ -64,6 +67,10 @@ func _on_close_selector_pressed():
 func _on_back_home_pressed():
 	visible = false
 	get_tree().change_scene_to_file("res://scenes/ui/MainMenu.tscn")
+
+# 重置游戏按钮点击事件处理函数
+func _on_reset_game_pressed():
+	DataManager.reset_save()
 
 # 定时器触发后调用此函数
 func _initialize_ui():

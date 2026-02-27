@@ -354,6 +354,7 @@ func _on_animation_finished():
 		# 玩家重生尝试获取当前场景的 LevelManager，如果不存在则报错
 		var level_manager = get_tree().get_first_node_in_group("level_manager")
 		if level_manager and level_manager.has_method("respawn_player"):
+			EventManager.emit(EventNames.PLAYER_DIED, [])
 			level_manager.respawn_player()
 		else:
 			push_error("未找到 LevelManager 节点或 respawn_player 方法！")

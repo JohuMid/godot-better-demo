@@ -5,11 +5,28 @@
 
 [node name="Hud" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
 script = ExtResource("1_atyv1")
 
-[node name="LevelSelector" type="TextureButton" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 17.0
+grow_horizontal = 2
+
+[node name="LevelSelector" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
 texture_normal = ExtResource("1_kw0id")
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "DEATH"
+
+[node name="DeathCount" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
