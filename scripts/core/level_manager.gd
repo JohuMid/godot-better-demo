@@ -114,6 +114,9 @@ func update_level_window():
 
 	print("➡️ 进入关卡 %d" % new_level)
 	current_player_level = new_level
+	DataManager.set_current_level(new_level)
+	# 更新已解锁关卡
+	DataManager.unlock_level(new_level)
 
 	# 定义要保留的关卡 ID 集合
 	var keep_ids = []

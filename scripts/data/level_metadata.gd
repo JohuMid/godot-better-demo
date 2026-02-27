@@ -8,4 +8,3 @@ const LEVELS = {
 	3: { "width": 608.0, "path": "res://scenes/levels/Level3.tscn" },
 	4: { "width": 608.0, "path": "res://scenes/levels/Level4.tscn" },
 }
-

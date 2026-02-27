@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 EventManager="*res://scripts/autoload/event_manager.gd"
+DataManager="*res://scripts/autoload/data_manager.gd"
 
 [display]
 

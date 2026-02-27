@@ -5,13 +5,17 @@ extends Control
 func _ready() -> void:
 	var start_button = $HBoxContainer/StartButton
 	var resume_button = $HBoxContainer/ResumeButton
-	var select_button = $HBoxContainer/SelectButton
 	var quit_button = $HBoxContainer/QuitButton
 	# 绑定按钮点击事件
 	start_button.pressed.connect(_on_start_button_pressed)
 	resume_button.pressed.connect(_on_resume_button_pressed)
-	select_button.pressed.connect(_on_select_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
+
+	# 显示继续按钮
+	if DataManager.get_unlock_level() > 0:
+		resume_button.show()
+	else:
+		resume_button.hide()
 
 
 # 开始按钮点击事件处理函数
@@ -22,12 +26,6 @@ func _on_start_button_pressed() -> void:
 # 继续按钮点击事件处理函数
 func _on_resume_button_pressed() -> void:
 	print("继续游戏！")
-
-# 选择按钮点击事件处理函数
-func _on_select_button_pressed() -> void:
-	# 加载关卡选择场景LevelSelector.tscn
-	get_tree().change_scene_to_file("res://scenes/ui/LevelSelector.tscn")
-
 
 # 退出按钮点击事件处理函数
 func _on_quit_button_pressed() -> void:

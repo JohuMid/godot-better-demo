@@ -14,3 +14,6 @@ static var PRESSURE_PLATE_DEACTIVATED = "pressure_plate_deactivated"
 
 static var MAGNETAREA_ENTERED = "magnetarea_entered"
 
+static var SHOW_LEVEL_SELECTOR = "show_level_selector"
+
+

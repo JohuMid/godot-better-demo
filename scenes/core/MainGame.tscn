@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cs2qoj8wcus2y"]
+[gd_scene load_steps=8 format=3 uid="uid://cs2qoj8wcus2y"]
 
 [ext_resource type="Texture2D" uid="uid://b03tcjw6ul5v1" path="res://resources/background/background 1/1.png" id="1_f65la"]
 [ext_resource type="Texture2D" uid="uid://chsi83w5jl6f7" path="res://resources/background/background 1/2.png" id="2_1luac"]
 [ext_resource type="Texture2D" uid="uid://bv2lxgjy8103p" path="res://resources/background/background 1/3.png" id="3_dcmex"]
 [ext_resource type="Script" uid="uid://b18si8n3hedg5" path="res://scripts/core/level_manager.gd" id="4_4x6vl"]
 [ext_resource type="PackedScene" uid="uid://cqa4utnaakybx" path="res://scenes/player/Player.tscn" id="5_13cbm"]
+[ext_resource type="PackedScene" uid="uid://dfkvclg1er6d5" path="res://scenes/ui/HUD.tscn" id="6_1luac"]
+[ext_resource type="PackedScene" uid="uid://oh8l0vb1mcl6" path="res://scenes/ui/LevelSelector.tscn" id="7_dcmex"]
 
 [node name="MainGame" type="Node2D"]
 
@@ -50,3 +52,10 @@ texture = ExtResource("3_dcmex")
 script = ExtResource("4_4x6vl")
 player_scene = ExtResource("5_13cbm")
 levels_container = NodePath("../levels_container")
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="UILayer" instance=ExtResource("6_1luac")]
+
+[node name="LevelSelector" parent="UILayer" instance=ExtResource("7_dcmex")]
+visible = false

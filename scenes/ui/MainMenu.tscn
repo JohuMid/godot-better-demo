@@ -123,11 +123,6 @@ modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 text = "继续游戏"
 
-[node name="SelectButton" type="Button" parent="HBoxContainer"]
-modulate = Color(1, 1, 1, 0.6666667)
-layout_mode = 2
-text = "选择关卡"
-
 [node name="QuitButton" type="Button" parent="HBoxContainer"]
 modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
