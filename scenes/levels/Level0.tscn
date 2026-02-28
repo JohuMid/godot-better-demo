@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=4 uid="uid://evr32afob2m7"]
+[gd_scene load_steps=10 format=4 uid="uid://evr32afob2m7"]
 
 [ext_resource type="TileSet" uid="uid://bemfy54u2to4h" path="res://resources/tres/tilemap.tres" id="4_qcr8a"]
 [ext_resource type="PackedScene" uid="uid://bxn3kxy6gjxcc" path="res://scenes/items/Bounce.tscn" id="7_ax2ff"]
 [ext_resource type="PackedScene" uid="uid://boqjb8fl55hyb" path="res://scenes/items/RightEdge.tscn" id="8_e2o36"]
+[ext_resource type="PackedScene" uid="uid://b7qcc71b272ww" path="res://scenes/items/Gem.tscn" id="9_e2o36"]
 [ext_resource type="PackedScene" uid="uid://75o0w0fr0wum" path="res://scenes/emeny/Lizard.tscn" id="9_ue060"]
-[ext_resource type="PackedScene" uid="uid://dq15p4xjpsb78" path="res://scenes/emeny/Pea.tscn" id="10_ue060"]
+[ext_resource type="PackedScene" uid="uid://mrfug6b22v44" path="res://scenes/emeny/Pea.tscn" id="10_ue060"]
 [ext_resource type="PackedScene" uid="uid://q6jos15cwh3u" path="res://scenes/items/Flag.tscn" id="11_oswwn"]
 [ext_resource type="PackedScene" uid="uid://cwi5akjnpdj7l" path="res://scenes/items/Groundspike.tscn" id="15_hsw41"]
 [ext_resource type="PackedScene" uid="uid://rbwvetm6ww4y" path="res://scenes/items/Rope.tscn" id="20_jkdna"]
@@ -79,7 +80,7 @@ position = Vector2(200, 16)
 position = Vector2(480, 144)
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
-position = Vector2(24, 104)
+position = Vector2(40, 104)
 
 [node name="RightEdge" parent="." instance=ExtResource("8_e2o36")]
 position = Vector2(768, 152)
@@ -96,3 +97,6 @@ type = "next"
 
 [node name="Flag2" parent="." instance=ExtResource("11_oswwn")]
 position = Vector2(768, 136)
+
+[node name="Gem" parent="." instance=ExtResource("9_e2o36")]
+position = Vector2(480, 40)

@@ -44,6 +44,7 @@ var position_smoothness: float = 12.0 # 位置平滑系数（8-15 之间）
 
 var is_swinging: bool = false # 是否正在荡秋千
 var swing_smoothness: float = 20.0 # 荡秋千时的快速跟随系数
+var allow_auto_reset_rotation: bool = true # 是否允许自动重置旋转
 
 # 挂点和旋转
 var hang_offset_y: float = 12.0 # 玩家在绳子下方的距离
@@ -53,6 +54,9 @@ var max_rotation_angle: float = PI / 3 # 最大旋转角度（60度）
 # 跳离冷却
 var rope_detach_cooldown: float = 0.0 # 冷却计时器
 var rope_detach_cooldown_time: float = 0.3 # 冷却时间（秒）
+
+# 重力方向
+var current_gravity_dir: String = "down"
 
 # —— 角色原始帧尺寸 ——
 const ORIGINAL_FRAME_WIDTH: int = 128
@@ -149,9 +153,8 @@ func _physics_process(delta):
 		handle_rope_physics(delta)
 		return
 
-
-	# ===== 旋转平滑处理 =====
-	if abs(rotation) > 0.01:
+	# 只有在允许自动回正、且不在倒挂状态时，才重置旋转
+	if allow_auto_reset_rotation and current_gravity_dir == "down" and abs(rotation) > 0.01:
 		rotation = lerp_angle(rotation, 0.0, 10.0 * delta) # 10.0 是平滑系数
 
 	# ===== 受击期间不处理输入 =====
@@ -170,9 +173,10 @@ func _physics_process(delta):
 	var current_on_floor = is_on_floor()
 
 	# 重力处理
-	if not current_on_floor:
-		velocity.y += gravity * gravity_scale * delta
-	else:
+	velocity.y += gravity * gravity_scale * delta
+
+	# 只有在“正常重力向下”且“站在地面”时，才清零向下速度（防陷地）
+	if current_gravity_dir == "down" and is_on_floor() and velocity.y > 0:
 		velocity.y = 0
 
 	# 跳跃处理
@@ -370,6 +374,39 @@ func _on_countdown_end(tag: String) -> void:
 		# 玩家重力恢复
 		gravity_scale = 1.0
 		jump_velocity = -200
+
+func change_gravity_scale(dir: String):
+	current_gravity_dir = dir
+	
+	if dir == "down":
+		gravity_scale = 1.0
+		allow_auto_reset_rotation = true  # ← 恢复自动回正
+	elif dir == "up":
+		gravity_scale = -1.0
+		allow_auto_reset_rotation = false # ← 禁止自动回正
+			
+	_update_visual_rotation()
+
+func _update_visual_rotation():
+	# 重置所有旋转和偏移
+	rotation = 0.0
+	animated_sprite.offset = original_offset
+
+	match current_gravity_dir:
+		"down":
+			# 正常站立：无旋转
+			rotation = 0.0
+			pass
+		"up":
+			# 天花板：旋转180度
+			rotation = PI  # 180度
+			# 可选：微调精灵偏移，避免“悬空”错觉
+			# animated_sprite.offset = original_offset + Vector2(0, -ORIGINAL_FRAME_HEIGHT * SPRITE_SCALE)
+		# 可扩展："left", "right" 等方向（见后文）
+
+	# 同步动画翻转逻辑（重要！）
+	# 因为旋转180°后，flip_h 的“左/右”含义反转了
+	# 我们用一个辅助函数处理输入
 
 # 玩家朝向检测
 func _check_facing_dir():

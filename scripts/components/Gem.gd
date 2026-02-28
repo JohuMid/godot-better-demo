@@ -6,6 +6,7 @@ const SPRITE_SCALE: float = 1.0
 @export var type: String = "star"
 var original_frame_width: int = 16
 var original_frame_height: int = 16
+var detector: Area2D
 var animated_sprite: AnimatedSprite2D
 
 const ANIM_SPEED = {
@@ -24,12 +25,18 @@ func _ready() -> void:
 
 	animated_sprite.scale = Vector2(SPRITE_SCALE, SPRITE_SCALE)
 
+	detector = $Detector
+	detector.body_entered.connect(_on_body_entered)
+
 	_set_animation(type)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
+func _on_body_entered(body: Node2D) -> void:
+	queue_free()
+		
 
 # —————— 设置动画 ——————
 func _set_animation(anim_name: String):
