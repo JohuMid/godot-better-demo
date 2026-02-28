@@ -1,17 +1,20 @@
-[gd_scene load_steps=14 format=3 uid="uid://oh8l0vb1mcl6"]
+[gd_scene load_steps=13 format=3 uid="uid://oh8l0vb1mcl6"]
 
 [ext_resource type="Script" uid="uid://c1r0hw1cn3w7c" path="res://scripts/ui/LevelSelector.gd" id="1_ag8rw"]
 [ext_resource type="Texture2D" uid="uid://cug1prbph7vrk" path="res://resources/background/background 5/2304x1296.png" id="2_s0din"]
 [ext_resource type="Texture2D" uid="uid://d1aiduigiore2" path="res://resources/gui/levels/level1.png" id="2_vqrkd"]
 [ext_resource type="Texture2D" uid="uid://cff2raexkswm7" path="res://resources/gui/levels/level2.png" id="3_xdiqg"]
 [ext_resource type="Texture2D" uid="uid://cqg8gbu0vtqm0" path="res://resources/gui/levels/level3.png" id="4_oufs3"]
-[ext_resource type="Texture2D" uid="uid://ce6bgcqa73kv4" path="res://resources/gui/letters/split_12.png" id="5_2pkmu"]
-[ext_resource type="Texture2D" uid="uid://dqkv1u2f7k3d7" path="res://resources/gui/letters/split_5.png" id="6_yvd70"]
-[ext_resource type="Texture2D" uid="uid://dsrjomo4vckes" path="res://resources/gui/letters/split_22.png" id="7_jsv1k"]
+[ext_resource type="FontFile" uid="uid://c2n4h4wsqxfre" path="res://resources/fonts/zpix.ttf" id="6_jsv1k"]
 [ext_resource type="Texture2D" uid="uid://d2yvsodo7n8rn" path="res://resources/gui/icon/Icon_restart.png" id="9_hqwx3"]
 [ext_resource type="Texture2D" uid="uid://dcqq77c13u8eo" path="res://resources/gui/icon/Icon_menu.png" id="9_vgkmy"]
 [ext_resource type="Texture2D" uid="uid://bt5x7k2tp3mu" path="res://resources/gui/icon/Icon_close.png" id="9_yvd70"]
 [ext_resource type="Texture2D" uid="uid://dg4dwk4qvn4y5" path="res://resources/gui/icon/Icon_lock.png" id="10_jsv1k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vgkmy"]
+font = ExtResource("6_jsv1k")
+font_size = 20
+outline_size = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqrkd"]
 corner_radius_top_left = 5
@@ -52,25 +55,15 @@ offset_bottom = 29.0
 grow_horizontal = 2
 scale = Vector2(0.6, 0.6)
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("5_2pkmu")
+text = "LEVEL"
+label_settings = SubResource("LabelSettings_vgkmy")
 
-[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+[node name="LevelIndex" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("6_yvd70")
-
-[node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("7_jsv1k")
-
-[node name="TextureRect4" type="TextureRect" parent="HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("6_yvd70")
-
-[node name="TextureRect5" type="TextureRect" parent="HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("5_2pkmu")
+text = "1"
+label_settings = SubResource("LabelSettings_vgkmy")
 
 [node name="Control" type="Control" parent="HBoxContainer"]
 layout_mode = 2
@@ -106,6 +99,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vqrkd")
 
 [node name="CenterImage" type="TextureButton" parent="Panel"]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

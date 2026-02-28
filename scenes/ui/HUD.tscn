@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfkvclg1er6d5"]
+[gd_scene load_steps=6 format=3 uid="uid://dfkvclg1er6d5"]
 
 [ext_resource type="Script" uid="uid://cf5ktirgqvmf1" path="res://scripts/ui/Hud.gd" id="1_atyv1"]
 [ext_resource type="Texture2D" uid="uid://ch7216fjdlyxm" path="res://resources/gui/icon/Icon_stop.png" id="1_kw0id"]
+[ext_resource type="FontFile" uid="uid://c2n4h4wsqxfre" path="res://resources/fonts/zpix.ttf" id="3_6ll6g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ig75s"]
+font = ExtResource("3_6ll6g")
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ed8p"]
+font = ExtResource("3_6ll6g")
+font_size = 14
 
 [node name="Hud" type="Control"]
 layout_mode = 3
@@ -25,8 +34,10 @@ texture_normal = ExtResource("1_kw0id")
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "DEATH"
+label_settings = SubResource("LabelSettings_ig75s")
 
 [node name="DeathCount" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "0"
+label_settings = SubResource("LabelSettings_4ed8p")

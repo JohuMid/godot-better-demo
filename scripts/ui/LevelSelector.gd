@@ -71,6 +71,8 @@ func _on_back_home_pressed():
 # 重置游戏按钮点击事件处理函数
 func _on_reset_game_pressed():
 	DataManager.reset_save()
+	visible = false
+	get_tree().change_scene_to_file("res://scenes/ui/MainMenu.tscn")
 
 # 定时器触发后调用此函数
 func _initialize_ui():
@@ -125,6 +127,10 @@ func _on_level_button_pressed(index: int):
 	current_level_index = index
 	_set_button_selected(index)
 	_switch_to_level_with_fade(index)
+	_change_level_index_text(index)
+
+func _change_level_index_text(index: int):
+	$HBoxContainer/LevelIndex.text = str(index + 1)
 
 func _switch_to_level_with_fade(target_index: int):
 	var tween = create_tween()
