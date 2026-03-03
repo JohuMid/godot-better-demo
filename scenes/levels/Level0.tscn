@@ -99,4 +99,8 @@ type = "next"
 position = Vector2(768, 136)
 
 [node name="Gem" parent="." instance=ExtResource("9_e2o36")]
-position = Vector2(480, 40)
+position = Vector2(480, 56)
+
+[node name="Gem2" parent="." instance=ExtResource("9_e2o36")]
+position = Vector2(168, 32)
+type = "coin"

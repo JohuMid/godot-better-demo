@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://b32u3loxt3ni0"]
+[gd_scene load_steps=17 format=4 uid="uid://b32u3loxt3ni0"]
 
 [ext_resource type="PackedScene" uid="uid://boqjb8fl55hyb" path="res://scenes/items/RightEdge.tscn" id="2_j08sa"]
 [ext_resource type="TileSet" uid="uid://bemfy54u2to4h" path="res://resources/tres/tilemap.tres" id="3_fh0io"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://djmn7g20wluj" path="res://scenes/emeny/Boom.tscn" id="13_n5pya"]
 [ext_resource type="PackedScene" uid="uid://bpqood28y6qda" path="res://scenes/items/Dirprompt.tscn" id="14_kypp1"]
 [ext_resource type="PackedScene" uid="uid://b6dwj52k47srk" path="res://scenes/prefabs/Zonetrigger.tscn" id="15_ukjja"]
+[ext_resource type="PackedScene" uid="uid://b7qcc71b272ww" path="res://scenes/items/Gem.tscn" id="16_p5s5a"]
 
 [node name="Level1" type="Node2D"]
 
@@ -139,3 +140,11 @@ position = Vector2(568, 104)
 [node name="Zonetrigger" parent="." node_paths=PackedStringArray("show_node") instance=ExtResource("15_ukjja")]
 position = Vector2(568, 154)
 show_node = NodePath("../Dirprompt")
+
+[node name="Gem" parent="." instance=ExtResource("16_p5s5a")]
+position = Vector2(80, -93)
+type = "green"
+
+[node name="Gem2" parent="." instance=ExtResource("16_p5s5a")]
+position = Vector2(384, 16)
+type = "red"

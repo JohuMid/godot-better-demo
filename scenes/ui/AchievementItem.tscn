@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhlkxkvkmsp05"]
+
+[ext_resource type="Script" uid="uid://icql3s3pqg2c" path="res://scripts/ui/AchievementItem.gd" id="1_v2k1t"]
+[ext_resource type="FontFile" uid="uid://c2n4h4wsqxfre" path="res://resources/fonts/zpix.ttf" id="3_jryep"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4i7kq"]
+font = ExtResource("3_jryep")
+font_size = 8
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[node name="AchievementItem" type="VBoxContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource("1_v2k1t")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "星星收集者"
+label_settings = SubResource("LabelSettings_4i7kq")
+horizontal_alignment = 1

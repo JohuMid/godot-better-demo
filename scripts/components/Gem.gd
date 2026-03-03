@@ -35,6 +35,8 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_body_entered(body: Node2D) -> void:
+	DataManager.complete_achievement(type + "_collect")
+	EventManager.emit(EventNames.UPDATE_ACHIEVEMENTS, [type + "_collect"])
 	queue_free()
 		
 

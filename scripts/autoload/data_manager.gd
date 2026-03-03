@@ -5,11 +5,27 @@ extends Node
 var save_data = {
 	"current_level": 0,
 	"unlocked_level": 0, # 已解锁关卡
-	"achievements": {}, # 成就字典，如 {"found_secret": true}
+	"achievements": {
+		"star_collect": false,
+		"coin_collect": false,
+		"green_collect": false,
+		"red_collect": false,
+		"purple_collect": false,
+		"blue_collect": false
+	},
 	"sound_enabled": true,
 	"music_volume": 0.8,
 	"death_count": 0,
 	"start_game_status": "new"
+}
+
+var achievementsDict = {
+	"star_collect": "星星收集者",
+	"coin_collect": "金币收集者",
+	"green_collect": "绿色宝石收集者",
+	"red_collect": "红色宝石收集者",
+	"purple_collect": "紫色宝石收集者",
+	"blue_collect": "蓝色宝石收集者",
 }
 
 # --- 文件路径 ---
@@ -52,8 +68,18 @@ func unlock_level(level: int):
 func is_level_unlocked(level: int) -> bool:
 	return save_data.unlocked_level >= level
 
+func get_achievement_name(key: String) -> String:
+	return achievementsDict.get(key, "未知成就")
+
+func get_achievement_completed(key: String) -> bool:
+	return save_data.achievements.get(key, false)
+
+func get_achievements()->Dictionary:
+	return save_data.achievements
+
+
 func complete_achievement(key: String):
-	if not save_data.achievements.has(key):
+	if save_data.achievements.has(key):
 		save_data.achievements[key] = true
 		save()
 
@@ -99,7 +125,14 @@ func reset_save():
 	save_data = {
 		"current_level": 0,
 		"unlocked_level": 0, # 已解锁关卡
-		"achievements": {}, # 成就字典，如 {"found_secret": true}
+		"achievements": {
+			"star_collect": false,
+			"coin_collect": false,
+			"green_collect": false,
+			"red_collect": false,
+			"purple_collect": false,
+			"blue_collect": false
+		},
 		"sound_enabled": true,
 		"music_volume": 0.8,
 		"death_count": 0,
