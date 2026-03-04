@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://oh8l0vb1mcl6"]
+[gd_scene load_steps=14 format=3 uid="uid://oh8l0vb1mcl6"]
 
 [ext_resource type="Script" uid="uid://c1r0hw1cn3w7c" path="res://scripts/ui/LevelSelector.gd" id="1_ag8rw"]
 [ext_resource type="Texture2D" uid="uid://cug1prbph7vrk" path="res://resources/background/background 5/2304x1296.png" id="2_s0din"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cff2raexkswm7" path="res://resources/gui/levels/level2.png" id="3_xdiqg"]
 [ext_resource type="Texture2D" uid="uid://cqg8gbu0vtqm0" path="res://resources/gui/levels/level3.png" id="4_oufs3"]
 [ext_resource type="FontFile" uid="uid://c2n4h4wsqxfre" path="res://resources/fonts/zpix.ttf" id="6_jsv1k"]
+[ext_resource type="Texture2D" uid="uid://bpx8qakb5q54j" path="res://resources/gui/icon/Icon_sound.png" id="7_vgkmy"]
 [ext_resource type="Texture2D" uid="uid://d2yvsodo7n8rn" path="res://resources/gui/icon/Icon_restart.png" id="9_hqwx3"]
 [ext_resource type="Texture2D" uid="uid://dcqq77c13u8eo" path="res://resources/gui/icon/Icon_menu.png" id="9_vgkmy"]
 [ext_resource type="Texture2D" uid="uid://bt5x7k2tp3mu" path="res://resources/gui/icon/Icon_close.png" id="9_yvd70"]
@@ -68,6 +69,10 @@ label_settings = SubResource("LabelSettings_vgkmy")
 [node name="Control" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="SoundControl" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("7_vgkmy")
 
 [node name="BackHome" type="Button" parent="HBoxContainer"]
 layout_mode = 2

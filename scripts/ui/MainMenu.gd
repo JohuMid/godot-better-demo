@@ -17,6 +17,7 @@ func _ready() -> void:
 	else:
 		resume_button.hide()
 
+	AudioManager.play_bgm("bgm/game-bgm")
 
 # 开始按钮点击事件处理函数
 func _on_start_button_pressed() -> void:

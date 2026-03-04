@@ -9,6 +9,12 @@ var close_selector
 var back_home
 var level_lock
 var reset_game
+var sound_control
+
+var sound_control_icons: Array[Texture2D] = [
+	load("res://resources/gui/icon/Icon_sound.png"),
+	load("res://resources/gui/icon/Icon_nosound.png")
+]
 
 @export var level_textures: Array[Texture2D]  # 在编辑器中拖入3张图
 
@@ -24,7 +30,13 @@ func _ready():
 	back_home.pressed.connect(_on_back_home_pressed)
 	reset_game = $HBoxContainer/ResetGame
 	reset_game.pressed.connect(_on_reset_game_pressed)
-	
+	sound_control = $HBoxContainer/SoundControl
+	sound_control.pressed.connect(_on_sound_control_pressed)
+
+	if DataManager.get_sound_enabled():
+		sound_control.icon = sound_control_icons[0]
+	else:
+		sound_control.icon = sound_control_icons[1]
 
 	center_image.modulate.a = 1.0  # 确保初始可见
 
@@ -73,6 +85,16 @@ func _on_reset_game_pressed():
 	DataManager.reset_save()
 	visible = false
 	get_tree().change_scene_to_file("res://scenes/ui/MainMenu.tscn")
+
+func _on_sound_control_pressed():
+	if DataManager.get_sound_enabled():
+		sound_control.icon = sound_control_icons[1]
+		DataManager.set_sound_enabled(false)
+		AudioManager.set_bgm_volume(0.0)
+	else:
+		sound_control.icon = sound_control_icons[0]
+		DataManager.set_sound_enabled(true)
+		AudioManager.set_bgm_volume(1.0)
 
 # 定时器触发后调用此函数
 func _initialize_ui():

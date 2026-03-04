@@ -77,7 +77,6 @@ func get_achievement_completed(key: String) -> bool:
 func get_achievements()->Dictionary:
 	return save_data.achievements
 
-
 func complete_achievement(key: String):
 	if save_data.achievements.has(key):
 		save_data.achievements[key] = true
@@ -85,6 +84,14 @@ func complete_achievement(key: String):
 
 func has_achievement(key: String) -> bool:
 	return save_data.achievements.get(key, false)
+
+
+func get_sound_enabled() -> bool:
+	return save_data.sound_enabled
+
+func set_sound_enabled(enabled: bool):
+	save_data.sound_enabled = enabled
+	save()
 
 # --- 核心：加载与保存 ---
 func load_data():
