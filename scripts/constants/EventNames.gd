@@ -5,6 +5,8 @@ static var PLAYER_DIED = "player_died"
 static var COIN_COLLECTED = "coin_collected"
 static var GAME_OVER = "game_over"
 static var LEVEL_STARTED = "level_started"
+static var END_GAME = "end_game"
+static var RESTART_GAME = "restart_game"
 
 static var COUNTDOWN_START = "countdown_start"
 static var COUNTDOWN_END = "countdown_end"

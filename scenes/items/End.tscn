@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdfvbgfhxcl0c"]
+
+[ext_resource type="Script" uid="uid://b7liccurmp7rp" path="res://scripts/components/End.gd" id="1_8gwfe"]
+[ext_resource type="Texture2D" uid="uid://cik1f13eq6gfv" path="res://resources/item/cup/spritesheet.png" id="2_aaqc2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gwfe"]
+size = Vector2(32, 32)
+
+[node name="End" type="Node2D"]
+script = ExtResource("1_8gwfe")
+atlas = ExtResource("2_aaqc2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="Detector" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_8gwfe")

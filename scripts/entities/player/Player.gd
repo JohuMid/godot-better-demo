@@ -91,6 +91,8 @@ func _ready():
 	
 	EventManager.subscribe(EventNames.PRESSURE_PLATE_ACTIVATED, Callable(self, "_on_pressure_plate_activated"))
 	EventManager.subscribe(EventNames.COUNTDOWN_END, Callable(self, "_on_countdown_end"))
+	EventManager.subscribe(EventNames.END_GAME, Callable(self, "_on_end_game"))
+	EventManager.subscribe(EventNames.RESTART_GAME, Callable(self, "_on_restart_game"))
 
 	var frames = TexturePackerImporter.create_sprite_frames(atlas, json_path, ORIGINAL_FRAME_WIDTH, ORIGINAL_FRAME_HEIGHT)
 	animated_sprite = $AnimatedSprite2D
@@ -370,6 +372,16 @@ func _on_countdown_end(tag: String) -> void:
 		# 玩家重力恢复
 		gravity_scale = 1.0
 		jump_velocity = -200
+
+func _on_end_game():
+	# 禁用玩家移动
+	_set_animation("Idle")
+	set_process(false)
+	set_physics_process(false)
+
+func _on_restart_game():
+	set_process(true)
+	set_physics_process(true)
 
 # 玩家朝向检测
 func _check_facing_dir():
