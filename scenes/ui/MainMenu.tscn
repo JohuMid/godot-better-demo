@@ -69,16 +69,16 @@ alignment = 1
 modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_iwbf0")
-text = "开始游戏"
+text = "START"
 
 [node name="ResumeButton" type="Button" parent="HBoxContainer"]
 modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_iwbf0")
-text = "继续游戏"
+text = "RESUME"
 
 [node name="QuitButton" type="Button" parent="HBoxContainer"]
 modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_iwbf0")
-text = "退出游戏"
+text = "EXIT"

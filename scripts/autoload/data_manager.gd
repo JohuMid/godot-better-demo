@@ -20,12 +20,12 @@ var save_data = {
 }
 
 var achievementsDict = {
-	"star_collect": "星星收集者",
-	"coin_collect": "金币收集者",
-	"green_collect": "绿色宝石收集者",
-	"red_collect": "红色宝石收集者",
-	"purple_collect": "紫色宝石收集者",
-	"blue_collect": "蓝色宝石收集者",
+	"star_collect": "STAR COLLECTOR",
+	"coin_collect": "COIN COLLECTOR",
+	"green_collect": "GREEN COLLECTOR",
+	"red_collect": "RED COLLECTOR",
+	"purple_collect": "PURPLE COLLECTOR",
+	"blue_collect": "BLUE COLLECTOR",
 }
 
 # --- 文件路径 ---
