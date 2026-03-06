@@ -1,0 +1,16 @@
+key,zh_CN,zh_TW,en,es
+game_name,根域羁旅,根域羈旅,ROOTBOUND,RAÍZ ATADA
+btn_start,启动游戏,啟動遊戲,Start Game,Iniciar Juego
+btn_continue,继续游戏,繼續遊戲,Continue Game,Continuar Juego
+btn_quit,退出游戏,退出遊戲,Quit Game,Salir del Juego
+menu_achievements,成就,成就,Achievements,Logros
+stats_death_count,死亡次数,死亡次數,Death Count,Recuento de Muertes
+level,关卡,關卡,Level,Nivel
+task_completed,任务完成,任務完成,Task Completed,Tarea Completada
+prompt_any_key,按任意键继续,按任意鍵繼續,Press Any Key to Continue,Pulsa Cualquier Tecla para Continuar
+collector_stars,星星收集者,星星收集者,Star Collector,Recolector de Estrellas
+collector_coins,金币收集者,金幣收集者,Coin Collector,Recolector de Monedas
+collector_emeralds,绿宝石收集者,綠寶石收集者,Emerald Collector,Recolector de Esmeraldas
+collector_rubies,红宝石收集者,紅寶石收集者,Ruby Collector,Recolector de Rubíes
+collector_amethysts,紫宝石收集者,紫寶石收集者,Amethyst Collector,Recolector de Amatistas
+collector_sapphires,蓝宝石收集者,藍寶石收集者,Sapphire Collector,Recolector de Zafiros

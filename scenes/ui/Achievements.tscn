@@ -44,7 +44,7 @@ scale = Vector2(0.6, 0.6)
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-text = "ACHIEVEMENTS"
+text = "menu_achievements"
 label_settings = SubResource("LabelSettings_et6qc")
 
 [node name="Control" type="Control" parent="HBoxContainer"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://oh8l0vb1mcl6"]
+[gd_scene load_steps=16 format=3 uid="uid://oh8l0vb1mcl6"]
 
 [ext_resource type="Script" uid="uid://c1r0hw1cn3w7c" path="res://scripts/ui/LevelSelector.gd" id="1_ag8rw"]
 [ext_resource type="Texture2D" uid="uid://cug1prbph7vrk" path="res://resources/background/background 5/2304x1296.png" id="2_s0din"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cff2raexkswm7" path="res://resources/gui/levels/level2.png" id="3_xdiqg"]
 [ext_resource type="Texture2D" uid="uid://cqg8gbu0vtqm0" path="res://resources/gui/levels/level3.png" id="4_oufs3"]
 [ext_resource type="FontFile" uid="uid://c2n4h4wsqxfre" path="res://resources/fonts/zpix.ttf" id="6_jsv1k"]
+[ext_resource type="Script" uid="uid://3brxh43yenur" path="res://scripts/ui/LanguageSelector.gd" id="7_hqwx3"]
 [ext_resource type="Texture2D" uid="uid://bpx8qakb5q54j" path="res://resources/gui/icon/Icon_sound.png" id="7_vgkmy"]
 [ext_resource type="Texture2D" uid="uid://d2yvsodo7n8rn" path="res://resources/gui/icon/Icon_restart.png" id="9_hqwx3"]
 [ext_resource type="Texture2D" uid="uid://dcqq77c13u8eo" path="res://resources/gui/icon/Icon_menu.png" id="9_vgkmy"]
@@ -16,6 +17,10 @@
 font = ExtResource("6_jsv1k")
 font_size = 20
 outline_size = 2
+
+[sub_resource type="Theme" id="Theme_hqwx3"]
+default_font = ExtResource("6_jsv1k")
+default_font_size = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqrkd"]
 corner_radius_top_left = 5
@@ -58,7 +63,7 @@ scale = Vector2(0.6, 0.6)
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-text = "LEVEL"
+text = "level"
 label_settings = SubResource("LabelSettings_vgkmy")
 
 [node name="LevelIndex" type="Label" parent="HBoxContainer"]
@@ -69,6 +74,13 @@ label_settings = SubResource("LabelSettings_vgkmy")
 [node name="Control" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="LanguageSelector" type="OptionButton" parent="HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_hqwx3")
+theme_override_fonts/font = ExtResource("6_jsv1k")
+theme_override_font_sizes/font_size = 14
+script = ExtResource("7_hqwx3")
 
 [node name="SoundControl" type="Button" parent="HBoxContainer"]
 layout_mode = 2

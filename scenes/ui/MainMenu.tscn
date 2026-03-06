@@ -45,7 +45,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="HBoxContainer2"]
 layout_mode = 2
-text = "ROOTBOUND"
+text = "game_name"
 label_settings = SubResource("LabelSettings_2ysvc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -69,16 +69,16 @@ alignment = 1
 modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_iwbf0")
-text = "START"
+text = "btn_start"
 
 [node name="ResumeButton" type="Button" parent="HBoxContainer"]
 modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_iwbf0")
-text = "RESUME"
+text = "btn_continue"
 
 [node name="QuitButton" type="Button" parent="HBoxContainer"]
 modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_iwbf0")
-text = "EXIT"
+text = "btn_quit"

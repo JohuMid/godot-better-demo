@@ -29,3 +29,7 @@ func set_completed(value: bool):
 		img.modulate = Color(1, 1, 1, 1)
 	else:
 		img.modulate = Color(0.1, 0.1, 0.1, 1)
+
+func update_text():
+	if key:
+		$Label.text = DataManager.get_achievement_name(key)

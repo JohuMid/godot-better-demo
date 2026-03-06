@@ -20,4 +20,7 @@ static var SHOW_LEVEL_SELECTOR = "show_level_selector"
 static var SHOW_ACHIEVEMENTS = "show_achievements"
 static var UPDATE_ACHIEVEMENTS = "update_achievements"
 
+static var TRANSLATION_CHANGED = "translation_changed"
+
+
 

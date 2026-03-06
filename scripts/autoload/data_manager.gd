@@ -20,12 +20,12 @@ var save_data = {
 }
 
 var achievementsDict = {
-	"star_collect": "STAR COLLECTOR",
-	"coin_collect": "COIN COLLECTOR",
-	"green_collect": "GREEN COLLECTOR",
-	"red_collect": "RED COLLECTOR",
-	"purple_collect": "PURPLE COLLECTOR",
-	"blue_collect": "BLUE COLLECTOR",
+	"star_collect": "collector_stars",
+	"coin_collect": "collector_coins",
+	"green_collect": "collector_emeralds",
+	"red_collect": "collector_rubies",
+	"purple_collect": "collector_amethysts",
+	"blue_collect": "collector_sapphires",
 }
 
 # --- 文件路径 ---
@@ -69,7 +69,11 @@ func is_level_unlocked(level: int) -> bool:
 	return save_data.unlocked_level >= level
 
 func get_achievement_name(key: String) -> String:
-	return achievementsDict.get(key, "未知成就")
+	var tr_key = achievementsDict.get(key)
+	if tr_key:
+		return tr(tr_key)
+	else:
+		return tr("unknown_achievement")
 
 func get_achievement_completed(key: String) -> bool:
 	return save_data.achievements.get(key, false)

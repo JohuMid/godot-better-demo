@@ -12,6 +12,7 @@ func _ready() -> void:
 
 	EventManager.subscribe(EventNames.SHOW_ACHIEVEMENTS, Callable(self, "_show_achievements"))
 	EventManager.subscribe(EventNames.UPDATE_ACHIEVEMENTS, Callable(self, "_update_achievements"))
+	EventManager.subscribe(EventNames.TRANSLATION_CHANGED, Callable(self, "_update_translation"))
 
 	_create_achievement_items()
 	
@@ -41,6 +42,11 @@ func _update_achievements(name: String):
 		if item.key == name:
 			item.set_completed(DataManager.get_achievement_completed(name))
 			break
+
+func _update_translation():
+	for item in grid_container.get_children():
+		if item.has_method("update_text"):
+			item.update_text()
 
 func _on_close_btn_pressed():
 	hide()

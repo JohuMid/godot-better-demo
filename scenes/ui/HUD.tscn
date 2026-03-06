@@ -38,7 +38,7 @@ texture_normal = ExtResource("3_ig75s")
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
-text = "DEATH"
+text = "stats_death_count"
 label_settings = SubResource("LabelSettings_ig75s")
 
 [node name="DeathCount" type="Label" parent="HBoxContainer"]
