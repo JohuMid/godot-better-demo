@@ -16,7 +16,7 @@ var sound_control_icons: Array[Texture2D] = [
 	load("res://resources/gui/icon/Icon_nosound.png")
 ]
 
-@export var level_textures: Array[Texture2D]  # 在编辑器中拖入3张图
+@export var level_textures: Array[Texture2D]  # 在编辑器中拖入图
 
 func _ready():
 	if level_textures.size() == 0:

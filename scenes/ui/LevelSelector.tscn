@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://oh8l0vb1mcl6"]
+[gd_scene load_steps=17 format=3 uid="uid://oh8l0vb1mcl6"]
 
 [ext_resource type="Script" uid="uid://c1r0hw1cn3w7c" path="res://scripts/ui/LevelSelector.gd" id="1_ag8rw"]
 [ext_resource type="Texture2D" uid="uid://cug1prbph7vrk" path="res://resources/background/background 5/2304x1296.png" id="2_s0din"]
 [ext_resource type="Texture2D" uid="uid://d1aiduigiore2" path="res://resources/gui/levels/level1.png" id="2_vqrkd"]
 [ext_resource type="Texture2D" uid="uid://cff2raexkswm7" path="res://resources/gui/levels/level2.png" id="3_xdiqg"]
 [ext_resource type="Texture2D" uid="uid://cqg8gbu0vtqm0" path="res://resources/gui/levels/level3.png" id="4_oufs3"]
+[ext_resource type="Texture2D" uid="uid://70q4mxyhsnae" path="res://resources/gui/levels/level4.png" id="5_mad4c"]
 [ext_resource type="FontFile" uid="uid://c2n4h4wsqxfre" path="res://resources/fonts/zpix.ttf" id="6_jsv1k"]
 [ext_resource type="Script" uid="uid://3brxh43yenur" path="res://scripts/ui/LanguageSelector.gd" id="7_hqwx3"]
 [ext_resource type="Texture2D" uid="uid://bpx8qakb5q54j" path="res://resources/gui/icon/Icon_sound.png" id="7_vgkmy"]
@@ -36,7 +37,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ag8rw")
-level_textures = Array[Texture2D]([ExtResource("2_vqrkd"), ExtResource("3_xdiqg"), ExtResource("4_oufs3")])
+level_textures = Array[Texture2D]([ExtResource("2_vqrkd"), ExtResource("3_xdiqg"), ExtResource("4_oufs3"), ExtResource("5_mad4c")])
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1

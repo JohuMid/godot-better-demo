@@ -134,6 +134,7 @@ offset_bottom = 36.0
 grow_horizontal = 2
 text = "task_completed"
 label_settings = SubResource("LabelSettings_koex5")
+horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 1
@@ -149,3 +150,4 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "prompt_any_key"
 label_settings = SubResource("LabelSettings_us30v")
+horizontal_alignment = 1
