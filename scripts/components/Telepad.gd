@@ -4,9 +4,11 @@ const SPRITE_SCALE: float = 1.0
 @export var atlas: Texture2D
 @export var json_path: String = "res://resources/item/ball/spritesheet.json"
 @export var type: String = "fireball"
+@export var id: String = "Telepad1"
 var original_frame_width: int = 32
 var original_frame_height: int = 32
 var animated_sprite: AnimatedSprite2D
+var detector: Area2D
 
 const ANIM_SPEED = {
 	"default": 2.0
@@ -14,6 +16,8 @@ const ANIM_SPEED = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	add_to_group(id)
+
 	if not atlas:
 		push_error("请在检查器中指定 Atlas 纹理！")
 		return
@@ -25,6 +29,8 @@ func _ready() -> void:
 	animated_sprite.scale = Vector2(SPRITE_SCALE, SPRITE_SCALE)
 
 	_set_animation(type)
+	detector = $Detector
+	detector.body_entered.connect(_on_body_entered)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -43,3 +49,9 @@ func _set_animation(anim_name: String):
 		print("▶ 播放动画: %s (速度: %.1f)" % [anim_name, speed_scale])
 	else:
 		print("⚠️ 动画不存在: %s" % anim_name)
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		print("检测到物体进入: %s" % body.name)
+		EventManager.emit(EventNames.TELEPAD_ENTERED, [id])

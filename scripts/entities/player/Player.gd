@@ -31,6 +31,10 @@ var is_hit: bool = false
 var hit_duration: float = 1 # 受击僵直时间（秒）
 var hit_timer: float = 0.0
 
+# —————— 传送相关 ——————
+var is_teleporting: bool = false
+var telepad_id: String = ""
+
 # —————— 绳子相关 ——————
 var on_rope: bool = false
 var rope_segment: RigidBody2D = null
@@ -73,6 +77,8 @@ const ANIM_SPEED = {
 	"Death": 2.0, # 死亡
 	"TakingDamage": 2.0, # 受击
 	"ClimbingLadder": 2.0, # 攀爬
+	"TeleportCharacter1": 4.0,
+	"TeleportCharacter2": 4.0,
 	"default": 1.0
 }
 
@@ -89,10 +95,12 @@ func _ready():
 		push_error("请在检查器中指定 Atlas 纹理！")
 		return
 	
-	EventManager.subscribe(EventNames.PRESSURE_PLATE_ACTIVATED, Callable(self, "_on_pressure_plate_activated"))
-	EventManager.subscribe(EventNames.COUNTDOWN_END, Callable(self, "_on_countdown_end"))
-	EventManager.subscribe(EventNames.END_GAME, Callable(self, "_on_end_game"))
-	EventManager.subscribe(EventNames.RESTART_GAME, Callable(self, "_on_restart_game"))
+	EventManager.subscribe(EventNames.PRESSURE_PLATE_ACTIVATED, Callable(self , "_on_pressure_plate_activated"))
+	EventManager.subscribe(EventNames.COUNTDOWN_END, Callable(self , "_on_countdown_end"))
+	EventManager.subscribe(EventNames.END_GAME, Callable(self , "_on_end_game"))
+	EventManager.subscribe(EventNames.RESTART_GAME, Callable(self , "_on_restart_game"))
+	EventManager.subscribe(EventNames.TELEPAD_ENTERED, Callable(self , "_on_telepad_entered"))
+
 
 	var frames = TexturePackerImporter.create_sprite_frames(atlas, json_path, ORIGINAL_FRAME_WIDTH, ORIGINAL_FRAME_HEIGHT)
 	animated_sprite = $AnimatedSprite2D
@@ -110,17 +118,17 @@ func _ready():
 	original_offset = animated_sprite.offset
 
 	# 连接动画信号
-	animated_sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
-	animated_sprite.connect("frame_changed", Callable(self, "_on_frame_changed"))
+	animated_sprite.connect("animation_finished", Callable(self , "_on_animation_finished"))
+	animated_sprite.connect("frame_changed", Callable(self , "_on_frame_changed"))
 	_create_collision_shape()
 	_set_animation("Idle")
 
 	# 初始化推箱子射线查询参数（只创建一次）
 	box_ray = PhysicsRayQueryParameters2D.new()
-	box_ray.exclude = [self]
+	box_ray.exclude = [ self ]
 
 	climb_ray = PhysicsRayQueryParameters2D.new()
-	climb_ray.exclude = [self]
+	climb_ray.exclude = [ self ]
 	# 检测层，添加 64 层以检测断桥
 	climb_ray.collision_mask = 1 | 64 | 128
 
@@ -163,6 +171,11 @@ func _physics_process(delta):
 			is_hit = false
 		# 死亡动画
 		_set_animation("Death")
+		return
+
+	# ===== 传送处理 =====
+	if is_teleporting:
+		_set_animation("TeleportCharacter2")
 		return
 
 	if is_climbing:
@@ -224,7 +237,7 @@ func _physics_process(delta):
 					var behind_ray = PhysicsRayQueryParameters2D.new()
 					behind_ray.from = global_position
 					behind_ray.to = global_position + behind_offset
-					behind_ray.exclude = [self]
+					behind_ray.exclude = [ self ]
 					behind_ray.collision_mask = 1
 
 					var hit_behind = get_world_2d().direct_space_state.intersect_ray(behind_ray)
@@ -360,6 +373,30 @@ func _on_animation_finished():
 			level_manager.respawn_player()
 		else:
 			push_error("未找到 LevelManager 节点或 respawn_player 方法！")
+	elif anim_name in ["TeleportCharacter2"]:
+		visible = false
+		var telepads = get_tree().get_nodes_in_group(telepad_id)
+		# 计算玩家到传送门的距离
+		var max_distance = 0
+		var farthest_telepad = null
+		for telepad in telepads:
+			var distance = global_position.distance_to(telepad.global_position)
+			if distance > max_distance:
+				max_distance = distance
+				farthest_telepad = telepad
+		
+		if farthest_telepad:
+			# 将玩家传送到另一个门的位置，向传送门的方向偏移
+			global_position = farthest_telepad.global_position + Vector2(16, 0) * _check_facing_dir()
+			_set_animation("TeleportCharacter1")
+			visible = true
+			is_teleporting = false
+				
+		
+	elif anim_name in ["TeleportCharacter1"]:
+		visible = true
+		is_teleporting = false
+
 
 # 倒计时开始回调
 func _on_pressure_plate_activated(tag: String) -> void:
@@ -383,6 +420,11 @@ func _on_restart_game():
 	set_process(true)
 	set_physics_process(true)
 
+func _on_telepad_entered(id: String) -> void:
+	print("玩家进入了传送门: %s" % id)
+	telepad_id = id
+	is_teleporting = true
+	
 # 玩家朝向检测
 func _check_facing_dir():
 	return 1 if not animated_sprite.flip_h else -1
@@ -506,7 +548,7 @@ func _check_box():
 	var to_forward = from + Vector2(box_distance * facing_dir, 0)
 	box_ray.from = from
 	box_ray.to = to_forward
-	box_ray.exclude = [self]
+	box_ray.exclude = [ self ]
 	var res = get_world_2d().direct_space_state.intersect_ray(box_ray)
 	if res and res.collider is RigidBody2D:
 		return res.collider
@@ -568,7 +610,7 @@ func _try_climb_edge():
 		shape_query.transform = Transform2D(0, shape_center)
 		shape_query.shape = shape
 		shape_query.collision_mask = collision_mask
-		shape_query.exclude = [self]
+		shape_query.exclude = [ self ]
 
 		var collisions = space_state.intersect_shape(shape_query)
 		if collisions.is_empty():

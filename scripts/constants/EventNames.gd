@@ -11,6 +11,8 @@ static var RESTART_GAME = "restart_game"
 static var COUNTDOWN_START = "countdown_start"
 static var COUNTDOWN_END = "countdown_end"
 
+static var TELEPAD_ENTERED = "telepad_entered"
+
 static var PRESSURE_PLATE_ACTIVATED = "pressure_plate_activated"
 static var PRESSURE_PLATE_DEACTIVATED = "pressure_plate_deactivated"
 

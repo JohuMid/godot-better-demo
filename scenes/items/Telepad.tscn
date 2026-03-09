@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dejr1lvkcdvpc"]
+[gd_scene load_steps=4 format=3 uid="uid://dejr1lvkcdvpc"]
 
 [ext_resource type="Script" uid="uid://c0glaaygicaoy" path="res://scripts/components/Telepad.gd" id="1_5isyr"]
 [ext_resource type="Texture2D" uid="uid://d2w8s7dfae02m" path="res://resources/item/ball/spritesheet.png" id="2_bhk48"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhk48"]
+size = Vector2(6, 32)
 
 [node name="Telepad" type="Node2D"]
 script = ExtResource("1_5isyr")
@@ -9,3 +12,10 @@ atlas = ExtResource("2_bhk48")
 type = "waterball"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="Detector" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
+shape = SubResource("RectangleShape2D_bhk48")

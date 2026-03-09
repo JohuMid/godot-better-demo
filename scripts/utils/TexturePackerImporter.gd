@@ -13,6 +13,7 @@ const NON_LOOPING_ANIMS = [
 	"Attack",
 	"Fall",
 	"Jump",
+	"TeleportCharacter2"
 	# 添加其他只需播放一次的动画名
 ]
 
