@@ -53,5 +53,8 @@ func _set_animation(anim_name: String):
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
+		if type == 'fireball':
+			body.take_hit(Vector2(200, 0))
+			return
 		print("检测到物体进入: %s" % body.name)
 		EventManager.emit(EventNames.TELEPAD_ENTERED, [id])
