@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=4 uid="uid://bc74sp3vn081h"]
+[gd_scene load_steps=16 format=4 uid="uid://bc74sp3vn081h"]
 
+[ext_resource type="Texture2D" uid="uid://c864jtth3nfbt" path="res://resources/tileset/Rocks.png" id="1_5v643"]
 [ext_resource type="TileSet" uid="uid://bemfy54u2to4h" path="res://resources/tres/tilemap.tres" id="1_oblk4"]
 [ext_resource type="PackedScene" uid="uid://b7drwybm3moq" path="res://scenes/items/PressurePlate.tscn" id="1_twycr"]
 [ext_resource type="PackedScene" uid="uid://boqjb8fl55hyb" path="res://scenes/items/RightEdge.tscn" id="2_oblk4"]
@@ -10,12 +11,110 @@
 [ext_resource type="PackedScene" uid="uid://dom5oi6nv5o0i" path="res://scenes/items/Chainsaw.tscn" id="8_e3qul"]
 [ext_resource type="PackedScene" uid="uid://ct458gb6jx10i" path="res://scenes/items/Stungun.tscn" id="9_dpm1s"]
 [ext_resource type="PackedScene" uid="uid://b1uib8mi2r60m" path="res://scenes/items/Moveplate.tscn" id="10_dpm1s"]
-[ext_resource type="PackedScene" uid="uid://mrfug6b22v44" path="res://scenes/emeny/Pea.tscn" id="12_a6cvn"]
+[ext_resource type="PackedScene" uid="uid://dq15p4xjpsb78" path="res://scenes/emeny/Pea.tscn" id="12_a6cvn"]
 [ext_resource type="PackedScene" uid="uid://buie1u0vi8dbe" path="res://scenes/items/Magnetarea.tscn" id="12_dwyyt"]
 [ext_resource type="PackedScene" uid="uid://q6jos15cwh3u" path="res://scenes/items/Flag.tscn" id="13_a6cvn"]
 [ext_resource type="PackedScene" uid="uid://b7qcc71b272ww" path="res://scenes/items/Gem.tscn" id="14_6rin4"]
 
 [node name="Level2" type="Node2D"]
+
+[node name="Rocks" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Rocks"]
+position = Vector2(176, 104)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(761, 61, 176, 124)
+
+[node name="Sprite2D6" type="Sprite2D" parent="Rocks"]
+position = Vector2(288, 144)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(1231, 147, 51, 38)
+
+[node name="Sprite2D7" type="Sprite2D" parent="Rocks"]
+position = Vector2(376, 128)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(959, 104, 141, 81)
+
+[node name="Sprite2D16" type="Sprite2D" parent="Rocks"]
+position = Vector2(496, 144)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(1147, 320, 108, 46)
+
+[node name="Sprite2D8" type="Sprite2D" parent="Rocks"]
+position = Vector2(176, 232)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(1240, 695, 35, 55)
+
+[node name="Sprite2D9" type="Sprite2D" parent="Rocks"]
+position = Vector2(368, 232)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(1240, 695, 35, 55)
+
+[node name="Sprite2D14" type="Sprite2D" parent="Rocks"]
+position = Vector2(416, 248)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(491, 523, 21, 27)
+
+[node name="Sprite2D10" type="Sprite2D" parent="Rocks"]
+position = Vector2(568, 232)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(1240, 695, 35, 55)
+
+[node name="Sprite2D15" type="Sprite2D" parent="Rocks"]
+position = Vector2(520, 232)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(432, 500, 35, 50)
+
+[node name="Sprite2D11" type="Sprite2D" parent="Rocks"]
+position = Vector2(464, 248)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(1328, 725, 16, 25)
+
+[node name="Sprite2D12" type="Sprite2D" parent="Rocks"]
+position = Vector2(264, 248)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(1328, 725, 16, 25)
+
+[node name="Sprite2D13" type="Sprite2D" parent="Rocks"]
+position = Vector2(232, 232)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(432, 500, 35, 50)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Rocks"]
+position = Vector2(984, 120)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(248, 644, 138, 93)
+
+[node name="Sprite2D5" type="Sprite2D" parent="Rocks"]
+position = Vector2(792, 136)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(619, 713, 29, 24)
+
+[node name="Sprite2D3" type="Sprite2D" parent="Rocks"]
+position = Vector2(704, 120)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(403, 675, 89, 62)
+
+[node name="Sprite2D4" type="Sprite2D" parent="Rocks"]
+position = Vector2(880, 144)
+texture = ExtResource("1_5v643")
+region_enabled = true
+region_rect = Rect2(534, 693, 63, 44)
 
 [node name="PressurePlate" parent="." instance=ExtResource("1_twycr")]
 position = Vector2(136, 256)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=4 uid="uid://bhcg3otco3kk1"]
+[gd_scene load_steps=11 format=4 uid="uid://bhcg3otco3kk1"]
 
 [ext_resource type="TileSet" uid="uid://bemfy54u2to4h" path="res://resources/tres/tilemap.tres" id="1_63eb4"]
+[ext_resource type="Texture2D" uid="uid://3lypfa2are68" path="res://resources/tileset/Crystals.png" id="1_h66bl"]
 [ext_resource type="PackedScene" uid="uid://b7drwybm3moq" path="res://scenes/items/PressurePlate.tscn" id="1_stl8g"]
 [ext_resource type="PackedScene" uid="uid://boqjb8fl55hyb" path="res://scenes/items/RightEdge.tscn" id="2_53p26"]
 [ext_resource type="PackedScene" uid="uid://dejr1lvkcdvpc" path="res://scenes/items/Telepad.tscn" id="3_53p26"]
@@ -11,6 +12,253 @@
 [ext_resource type="PackedScene" uid="uid://kn1vk551lqry" path="res://scenes/items/Launcher.tscn" id="8_x3k3d"]
 
 [node name="Level3" type="Node2D"]
+
+[node name="Crystals" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Crystals"]
+position = Vector2(104, 104)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(661, 29, 88, 117)
+
+[node name="Sprite2D15" type="Sprite2D" parent="Crystals"]
+position = Vector2(224, -120)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(451, 285, 50, 39)
+
+[node name="Sprite2D16" type="Sprite2D" parent="Crystals"]
+position = Vector2(336, -144)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(209, 246, 104, 78)
+
+[node name="Sprite2D6" type="Sprite2D" parent="Crystals"]
+position = Vector2(160, 144)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(341, 465, 79, 39)
+
+[node name="Sprite2D10" type="Sprite2D" parent="Crystals"]
+position = Vector2(456, 128)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(200, 437, 114, 67)
+
+[node name="Sprite2D7" type="Sprite2D" parent="Crystals"]
+position = Vector2(152, 240)
+rotation = 3.1415927
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(200, 437, 114, 67)
+
+[node name="Sprite2D9" type="Sprite2D" parent="Crystals"]
+position = Vector2(464, 248)
+rotation = 3.1415927
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(27, 412, 146, 92)
+
+[node name="Sprite2D36" type="Sprite2D" parent="Crystals"]
+position = Vector2(216, -24)
+rotation = 3.1415927
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(32, 217, 133, 107)
+
+[node name="Sprite2D38" type="Sprite2D" parent="Crystals"]
+position = Vector2(200, -272)
+rotation = 3.1415927
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(451, 285, 50, 39)
+
+[node name="Sprite2D39" type="Sprite2D" parent="Crystals"]
+position = Vector2(320, -272)
+rotation = 3.1415927
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(533, 305, 26, 19)
+
+[node name="Sprite2D37" type="Sprite2D" parent="Crystals"]
+position = Vector2(336, -40)
+rotation = 3.1415927
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(344, 269, 77, 55)
+
+[node name="Sprite2D11" type="Sprite2D" parent="Crystals"]
+position = Vector2(720, 224)
+rotation = 3.1415927
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(205, 66, 97, 80)
+
+[node name="Sprite2D14" type="Sprite2D" parent="Crystals"]
+position = Vector2(1160, 224)
+rotation = 3.1415927
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(209, 246, 104, 78)
+
+[node name="Sprite2D33" type="Sprite2D" parent="Crystals"]
+position = Vector2(1448, 120)
+rotation = 3.1415927
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(1051, 470, 51, 34)
+
+[node name="Sprite2D34" type="Sprite2D" parent="Crystals"]
+position = Vector2(1512, 152)
+rotation = 3.1415927
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(641, 211, 118, 113)
+
+[node name="Sprite2D35" type="Sprite2D" parent="Crystals"]
+position = Vector2(1568, 112)
+rotation = 3.1415927
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(1133, 485, 26, 19)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Crystals"]
+position = Vector2(528, 120)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(821, 66, 76, 80)
+
+[node name="Sprite2D3" type="Sprite2D" parent="Crystals"]
+position = Vector2(384, 136)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(951, 89, 64, 57)
+
+[node name="Sprite2D4" type="Sprite2D" parent="Crystals"]
+position = Vector2(208, 144)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(1061, 109, 34, 37)
+
+[node name="Sprite2D5" type="Sprite2D" parent="Crystals"]
+position = Vector2(568, 152)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(1136, 127, 23, 19)
+
+[node name="Sprite2D8" type="Sprite2D" parent="Crystals"]
+position = Vector2(720, 104)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(21, 24, 153, 122)
+
+[node name="Sprite2D28" type="Sprite2D" parent="Crystals"]
+position = Vector2(1944, 104)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(21, 24, 153, 122)
+
+[node name="Sprite2D32" type="Sprite2D" parent="Crystals"]
+position = Vector2(1792, 152)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(541, 125, 17, 21)
+
+[node name="Sprite2D30" type="Sprite2D" parent="Crystals"]
+position = Vector2(2200, 120)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(205, 66, 97, 80)
+
+[node name="Sprite2D31" type="Sprite2D" parent="Crystals"]
+position = Vector2(2296, 144)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(457, 104, 41, 42)
+
+[node name="Sprite2D12" type="Sprite2D" parent="Crystals"]
+position = Vector2(968, 56)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(641, 211, 118, 113)
+
+[node name="Sprite2D13" type="Sprite2D" parent="Crystals"]
+position = Vector2(1160, 112)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(32, 217, 133, 107)
+
+[node name="Sprite2D19" type="Sprite2D" parent="Crystals"]
+position = Vector2(1440, 32)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(631, 396, 133, 108)
+
+[node name="Sprite2D20" type="Sprite2D" parent="Crystals"]
+position = Vector2(1520, 48)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(809, 248, 103, 76)
+
+[node name="Sprite2D21" type="Sprite2D" parent="Crystals"]
+position = Vector2(1584, 56)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(946, 452, 70, 52)
+
+[node name="Sprite2D22" type="Sprite2D" parent="Crystals"]
+position = Vector2(2072, 336)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(617, 612, 179, 68)
+
+[node name="Sprite2D23" type="Sprite2D" parent="Crystals"]
+position = Vector2(2216, 344)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(820, 624, 134, 56)
+
+[node name="Sprite2D24" type="Sprite2D" parent="Crystals"]
+position = Vector2(2320, 344)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(980, 654, 102, 26)
+
+[node name="Sprite2D25" type="Sprite2D" parent="Crystals"]
+position = Vector2(2112, 248)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(980, 654, 102, 26)
+
+[node name="Sprite2D29" type="Sprite2D" parent="Crystals"]
+position = Vector2(2392, 248)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(980, 654, 102, 26)
+
+[node name="Sprite2D26" type="Sprite2D" parent="Crystals"]
+position = Vector2(2192, 248)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(1119, 658, 72, 22)
+
+[node name="Sprite2D27" type="Sprite2D" parent="Crystals"]
+position = Vector2(2280, 240)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(820, 624, 134, 56)
+
+[node name="Sprite2D17" type="Sprite2D" parent="Crystals"]
+position = Vector2(320, -368)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(32, 217, 133, 107)
+
+[node name="Sprite2D18" type="Sprite2D" parent="Crystals"]
+position = Vector2(200, -352)
+texture = ExtResource("1_h66bl")
+region_enabled = true
+region_rect = Rect2(209, 246, 104, 78)
 
 [node name="PressurePlate" parent="." instance=ExtResource("1_stl8g")]
 position = Vector2(2280, 352)
