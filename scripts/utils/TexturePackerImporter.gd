@@ -18,8 +18,8 @@ const NON_LOOPING_ANIMS = [
 ]
 
 static func create_sprite_frames(atlas_texture: Texture2D, json_path: String, frame_width: int, frame_height: int) -> SpriteFrames:
-	print(frame_width,frame_height)
-	print(json_path)
+	# print(frame_width,frame_height)
+	# print(json_path)
 
 	var sprite_frames = SpriteFrames.new()
 	

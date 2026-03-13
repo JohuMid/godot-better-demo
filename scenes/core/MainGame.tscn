@@ -17,7 +17,6 @@
 [node name="ParallaxBackground" type="Node2D" parent="levels_container"]
 
 [node name="Parallax2D" type="Parallax2D" parent="levels_container/ParallaxBackground"]
-scale = Vector2(0.8, 0.8)
 scroll_scale = Vector2(0.2, 0.2)
 scroll_offset = Vector2(-3.0517578e-05, -3.8146973e-06)
 repeat_size = Vector2(576, 324)
@@ -28,7 +27,6 @@ position = Vector2(288, 161)
 texture = ExtResource("1_f65la")
 
 [node name="Parallax2D2" type="Parallax2D" parent="levels_container/ParallaxBackground"]
-scale = Vector2(0.8, 0.8)
 scroll_scale = Vector2(0.4, 0.4)
 repeat_size = Vector2(576, 0)
 
@@ -39,7 +37,6 @@ scale = Vector2(1, 0.99382716)
 texture = ExtResource("2_1luac")
 
 [node name="Parallax2D3" type="Parallax2D" parent="levels_container/ParallaxBackground"]
-scale = Vector2(0.8, 0.8)
 scroll_scale = Vector2(0.8, 0.8)
 scroll_offset = Vector2(-6.1035156e-05, 3.8146973e-06)
 repeat_size = Vector2(576, 0)
@@ -47,7 +44,6 @@ repeat_size = Vector2(576, 0)
 [node name="Sprite2D" type="Sprite2D" parent="levels_container/ParallaxBackground/Parallax2D3"]
 modulate = Color(0.050892226, 0.5266686, 0.43294138, 1)
 position = Vector2(288.00003, 161.00002)
-scale = Vector2(0.99999976, 0.99382716)
 texture = ExtResource("3_dcmex")
 
 [node name="LevelManager" type="Node2D" parent="." node_paths=PackedStringArray("levels_container")]

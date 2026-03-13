@@ -56,7 +56,7 @@ func _set_animation(anim_name: String):
 		animated_sprite.play(anim_name)
 		var speed_scale = ANIM_SPEED.get(anim_name, ANIM_SPEED.default)
 		animated_sprite.speed_scale = speed_scale
-		print("▶ 播放动画: %s (速度: %.1f)" % [anim_name, speed_scale])
+		# print("▶ 播放动画: %s (速度: %.1f)" % [anim_name, speed_scale])
 	else:
 		print("⚠️ 动画不存在: %s" % anim_name)
 
@@ -66,7 +66,7 @@ func _on_body_entered(body: Node2D) -> void:
 		# 逐渐消失
 		var tween = create_tween()
 		tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 0.2)
+		tween.tween_callback(queue_free)
 		
-		queue_free()
 	if body.is_in_group("player"):
 		body.take_hit(Vector2(200, 0))

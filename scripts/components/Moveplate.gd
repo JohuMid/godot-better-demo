@@ -20,8 +20,8 @@ func _ready():
 	if not move_node:
 		move_node = self
 
-	EventManager.subscribe(EventNames.PRESSURE_PLATE_ACTIVATED, Callable(self, "_on_pressure_plate_activated"))
-	EventManager.subscribe(EventNames.PRESSURE_PLATE_DEACTIVATED, Callable(self, "_on_pressure_plate_deactivated"))
+	EventManager.subscribe(EventNames.PRESSURE_PLATE_ACTIVATED, Callable(self , "_on_pressure_plate_activated"))
+	EventManager.subscribe(EventNames.PRESSURE_PLATE_DEACTIVATED, Callable(self , "_on_pressure_plate_deactivated"))
 
 func _physics_process(delta):
 	# 每帧计算平台的瞬时速度（用于玩家同步）
@@ -30,7 +30,6 @@ func _physics_process(delta):
 	prev_global_position = global_position
 
 func _on_pressure_plate_activated(tag: String):
-	print('tag',tag)
 	if "moveplate" != tag:
 		return
 	_stop_current_tween()
@@ -42,6 +41,7 @@ func _on_pressure_plate_activated(tag: String):
 		return
 	
 	var duration = distance / speed
+	print("distance",move_node.global_position, distance, target,duration)
 	current_tween = create_tween()
 	current_tween.tween_property(move_node, "global_position", target, duration)
 	current_tween.set_trans(Tween.TRANS_LINEAR)
