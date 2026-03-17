@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://csjx575pub5ug"
-path="res://.godot/imported/bounce.wav-7aa08f68edf411eba8383cccb6535a80.sample"
+uid="uid://cox6bd51nkll1"
+path="res://.godot/imported/chainsaw.wav-57dcb33635823e5e3ae3e80bcbc45e6b.sample"
 
 [deps]
 
-source_file="res://resources/audio/sfx/bounce.wav"
-dest_files=["res://.godot/imported/bounce.wav-7aa08f68edf411eba8383cccb6535a80.sample"]
+source_file="res://resources/audio/sfx/chainsaw.wav"
+dest_files=["res://.godot/imported/chainsaw.wav-57dcb33635823e5e3ae3e80bcbc45e6b.sample"]
 
 [params]
 

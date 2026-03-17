@@ -7,4 +7,3 @@ const LEVELS = {
 	2: { "width": 1056.0, "path": "res://scenes/levels/Level2.tscn" },
 	3: { "width": 2448.0, "path": "res://scenes/levels/Level3.tscn" },
 }
-

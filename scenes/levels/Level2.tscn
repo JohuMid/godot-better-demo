@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dom5oi6nv5o0i" path="res://scenes/items/Chainsaw.tscn" id="8_e3qul"]
 [ext_resource type="PackedScene" uid="uid://ct458gb6jx10i" path="res://scenes/items/Stungun.tscn" id="9_dpm1s"]
 [ext_resource type="PackedScene" uid="uid://b1uib8mi2r60m" path="res://scenes/items/Moveplate.tscn" id="10_dpm1s"]
-[ext_resource type="PackedScene" uid="uid://dq15p4xjpsb78" path="res://scenes/emeny/Pea.tscn" id="12_a6cvn"]
+[ext_resource type="PackedScene" uid="uid://mrfug6b22v44" path="res://scenes/emeny/Pea.tscn" id="12_a6cvn"]
 [ext_resource type="PackedScene" uid="uid://buie1u0vi8dbe" path="res://scenes/items/Magnetarea.tscn" id="12_dwyyt"]
 [ext_resource type="PackedScene" uid="uid://q6jos15cwh3u" path="res://scenes/items/Flag.tscn" id="13_a6cvn"]
 [ext_resource type="PackedScene" uid="uid://b7qcc71b272ww" path="res://scenes/items/Gem.tscn" id="14_6rin4"]
@@ -121,7 +121,7 @@ position = Vector2(136, 256)
 trigger_tags = Array[String](["countdown1", "player"])
 
 [node name="PressurePlate2" parent="." instance=ExtResource("1_twycr")]
-position = Vector2(488, 256)
+position = Vector2(88, 160)
 trigger_tags = Array[String](["moveplate", "countdown1", "player"])
 
 [node name="Countdowns" type="Node2D" parent="."]
@@ -203,7 +203,7 @@ position = Vector2(120, 0)
 position = Vector2(200, 88)
 
 [node name="Moveplate" parent="Moveplate" node_paths=PackedStringArray("move_node") instance=ExtResource("10_dpm1s")]
-move_offset = Vector2(0, 30)
+move_offset = Vector2(-30, 0)
 move_node = NodePath("..")
 
 [node name="Magnetarea" parent="." instance=ExtResource("12_dwyyt")]

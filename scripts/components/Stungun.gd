@@ -44,6 +44,8 @@ func activate() -> void:
 	print("Activated!")
 	# 播放攻击动画
 	animation_player.play("attack")
+	# 播放攻击音效
+	AudioManager.play_sfx("stungun")
 	animation_player.animation_finished.connect(_on_attack_forward_finished, CONNECT_ONE_SHOT)
 	
 	# 处理所有当前重叠的角色

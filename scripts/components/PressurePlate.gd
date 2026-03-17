@@ -47,7 +47,8 @@ func _on_body_exited(body: Node2D) -> void:
 func activate() -> void:
 	if is_pressed:
 		return
-
+	# 播放压力板激活音效
+	AudioManager.play_sfx("pressplate")
 	is_pressed = true
 	# 目标位置是相对于 visual 节点的父节点 (PressurePlate) 的局部位置
 	target_position = original_visual_position + Vector2(0, pressed_distance)

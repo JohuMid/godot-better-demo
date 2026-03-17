@@ -66,4 +66,6 @@ func _on_body_entered(body: Node2D) -> void:
 			body.take_hit(Vector2(200, 0))
 			return
 		print("检测到物体进入: %s" % body.name)
+		# 播放触发音效
+		AudioManager.play_sfx("telepad")
 		EventManager.emit(EventNames.TELEPAD_ENTERED, [id])

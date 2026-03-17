@@ -30,6 +30,8 @@ func _enter_attack_state() -> void:
 
 	_on_animation_finished()
 	# 可播放攻击音效等
+	# 播放攻击音效
+	AudioManager.play_sfx("boom")
 	print("Boom 开始攻击！")
 
 func _exit_attack_state() -> void:

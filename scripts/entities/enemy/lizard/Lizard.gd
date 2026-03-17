@@ -24,6 +24,8 @@ func _enter_attack_state() -> void:
 	has_hit_in_this_attack = false
 	# 可播放攻击音效等
 	print("Lizard 开始攻击！")
+	# 播放攻击音效
+	AudioManager.play_sfx("lizardattack")
 
 # 检查是否在攻击帧
 func _perform_attack_check() -> void:

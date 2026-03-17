@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://csjx575pub5ug"
-path="res://.godot/imported/bounce.wav-7aa08f68edf411eba8383cccb6535a80.sample"
+uid="uid://nbsnfcp27688"
+path="res://.godot/imported/telepad.wav-596047d58455cb9cefaf8344b2862a5d.sample"
 
 [deps]
 
-source_file="res://resources/audio/sfx/bounce.wav"
-dest_files=["res://.godot/imported/bounce.wav-7aa08f68edf411eba8383cccb6535a80.sample"]
+source_file="res://resources/audio/sfx/telepad.wav"
+dest_files=["res://.godot/imported/telepad.wav-596047d58455cb9cefaf8344b2862a5d.sample"]
 
 [params]
 

@@ -44,8 +44,13 @@ func _spawn_pea_bullet() -> void:
 		bullet.rotation = direction.angle_to(Vector2.LEFT)
 		launch_icon.rotation = direction.angle_to(-Vector2.DOWN)
 
-	var container = get_node_or_null("PeaBullet")
+	var container = get_node_or_null("LauncherBullet")
 	if container:
 		container.add_child(bullet)
 	else:
 		add_child(bullet)
+
+	# 播放发射音效
+	if DataManager.get_current_level() == 3:
+		AudioManager.play_sfx("launcher", 0.05)
+	

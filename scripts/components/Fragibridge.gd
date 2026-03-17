@@ -17,7 +17,8 @@ func _on_player_entered(body):
 func _collapse():
 	# 播放破碎动画
 	$AnimationPlayer.play("break")
-	
+	# 播放破碎音效
+	AudioManager.play_sfx("bridgebrake")
 	# 禁用碰撞（关键！）
 	$CollisionShape2D.disabled = true
 	

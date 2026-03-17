@@ -562,6 +562,7 @@ func take_hit(push_velocity: Vector2) -> void:
 	hit_timer = hit_duration
 	velocity = push_velocity # 直接应用击退速度
 	# 可选：播放音效、屏幕震动等
+	AudioManager.play_sfx("blood-pop", 0.1)
 	
 func _try_climb_edge():
 	var space_state = get_world_2d().direct_space_state

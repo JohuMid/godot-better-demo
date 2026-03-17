@@ -76,6 +76,8 @@ func _process_body(body: CharacterBody2D) -> void:
 	# 调用玩家的受击接口
 	if body.has_method("take_hit"):
 		body.take_hit(push_vel)
+		# 播放 chainsaw 音效
+		AudioManager.play_sfx("chainsaw")
 	else:
 		# 兜底：直接设 velocity（但会被覆盖）
 		body.velocity = push_vel

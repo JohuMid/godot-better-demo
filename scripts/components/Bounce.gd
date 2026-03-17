@@ -39,6 +39,8 @@ func _on_body_exited(body: Node2D) -> void:
 func activate() -> void:
 	print("Activated!")
 	animation_player.play("bounce")
+	# 播放弹跳音效
+	AudioManager.play_sfx("bounce")
 	# 将进入区域的物体向上推动
 	for body in detector.get_overlapping_bodies():
 		if body is CharacterBody2D:

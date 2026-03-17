@@ -56,6 +56,7 @@ func _enter_attack_state() -> void:
 	_start_attack()
 	# _on_animation_finished()
 	# 可播放攻击音效等
+	AudioManager.play_sfx("spike")
 	print("Spike 开始攻击！")
 
 func _start_attack() -> void:

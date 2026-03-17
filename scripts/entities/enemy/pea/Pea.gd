@@ -25,6 +25,8 @@ func _enter_attack_state() -> void:
 	_set_animation("Attack")
 	has_hit_in_this_attack = false
 	attack_timer = 0.0  # 允许立即第一次攻击
+	# 播放攻击音效
+	AudioManager.play_sfx("peabullet")
 	print("Pea 开始攻击！")
 
 func _perform_attack_check() -> void:

@@ -32,6 +32,8 @@ func _ready() -> void:
 func _on_player_entered(body: Node2D) -> void:
 	if body and body.is_in_group("player"):
 		print("Player hit!",body)
+		# 播放攻击音效
+		AudioManager.play_sfx("barricade")
 		var facing = body._check_facing_dir()
 		body.take_hit(Vector2(150 * -facing, 0))
 	if body and body.is_in_group("box"):
