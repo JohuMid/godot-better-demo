@@ -121,7 +121,7 @@ position = Vector2(136, 256)
 trigger_tags = Array[String](["countdown1", "player"])
 
 [node name="PressurePlate2" parent="." instance=ExtResource("1_twycr")]
-position = Vector2(88, 160)
+position = Vector2(488, 256)
 trigger_tags = Array[String](["moveplate", "countdown1", "player"])
 
 [node name="Countdowns" type="Node2D" parent="."]

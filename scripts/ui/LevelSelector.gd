@@ -5,6 +5,7 @@ const FADE_DURATION = 0.2
 var is_switching = false
 var current_level_index: int = 0
 var center_image
+var center_btn
 var close_selector
 var back_home
 var level_lock
@@ -22,7 +23,8 @@ func _ready():
 	if level_textures.size() == 0:
 		push_warning("请在 Inspector 中为 level_textures 赋值！")
 		return
-	center_image = $Panel/CenterImage
+	center_btn = $Panel/CenterBtn
+	center_image = $Panel/CenterBtn/CenterImage
 	level_lock = $Panel/LevelLock
 	close_selector = $HBoxContainer/CloseSelector
 	close_selector.pressed.connect(_on_close_selector_pressed)
@@ -38,15 +40,15 @@ func _ready():
 	else:
 		sound_control.icon = sound_control_icons[1]
 
-	center_image.modulate.a = 1.0  # 确保初始可见
+	center_btn.modulate.a = 1.0  # 确保初始可见
 
 	var timer = get_tree().create_timer(0.05)  # 50 毫秒足够 UI 布局完成
 	timer.timeout.connect(_initialize_ui)
 
 	_update_level_lock(0)
 
-	# center_image点击跳转到对应关卡
-	center_image.pressed.connect(_on_center_image_pressed)
+	# center_btn点击跳转到对应关卡
+	center_btn.pressed.connect(_on_center_image_pressed)
 
 	EventManager.subscribe(EventNames.SHOW_LEVEL_SELECTOR, Callable(self, "_show_level_selector"))
 
@@ -160,8 +162,7 @@ func _switch_to_level_with_fade(target_index: int):
 
 	tween.tween_property(img, "modulate:a", 0.0, FADE_DURATION)
 	tween.tween_callback(func(): 
-		img.texture_normal = level_textures[target_index]
-		img.custom_minimum_size = img.texture_normal.get_size()
+		img.texture = level_textures[target_index]
 	)
 	tween.tween_property(img, "modulate:a", 1.0, FADE_DURATION)
 	tween.finished.connect(func(): is_switching = false)
@@ -169,8 +170,7 @@ func _switch_to_level_with_fade(target_index: int):
 	_update_level_lock(target_index)
 
 func _update_center_image():
-	center_image.texture_normal = level_textures[current_level_index]
-	center_image.custom_minimum_size = center_image.texture_normal.get_size()
+	center_image.texture = level_textures[current_level_index]
 
 func _set_button_selected(selected_index: int):
 	for i in range($IndicatorBox.get_child_count()):

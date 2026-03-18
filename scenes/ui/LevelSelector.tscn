@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://c1r0hw1cn3w7c" path="res://scripts/ui/LevelSelector.gd" id="1_ag8rw"]
 [ext_resource type="Texture2D" uid="uid://cug1prbph7vrk" path="res://resources/background/background 5/2304x1296.png" id="2_s0din"]
-[ext_resource type="Texture2D" uid="uid://d1aiduigiore2" path="res://resources/gui/levels/level1.png" id="2_vqrkd"]
-[ext_resource type="Texture2D" uid="uid://cff2raexkswm7" path="res://resources/gui/levels/level2.png" id="3_xdiqg"]
-[ext_resource type="Texture2D" uid="uid://cqg8gbu0vtqm0" path="res://resources/gui/levels/level3.png" id="4_oufs3"]
-[ext_resource type="Texture2D" uid="uid://70q4mxyhsnae" path="res://resources/gui/levels/level4.png" id="5_mad4c"]
+[ext_resource type="Texture2D" uid="uid://0e5grtbqmxmq" path="res://resources/gui/levels/level1.png" id="2_vqrkd"]
+[ext_resource type="Texture2D" uid="uid://cxm74k02qhh1k" path="res://resources/gui/levels/level2.png" id="3_xdiqg"]
+[ext_resource type="Texture2D" uid="uid://d8ubuaptujvx" path="res://resources/gui/levels/level3.png" id="4_oufs3"]
+[ext_resource type="Texture2D" uid="uid://6gb187empnu3" path="res://resources/gui/levels/level4.png" id="5_mad4c"]
 [ext_resource type="FontFile" uid="uid://c2n4h4wsqxfre" path="res://resources/fonts/zpix.ttf" id="6_jsv1k"]
 [ext_resource type="Script" uid="uid://3brxh43yenur" path="res://scripts/ui/LanguageSelector.gd" id="7_hqwx3"]
 [ext_resource type="Texture2D" uid="uid://bpx8qakb5q54j" path="res://resources/gui/icon/Icon_sound.png" id="7_vgkmy"]
@@ -81,6 +81,7 @@ layout_mode = 2
 theme = SubResource("Theme_hqwx3")
 theme_override_fonts/font = ExtResource("6_jsv1k")
 theme_override_font_sizes/font_size = 14
+fit_to_longest_item = false
 script = ExtResource("7_hqwx3")
 
 [node name="SoundControl" type="Button" parent="HBoxContainer"]
@@ -116,7 +117,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vqrkd")
 
-[node name="CenterImage" type="TextureButton" parent="Panel"]
+[node name="CenterBtn" type="TextureButton" parent="Panel"]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -125,6 +126,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch_mode = 5
+
+[node name="CenterImage" type="TextureRect" parent="Panel/CenterBtn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+stretch_mode = 6
 
 [node name="LevelLock" type="TextureRect" parent="Panel"]
 layout_mode = 1
