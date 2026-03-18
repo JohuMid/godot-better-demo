@@ -13,7 +13,9 @@ config_version=5
 config/name="better-demo"
 run/main_scene="uid://xo1q7lqtprfl"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://bh2q38ois2bws"
+config/macos_native_icon="uid://bh2q38ois2bws"
+config/windows_native_icon="uid://bh2q38ois2bws"
 
 [autoload]
 
@@ -77,6 +79,10 @@ down={
 ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [internationalization]
 
 locale/translations=PackedStringArray("res://i18n/translations.en.translation", "res://i18n/translations.es.translation", "res://i18n/translations.zh_CN.translation", "res://i18n/translations.zh_TW.translation")
@@ -96,3 +102,4 @@ locale/translations=PackedStringArray("res://i18n/translations.en.translation", 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true

@@ -12,6 +12,12 @@ script = ExtResource("1_xd0a5")
 
 [node name="Up" type="Node2D" parent="."]
 
+[node name="Up" type="Button" parent="Up"]
+offset_left = -8.5
+offset_top = -8.5
+offset_right = 8.5
+offset_bottom = 8.0
+
 [node name="Sprite2D" type="Sprite2D" parent="Up"]
 texture = ExtResource("1_p2f55")
 
@@ -21,6 +27,12 @@ texture = ExtResource("3_nuqh3")
 
 [node name="Left" type="Node2D" parent="."]
 position = Vector2(-18, 18)
+
+[node name="Left" type="Button" parent="Left"]
+offset_left = -8.5
+offset_top = -8.5
+offset_right = 8.5
+offset_bottom = 8.5
 
 [node name="Sprite2D" type="Sprite2D" parent="Left"]
 texture = ExtResource("1_p2f55")
@@ -32,6 +44,12 @@ texture = ExtResource("3_0g2w5")
 [node name="Down" type="Node2D" parent="."]
 position = Vector2(0, 18)
 
+[node name="Down" type="Button" parent="Down"]
+offset_left = -8.5
+offset_top = -8.5
+offset_right = 8.5
+offset_bottom = 8.5
+
 [node name="Sprite2D" type="Sprite2D" parent="Down"]
 texture = ExtResource("1_p2f55")
 
@@ -41,6 +59,12 @@ texture = ExtResource("4_mhhnt")
 
 [node name="Right" type="Node2D" parent="."]
 position = Vector2(18, 18)
+
+[node name="Right" type="Button" parent="Right"]
+offset_left = -8.5
+offset_top = -8.5
+offset_right = 8.5
+offset_bottom = 8.5
 
 [node name="Sprite2D" type="Sprite2D" parent="Right"]
 texture = ExtResource("1_p2f55")

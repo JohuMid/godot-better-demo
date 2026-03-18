@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cs2qoj8wcus2y"]
+[gd_scene load_steps=11 format=3 uid="uid://cs2qoj8wcus2y"]
 
 [ext_resource type="Texture2D" uid="uid://b03tcjw6ul5v1" path="res://resources/background/background 1/1.png" id="1_f65la"]
 [ext_resource type="Texture2D" uid="uid://chsi83w5jl6f7" path="res://resources/background/background 1/2.png" id="2_1luac"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://oh8l0vb1mcl6" path="res://scenes/ui/LevelSelector.tscn" id="7_dcmex"]
 [ext_resource type="PackedScene" uid="uid://b7hondguw8ydl" path="res://scenes/ui/Achievements.tscn" id="8_4x6vl"]
 [ext_resource type="PackedScene" uid="uid://bwjnx87hos3r4" path="res://scenes/ui/WinEffect.tscn" id="9_13cbm"]
+[ext_resource type="Script" uid="uid://d3n5f30nla4mn" path="res://scripts/ui/MobileControls.gd" id="10_pqaf7"]
 
 [node name="MainGame" type="Node2D"]
 
@@ -63,3 +64,6 @@ visible = false
 
 [node name="WinEffect" parent="UILayer" instance=ExtResource("9_13cbm")]
 visible = false
+
+[node name="MobileControls" type="Node" parent="UILayer"]
+script = ExtResource("10_pqaf7")
